@@ -1,0 +1,20 @@
+"use client";
+
+import { AlertTriangle, ArrowRight, Check, LockKeyhole, MessageCircle, ShieldAlert } from "lucide-react";
+import { useState } from "react";
+import { Button } from "./ui/button";
+import { Card } from "./ui/data";
+import { Badge, StatusDot } from "./ui/navigation";
+import { MergePane } from "./ui/visuals";
+import { StatusExplanation } from "./ui/feedback";
+import { toast } from "./ui/overlays";
+import { SeamDivider } from "./ui/seams";
+import type { DashboardData, DashboardView } from "./dashboard-types";
+
+export function ConflictsScreen({ data, onNavigate }: Readonly<{ data: DashboardData; onNavigate: (view: DashboardView) => void }>) {
+  void data;
+  const [resolved, setResolved] = useState(false);
+  const [choice, setChoice] = useState<"keep" | "archive" | null>(null);
+  const resolve = (next: "keep" | "archive") => { setChoice(next); setResolved(true); toast.success(next === "keep" ? "Verified patch kept" : "Stale patch archived", { description: "The explicit conflict decision is now ready for audit." }); };
+  return <div className="pw-route-screen pw-conflicts-screen"><div className="pw-dashboard-heading"><div><span className="pw-dashboard-kicker"><span className="pw-kicker-dot" /> FIX / merge safety</span><h1 id="dashboard-page-title">Conflicts</h1><p>PATCHWORK will show the collision, explain the safe option, and wait for an explicit human decision.</p></div><Button size="sm" variant="secondary" leadingIcon={<ArrowRight size={14} aria-hidden="true" />} onClick={() => onNavigate("releases")}>Back to release</Button></div><section className={`pw-conflict-hero${resolved ? " is-resolved" : ""}`}><div className="pw-conflict-hero-icon">{resolved ? <Check size={20} aria-hidden="true" /> : <AlertTriangle size={20} aria-hidden="true" />}</div><div><StatusDot tone={resolved ? "green" : "amber"} label={resolved ? "Resolved" : "Blocking review"} /><h2>{resolved ? "The conflict has an owner." : "Two patches touch the same price token."}</h2><p>{resolved ? `Decision: ${choice === "keep" ? "keep the verified patch" : "archive the stale patch"}. The release can continue to the next policy check.` : "The verified patch changes the Aurora price color. A stale draft proposes a different color on the same semantic target."}</p></div><Badge tone={resolved ? "green" : "amber"}>{resolved ? "Decision recorded" : "1 conflict"}</Badge></section><div className="pw-conflict-grid"><Card eyebrow="Side-by-side evidence" title="Keep the safer operation"><MergePane left="color: #777777;\nsource: patch_203" right="color: #132038;\nsource: patch_204" merged="color: #132038;\nsource: verified" onAccept={() => resolve("keep")} /><div className="pw-conflict-explain"><MessageCircle size={14} aria-hidden="true" /><span>PatchPilot: “Keep the operation with the verified target and signed inverse. The stale draft adds no new evidence.”</span></div></Card><Card eyebrow="Explicit action" title="Nothing merges by accident"><StatusExplanation tone={resolved ? "green" : "amber"} title={resolved ? "Conflict resolved" : "Human decision required"} description={resolved ? "The selected action is attached to the audit trail and visible to release policy." : "Choose whether to keep the verified patch or archive the stale change. PATCHWORK will not guess."} /><div className="pw-conflict-choice"><Button size="sm" leadingIcon={<ShieldAlert size={14} aria-hidden="true" />} onClick={() => resolve("keep")} disabled={resolved}>Keep verified patch</Button><Button size="sm" variant="secondary" leadingIcon={<LockKeyhole size={14} aria-hidden="true" />} onClick={() => resolve("archive")} disabled={resolved}>Archive stale patch</Button></div></Card></div><Card eyebrow="Conflict details" title="Why this is blocking"><div className="pw-conflict-details"><span><strong>Target</strong><code>p[data-product-price]</code></span><span><strong>Conflict type</strong><code>direct style property</code></span><span><strong>Severity</strong><code>blocking</code></span><span><strong>Recovery</strong><code>one-click archive</code></span></div></Card><SeamDivider label="CONFLICT → DECISION · NEVER APPLY THE WRONG ELEMENT" /></div>;
+}

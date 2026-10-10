@@ -1,5 +1,5 @@
 export type DashboardTone = "green" | "amber" | "red";
-export type DashboardView = "overview" | "scan" | "patches" | "releases" | "incidents" | "audit" | "reviews";
+export type DashboardView = "overview" | "scan" | "patches" | "conflicts" | "releases" | "incidents" | "audit" | "reviews";
 
 export interface DashboardSite {
   id: string;
