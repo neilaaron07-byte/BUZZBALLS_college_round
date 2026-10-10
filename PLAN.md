@@ -348,7 +348,7 @@ workspace where every mandatory feature is reachable and explained.
 - [ ] P175s Add typed patch proposal endpoints that reuse core allowlists and return inverse operations. (depends: P175r)
 - [ ] P175t Add SDK handshake, installation status, and connected-origin health endpoints. (depends: P175s)
 - [ ] P175u Add explicit publish, pause, kill-switch, and rollback boundaries with idempotency keys. (depends: P175t)
-- [ ] P175v Add PatchPilot context, tool routing, action-card contracts, and prompt-injection redaction. (depends: P175u, D041)
+- [x] P175v Add PatchPilot context, tool routing, action-card contracts, and prompt-injection redaction. (depends: P175u, D041)
 - [ ] P175w Add PatchPilot SSE streaming with offline fallback and typed error recovery. (depends: P175v)
 - [ ] P175x Add global Ask PatchPilot drawer and contextual Explain and fix actions to the dashboard. (depends: P175w)
 - [ ] P175y Add `/fix` guided SCAN → FIX → SHIP route with timer, projected score, verification filmstrip, and undo. (depends: P175x)

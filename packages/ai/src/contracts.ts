@@ -65,6 +65,30 @@ export interface PatchProposal {
   nextAction: NextAction;
   autoApproved: false;
   evidence: readonly EvidenceItem[];
+  inverse?: PatchOperation | null;
+}
+
+export type PatchPilotActionKind = "patch_proposal" | "reanchor_proposal" | "conflict_resolution" | "rollback_plan" | "release_notes" | "pr_description";
+
+export interface PatchPilotDiffLine {
+  label: string;
+  before: string;
+  after: string;
+}
+
+export interface PatchPilotActionCard {
+  id: string;
+  kind: PatchPilotActionKind;
+  status: "review" | "blocked";
+  title: string;
+  summary: string;
+  safe: boolean;
+  requiresHumanApproval: true;
+  diff: readonly PatchPilotDiffLine[];
+  operation: PatchOperation | null;
+  inverse: PatchOperation | null;
+  evidence: readonly EvidenceItem[];
+  actions: readonly ["approve", "edit", "dismiss"];
 }
 
 export interface BlastRadiusNarrative {
@@ -122,3 +146,23 @@ export interface PatchPilotOptions {
 }
 
 export type ToolName = "scan" | "explain" | "suggest" | "summarize" | "draft";
+
+export const patchPilotActionToolNames = [
+  "list_patches",
+  "get_patch",
+  "get_conflict",
+  "get_verification_run",
+  "get_release",
+  "get_health",
+  "explain_resolver_result",
+  "propose_patch",
+  "propose_reanchor",
+  "propose_conflict_resolution",
+  "suggest_rollback_plan",
+  "summarize_activity",
+  "generate_release_notes",
+  "draft_pr_description",
+  "search_audit",
+] as const;
+
+export type PatchPilotActionToolName = (typeof patchPilotActionToolNames)[number];

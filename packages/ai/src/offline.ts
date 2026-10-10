@@ -1,6 +1,7 @@
 import { scanPage, type PatchOperation, type ScanFinding } from "../../core/src/index";
 import type { BlastRadiusNarrative, ConfidenceSummary, EvidenceItem, HealthNarrative, NextAction, PatchPilotContext, PatchPilotOptions, PatchPilotProvider, PatchPilotRequest, PatchPilotResponse, PatchProposal, ResponseStatus } from "./contracts";
 import { confidenceFromEvidence, assertEvidenceBacked, statusForConfidence } from "./safety";
+import { sanitizePatchPilotContext, sanitizePatchPilotQuestion } from "./redaction";
 
 function evidence(id: string, source: EvidenceItem["source"], text: string): EvidenceItem {
   return { id, source, text };
@@ -67,7 +68,9 @@ function suggestionForFinding(finding: ScanFinding, context: PatchPilotContext):
     return { id: `proposal-${finding.id}`, status: "blocked", operation: null, targetLabel, confidence: confidence(resolution.confidence, "The target was found, but this offline provider does not have a safe typed operation for this detector."), explanation: "The target is resolved, but PatchPilot will not invent an operation for this finding.", nextAction: action("Draft the change manually", "Choose a supported property in the review panel so the proposed value is explicit.", true), autoApproved: false, evidence: [...findingEvidenceItems, evidence(`resolver:${finding.id}`, "resolver", resolution.reason)] };
   }
   const moved = resolution.outcome === "moved";
-  return { id: `proposal-${finding.id}`, status: "review", operation, targetLabel, confidence: confidence(resolution.confidence, moved ? "The resolver recovered a moved target with a clear margin; review is still required." : "The resolver found a unique target and the operation uses an allowed core property."), explanation: moved ? `The original target moved, but PATCHWORK recovered ${targetLabel} from its semantic evidence. The contrast patch remains review-only.` : `A reviewable contrast patch is ready for ${targetLabel}; it changes only the text color and does not publish automatically.`, nextAction: action("Open the isolated preview", "Verify the visual result and accessibility delta before review.", true), autoApproved: false, evidence: [...findingEvidenceItems, evidence(`resolver:${finding.id}`, "resolver", resolution.reason), evidence(`operation:${finding.id}`, "scanner", "Operation limited to the core CSS color allowlist.")] };
+  const currentElement = context.snapshot?.elements.find((element) => element.id === finding.targetIds[0]);
+  const inverse = currentElement?.styles?.foreground ? { ...operation, value: currentElement.styles.foreground } : null;
+  return { id: `proposal-${finding.id}`, status: "review", operation, inverse, targetLabel, confidence: confidence(resolution.confidence, moved ? "The resolver recovered a moved target with a clear margin; review is still required." : "The resolver found a unique target and the operation uses an allowed core property."), explanation: moved ? `The original target moved, but PATCHWORK recovered ${targetLabel} from its semantic evidence. The contrast patch remains review-only.` : `A reviewable contrast patch is ready for ${targetLabel}; it changes only the text color and does not publish automatically.`, nextAction: action("Open the isolated preview", "Verify the visual result and accessibility delta before review.", true), autoApproved: false, evidence: [...findingEvidenceItems, evidence(`resolver:${finding.id}`, "resolver", resolution.reason), evidence(`operation:${finding.id}`, "scanner", "Operation limited to the core CSS color allowlist.")] };
 }
 
 function blastRadius(context: PatchPilotContext): BlastRadiusNarrative {
@@ -98,6 +101,7 @@ export class OfflinePatchPilot implements PatchPilotProvider {
   }
 
   async complete(request: PatchPilotRequest): Promise<PatchPilotResponse> {
+    request = { ...request, context: sanitizePatchPilotContext(request.context), question: sanitizePatchPilotQuestion(request.question) };
     const findings = request.context.findings ?? (request.context.snapshot ? scanPage(request.context.snapshot) : []);
     if (request.intent === "scan") {
       const finding = highestFinding(findings);

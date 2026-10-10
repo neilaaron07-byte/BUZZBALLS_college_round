@@ -58,6 +58,7 @@ Updated: 2026-10-10
 - Group 13 validation is green: `npm run typecheck`, `npm run lint`, `npm run build`, `npm test`, focused dashboard engine tests, and the full 28-route dark/light desktop/tablet/mobile sweep passed. The sweep captured 168 pages with zero console errors; representative Overview, Releases, and Evidence captures were reviewed across desktop, tablet, and mobile.
 - Launch brief validation is green: the marketing surface is split into typed evidence, chrome, hero, interaction, and section modules; `npm run typecheck`, `npm run lint`, `npm run build`, `npm test` (108 tests), `node --test tests/marketing.contract.test.mjs`, and the full 168-page dark/light desktop/tablet/mobile screenshot sweep pass. The measured total is 13,527 handwritten lines, with `apps/web` at 460 lines; the final marketing size gate remains open rather than being padded.
 - Live-site scan tranche is green: typed target policy, SSRF-safe URL/DNS validation, bounded redirects and body reads, inert JSDOM extraction, detector-backed findings, asynchronous job state, versioned `/api/v1/live-sites/scan`, and replayable SSE progress are implemented. The focused live-site suite and full repository suite pass at 113 tests.
+- PatchPilot safety tranche is green: the AI package now exposes all 15 requested read/propose tools, redacts secrets and hostile page instructions before provider context, creates inverse-aware review-only action cards, and keeps publish/rollback/delete outside the tool catalog. The focused AI suite and full repository suite pass at 114 tests.
 - P163a is complete: the Scan screen now consumes a six-detector scan-session engine with measured finding triage, repeat-run comparisons, explicit clear/finding/blocked states, and export-safe detector CSV. Seven focused scan-session tests cover repeat runs, resolved/new findings, filtering, dangerous targets, and CSV evidence.
 - P163b is complete: Patches now consumes a typed draft contract with allowlisted operations, inverse rollback values, preview/review/conflict states, audit timeline events, safety checks, and an unsafe-value guard. Seven focused patch-workflow tests cover blocked, review, approved, changes-requested, archived, and export states.
 - P163c is complete: Verification now consumes a typed replay model with interaction, visual, accessibility, console, and network checks; deterministic run IDs; warning/failure states; viewport matrix summaries; run comparison; selected-check narratives; and CSV proof export. Seven focused verification tests cover pass, warning, failure, replay recovery, regression, gate counts, and export evidence.
@@ -68,7 +69,7 @@ Updated: 2026-10-10
 ## Next
 
 1. Add typed patch proposals that reuse core allowlists and inverses, then expose SDK handshake, installation status, and explicit release boundaries (P175s–P175u).
-2. Expand PatchPilot from the marketing demo into a tool-bound offline assistant with redaction, action cards, streamed recovery, and dashboard context (P175v–P175x).
+2. Expand PatchPilot from the typed safety layer into streamed recovery, dashboard context, and contextual action cards (P175w–P175x).
 3. Add the guided `/fix` SCAN → FIX → SHIP flow and its live/AI/security tests, while continuing the dashboard, web, ShopNest, and tests LOC tranches (P175y–P203).
 
 ## Known issues

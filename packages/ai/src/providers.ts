@@ -1,5 +1,6 @@
 import type { OptionalProviderAdapter, PatchPilotProvider, PatchPilotRequest, PatchPilotResponse } from "./contracts";
 import { OfflinePatchPilot } from "./offline";
+import { sanitizePatchPilotContext, sanitizePatchPilotQuestion } from "./redaction";
 
 export class AdapterPatchPilot implements PatchPilotProvider {
   readonly name: string;
@@ -13,11 +14,12 @@ export class AdapterPatchPilot implements PatchPilotProvider {
   }
 
   async complete(request: PatchPilotRequest): Promise<PatchPilotResponse> {
+    const safeRequest: PatchPilotRequest = { ...request, context: sanitizePatchPilotContext(request.context), question: sanitizePatchPilotQuestion(request.question) };
     try {
-      const response = this.adapter.normalize(await this.adapter.complete(request), request);
+      const response = this.adapter.normalize(await this.adapter.complete(safeRequest), safeRequest);
       return response;
     } catch {
-      return this.fallback.complete(request);
+      return this.fallback.complete(safeRequest);
     }
   }
 }
