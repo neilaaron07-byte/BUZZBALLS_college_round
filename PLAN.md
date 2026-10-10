@@ -342,9 +342,9 @@ workspace where every mandatory feature is reachable and explained.
 
 ## Group 11B — live-site API and PatchPilot workflow
 
-- [ ] P175p Add a typed live-site target schema with origin, ownership, SDK status, and scan policy. (depends: P175o, D040)
-- [ ] P175q Add SSRF-safe URL validation, redirect limits, private-network blocking, and fetch timeouts. (depends: P175p)
-- [ ] P175r Add live page snapshot extraction with detector evidence and scan-progress events. (depends: P175q)
+- [x] P175p Add a typed live-site target schema with origin, ownership, SDK status, and scan policy. (depends: P175o, D040)
+- [x] P175q Add SSRF-safe URL validation, redirect limits, private-network blocking, and fetch timeouts. (depends: P175p)
+- [x] P175r Add live page snapshot extraction with detector evidence and scan-progress events. (depends: P175q)
 - [ ] P175s Add typed patch proposal endpoints that reuse core allowlists and return inverse operations. (depends: P175r)
 - [ ] P175t Add SDK handshake, installation status, and connected-origin health endpoints. (depends: P175s)
 - [ ] P175u Add explicit publish, pause, kill-switch, and rollback boundaries with idempotency keys. (depends: P175t)

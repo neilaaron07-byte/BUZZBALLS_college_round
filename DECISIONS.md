@@ -444,3 +444,17 @@ AI tools.
 Reason: useful assistance should shorten diagnosis and authoring without
 turning a language model into an unreviewed deployment actor. The UI therefore
 shows the evidence, diff, confidence, and next human action together.
+
+## D-042 — Scan public pages as inert, bounded HTML before browser verification
+
+Decision: the first live-site scanner fetches only public http/https HTML, blocks
+credentials, private DNS answers, loopback ranges, non-standard ports, unsafe
+redirects, oversized bodies, and non-HTML responses, then parses the document
+without executing its scripts. It emits a typed asynchronous job with replayable
+SSE progress and feeds the existing core detectors; browser layout and runtime
+verification remain separate evidence stages.
+
+Reason: remote HTML is untrusted input and a server-side scanner must not become
+an SSRF proxy or execute arbitrary page code. Keeping the inert snapshot small
+and explicit makes the first live workflow safe while preserving a clear path to
+SDK-mediated runtime verification.

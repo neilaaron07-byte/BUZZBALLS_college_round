@@ -23,6 +23,7 @@ import { rateLimit, requestContext } from "./middleware";
 import { JsonRepository } from "./store";
 import { createSeedState } from "./seed";
 import type { ApiContext } from "./types";
+import { liveSiteRoutes } from "./routes/live-sites";
 
 export interface ApiContextOptions {
   filePath?: string;
@@ -33,7 +34,7 @@ export interface ApiContextOptions {
 export async function createApiContext(options: ApiContextOptions = {}): Promise<ApiContext> {
   const repository = new JsonRepository({ filePath: options.filePath ?? `${process.cwd()}/.patchwork/state.json`, initial: createSeedState });
   await repository.read();
-  return { repository, startedAt: Date.now(), requestCache: new Map(), idempotencyTtlMs: options.idempotencyTtlMs ?? 10 * 60_000, volatileMetrics: { requests: 0, errors: 0, idempotentReplays: 0, bytesRejected: 0 } };
+  return { repository, startedAt: Date.now(), requestCache: new Map(), liveScanJobs: new Map(), idempotencyTtlMs: options.idempotencyTtlMs ?? 10 * 60_000, volatileMetrics: { requests: 0, errors: 0, idempotentReplays: 0, bytesRejected: 0 } };
 }
 
 export function createApiApp(context: ApiContext, options: Pick<ApiContextOptions, "rateLimitPerMinute"> = {}): Express {
@@ -62,6 +63,8 @@ export function createApiApp(context: ApiContext, options: Pick<ApiContextOption
   app.use("/api", releaseRoutes(context));
   app.use("/api", auditRoutes(context));
   app.use("/api", integrationRoutes(context));
+  app.use("/api/v1", liveSiteRoutes(context));
+  app.use("/api", liveSiteRoutes(context));
   app.use((_request, _response, next) => next(new ApiError(404, "ROUTE_NOT_FOUND", "PATCHWORK could not find that API route.")));
   app.use(errorHandler);
   return app;

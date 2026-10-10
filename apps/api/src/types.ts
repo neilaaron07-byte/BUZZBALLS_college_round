@@ -112,6 +112,7 @@ export interface ApiContext {
   repository: import("./store").JsonRepository<ApiState>;
   startedAt: number;
   requestCache: Map<string, { status: number; body: unknown; expiresAt: number }>;
+  liveScanJobs: Map<string, import("./live-site").LiveScanJob>;
   idempotencyTtlMs: number;
   volatileMetrics: { requests: number; errors: number; idempotentReplays: number; bytesRejected: number };
 }

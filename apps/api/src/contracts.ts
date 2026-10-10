@@ -88,6 +88,30 @@ export const healthEventRequestSchema = z.object({
 
 export const storedReportRequestSchema = z.object({ report: z.unknown() }).strict();
 
+export const liveSiteTargetSchema = z.object({
+  siteId: identifierSchema,
+  pageUrl: z.string().url().max(2_048),
+  ownership: z.object({
+    verified: z.boolean().default(false),
+    ownerName: z.string().min(1).max(120).optional(),
+  }).strict().default({ verified: false }),
+  runtime: z.object({
+    installed: z.boolean().default(false),
+    version: z.string().max(80).optional(),
+    connectedOrigin: z.string().url().max(2_048).optional(),
+  }).strict().default({ installed: false }),
+  scanPolicy: z.object({
+    allowPaths: z.array(z.string().min(1).max(200)).max(50).default(["/"]),
+    denyPaths: z.array(z.string().min(1).max(200)).max(50).default([]),
+    maxBytes: z.number().int().min(32_000).max(1_000_000).default(512_000),
+    timeoutMs: z.number().int().min(1_000).max(15_000).default(8_000),
+  }).strict().default({ allowPaths: ["/"], denyPaths: [], maxBytes: 512_000, timeoutMs: 8_000 }),
+}).strict();
+
+export const liveScanRequestSchema = liveSiteTargetSchema.extend({
+  viewport: z.object({ width: z.number().int().min(320).max(2_880), height: z.number().int().min(480).max(2_880) }).strict().default({ width: 1_440, height: 900 }),
+}).strict();
+
 export function parseLimit(value: unknown, fallback = 25): number {
   const parsed = z.coerce.number().int().min(1).max(100).safeParse(value);
   return parsed.success ? parsed.data : fallback;
@@ -101,3 +125,5 @@ export type PatchCreateRequest = z.infer<typeof patchCreateRequestSchema>;
 export type RevisionCreateRequest = z.infer<typeof revisionCreateRequestSchema>;
 export type ReviewRequest = z.infer<typeof reviewRequestSchema>;
 export type ReleasePolicy = z.infer<typeof releasePolicySchema>;
+export type LiveSiteTarget = z.infer<typeof liveSiteTargetSchema>;
+export type LiveScanRequest = z.infer<typeof liveScanRequestSchema>;
