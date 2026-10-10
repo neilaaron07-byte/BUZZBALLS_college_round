@@ -114,21 +114,21 @@ rejects the seeded malicious payload suite.
 
 ## Group 3 — `packages/core` fingerprinting and resolver
 
-- [ ] P035 Define semantic fingerprint types for tag, attributes, text, path, siblings, landmarks, region, and visual role. (depends: P034)
-- [ ] P036 Normalize text, tokens, whitespace, numbers, and casing for stable comparison. (depends: P035)
-- [ ] P037 Detect hashed or noisy class tokens without discarding meaningful classes. (depends: P035)
-- [ ] P038 Capture stable attributes including id, test ID, name, role, aria label, and href pattern. (depends: P035)
-- [ ] P039 Capture normalized n-gram signatures and structural DOM path. (depends: P036)
-- [ ] P040 Capture sibling signatures and nearest landmark chain. (depends: P035)
-- [ ] P041 Calculate coarse viewport region and visual role. (depends: P035)
-- [ ] P042 Implement weighted signal similarity with the specified 0.30/0.20/0.15/0.10/0.10/0.05/0.05/0.05 weights. (depends: P036, P037, P038, P039, P040, P041)
-- [ ] P043 Implement exact, moved, ambiguous, and missing resolver outcomes with confidence and runner-up. (depends: P042)
-- [ ] P044 Implement configurable confidence thresholds and margin rules. (depends: P043)
-- [ ] P045 Add human-readable resolver reasons and per-signal score breakdown. (depends: P043)
-- [ ] P046 Add mutation fixtures for wrappers, moves, renamed classes, edited text, duplicates, reorder, and removal. (depends: P043)
-- [ ] P047 Add at least 30 resolver mutation tests with wrong-element application asserted to zero. (depends: P046)
-- [ ] P048 Add a deterministic 200-scenario benchmark generator for later judge evidence. (depends: P047)
-- [ ] P049 Run the resolver gate and publish an explainable confidence fixture. (depends: P048)
+- [x] P035 Define semantic fingerprint types for tag, attributes, text, path, siblings, landmarks, region, and visual role. (depends: P034)
+- [x] P036 Normalize text, tokens, whitespace, numbers, and casing for stable comparison. (depends: P035)
+- [x] P037 Detect hashed or noisy class tokens without discarding meaningful classes. (depends: P035)
+- [x] P038 Capture stable attributes including id, test ID, name, role, aria label, and href pattern. (depends: P035)
+- [x] P039 Capture normalized n-gram signatures and structural DOM path. (depends: P036)
+- [x] P040 Capture sibling signatures and nearest landmark chain. (depends: P035)
+- [x] P041 Calculate coarse viewport region and visual role. (depends: P035)
+- [x] P042 Implement weighted signal similarity with the specified 0.30/0.20/0.15/0.10/0.10/0.05/0.05/0.05 weights. (depends: P036, P037, P038, P039, P040, P041)
+- [x] P043 Implement exact, moved, ambiguous, and missing resolver outcomes with confidence and runner-up. (depends: P042)
+- [x] P044 Implement configurable confidence thresholds and margin rules. (depends: P043)
+- [x] P045 Add human-readable resolver reasons and per-signal score breakdown. (depends: P043)
+- [x] P046 Add mutation fixtures for wrappers, moves, renamed classes, edited text, duplicates, reorder, and removal. (depends: P043)
+- [x] P047 Add at least 30 resolver mutation tests with wrong-element application asserted to zero. (depends: P046)
+- [x] P048 Add a deterministic 200-scenario benchmark generator for later judge evidence. (depends: P047)
+- [x] P049 Run the resolver gate and publish an explainable confidence fixture. (depends: P048)
 
 **Runnable after Group 3:** Core can resolve ShopNest targets through realistic
 DOM mutations and explain every decision.

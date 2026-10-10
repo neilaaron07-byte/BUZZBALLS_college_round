@@ -29,10 +29,11 @@ Updated: 2026-10-10
 - D028–D034 are complete: the deterministic asset generator created 48 original local assets, including 24 ShopNest product illustrations, hero SVG/PNG, state art, social previews, icons, avatars, and PatchPilot orb; manifest validation passes with no external URLs.
 - D035–D038 are complete: six design-system contract tests pass; the Playwright runner captured all 12 route/theme/viewport combinations with zero console errors; representative baselines were reviewed; typecheck, tests, build, lint, contrast, asset validation, judge, and screenshot gates pass.
 - P023–P034 are complete: `@patchwork/core` now exports Zod-backed site, release, manifest, patch, operation, review, verification, health, and audit schemas; canonical normalization and Web Crypto SHA-256 hashing; same-origin and CSS safety checks; plain-English safety errors; and a 40-fixture malicious payload suite. `npm run core:gate` reports no `any` types.
+- P035–P049 are complete: semantic fingerprints normalize copy, classes, stable attributes, DOM paths, siblings, landmarks, viewport regions, and visual roles; the weighted resolver reports exact, moved, ambiguous, and missing outcomes with thresholds, runner-up evidence, and plain-English reasons; 32 mutations and a deterministic 200-scenario benchmark pass. The explainable fixture is in `docs/evidence/resolver-confidence.md`.
 
 ## Next
 
-1. Start Group 3 with semantic fingerprints, weighted resolution, ambiguity blocking, and mutation fixtures.
+1. Start Group 4 with three-way conflicts, signed manifests, hash-chained audit, and scanner detectors.
 2. Add the dashboard SCAN workflow on top of the validated UI primitives.
 3. Add verifier and AI contracts before connecting release controls.
 4. Keep `npm run loc` visible as feature packages grow toward the measured gates.

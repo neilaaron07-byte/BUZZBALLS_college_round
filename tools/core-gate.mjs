@@ -18,7 +18,6 @@ await collect(sourceRoot);
 const sources = await Promise.all(files.map(async (path) => ({ path, text: await readFile(path, "utf8") })));
 const anyMatches = sources.flatMap(({ path, text }) => [...text.matchAll(/\bany\b/g)].map((match) => `${path}:${match.index ?? 0}`));
 const requiredExports = ["parseSafeOperation", "patchContentHash", "auditEntrySchema", "patchOperationSchema"];
-const index = await readFile(join(sourceRoot, "index.ts"), "utf8");
 const allSource = sources.map(({ text }) => text).join("\n");
 const missingExports = requiredExports.filter((name) => !allSource.includes(name));
 const result = {
