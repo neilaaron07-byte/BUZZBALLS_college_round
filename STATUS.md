@@ -44,11 +44,13 @@ Updated: 2026-10-10
 - P137–P138 are complete: the dashboard is split into route-level modules with a responsive shell, shared seam/tokens styling, API/seed data contracts, and no file over the 1,000-line limit.
 - The first `/dashboard` overview is now runnable: next action, real session stopwatch, SCAN/FIX/SHIP cards, risk ring, release pipeline, recent activity, review ownership, command palette, theme toggle, and mobile navigation are wired.
 - P139–P143 are complete: reusable primitives and explicit status explanations are exercised in the operator shell; the summary keeps the next best action visible and starts a real 60-second session stopwatch.
+- P145 and P148 are complete: SCAN now exposes a detector summary, completed re-scan action, finding filters, severity, confidence, measured snapshot values, resolver signals, DOM target evidence, and blast-radius explanation.
+- FIX is partially active: Patches has realistic queue data, filters, reviewer/approval state, one-operation diff, conflict warning, private-preview state, and explicit handoff to release control. P146, P147, and P149 remain open until the list/kanban, composer, and API-backed preview contract are complete.
 
 ## Next
 
-1. Complete the dashboard primitives and connected overview gate (P139–P143).
-2. Add route-level SCAN/FIX/SHIP screens and interaction coverage (P144–P162).
+1. Finish FIX with kanban/sort/saved views, operation composer, and API-backed isolated preview (P146–P149).
+2. Add review, conflict, verification, release, incident, audit, collaborator, and settings screens (P150–P162).
 3. Connect verifier and PatchPilot contracts to the dashboard’s API client and durable release controls.
 4. Keep `npm run loc` visible as feature packages grow toward the measured gates.
 
@@ -56,7 +58,7 @@ Updated: 2026-10-10
 
 - The repository is still a single vinext app; the target workspace packages do not exist yet.
 - The current ShopNest incident surface still contains the first-pass visual language and will be migrated incrementally.
-- The final LOC gates are intentionally not met yet: current measured handwritten LOC is 9,329 overall; `apps/api` is 4,000/4,000, while dashboard, marketing, ShopNest, core, SDK, extension, verifier, AI, and tests remain below their final thresholds.
+- The final LOC gates are intentionally not met yet: current measured handwritten LOC is 9,397 overall; `apps/api` is 4,000/4,000, while dashboard, marketing, ShopNest, core, SDK, extension, verifier, AI, and tests remain below their final thresholds.
 - The currently deployed Site reflects the prior validated incident demo, not this rebuild in progress.
 - `npm install` reports 28 transitive audit findings in the existing toolchain; no production feature dependency was added yet.
 - The core safety gate is intentionally narrower than the final release gate: signing, resolver, conflict, scanner, API, and dashboard behavior remain in later groups.
