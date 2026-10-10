@@ -5,6 +5,7 @@ export const dashboardRoutes: readonly DashboardRoute[] = [
   { id: "scan", label: "Scan findings", shortLabel: "Scan", description: "Evidence, confidence, and blast radius", icon: "scan" },
   { id: "patches", label: "Patches", shortLabel: "Fix", description: "Drafts, reviews, and safe previews", icon: "patch" },
   { id: "conflicts", label: "Conflicts", shortLabel: "Merge", description: "Explicit decisions for colliding changes", icon: "merge" },
+  { id: "verification", label: "Verification", shortLabel: "Verify", description: "Browser proof before public traffic", icon: "verify" },
   { id: "releases", label: "Releases", shortLabel: "Ship", description: "Policy, canary, and promotion", icon: "rocket" },
   { id: "incidents", label: "Incidents", shortLabel: "Health", description: "Signals, rollback, and recovery", icon: "pulse" },
   { id: "reviews", label: "Review inbox", shortLabel: "Reviews", description: "Owners, approvals, and checks", icon: "users" },

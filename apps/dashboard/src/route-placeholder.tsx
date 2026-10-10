@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, CheckCircle2, FileClock, Layers3, Rocket, ScanSearch, ShieldAlert, Users } from "lucide-react";
+import { ArrowRight, CheckCircle2, FileClock, Layers3, Rocket, ScanSearch, ShieldAlert, ShieldCheck, Users } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/data";
 import { Badge, StatusDot } from "./ui/navigation";
@@ -14,6 +14,7 @@ const routeCopy: Record<DashboardView, { eyebrow: string; title: string; descrip
   scan: { eyebrow: "SCAN / evidence", title: "Scan findings", description: "Review every detector finding with its measured evidence, confidence, and blast radius before you create a patch.", icon: ScanSearch, next: "patches", nextLabel: "Open patches" },
   patches: { eyebrow: "FIX / safe change", title: "Patches", description: "Inspect independently managed changes, reviewers, conflicts, and isolated previews before they become a release.", icon: Layers3, next: "releases", nextLabel: "Review releases" },
   conflicts: { eyebrow: "FIX / merge safety", title: "Conflicts", description: "Make an explicit decision when two independently managed patches touch the same target.", icon: Layers3, next: "patches", nextLabel: "Back to patches" },
+  verification: { eyebrow: "FIX / proof", title: "Verification", description: "Replay interaction, visual, accessibility, and console checks before a release can reach public traffic.", icon: ShieldCheck, next: "releases", nextLabel: "Review release" },
   releases: { eyebrow: "SHIP / release control", title: "Releases", description: "Promote a signed manifest one gate at a time. The canary, policy, and health evidence stay together.", icon: Rocket, next: "incidents", nextLabel: "Open health" },
   incidents: { eyebrow: "SHIP / health", title: "Incidents", description: "See the live signal that would pause or roll back a release, with a clear undo path when the boundary is crossed.", icon: ShieldAlert, next: "audit", nextLabel: "Open audit" },
   reviews: { eyebrow: "FIX / people", title: "Review inbox", description: "Give every reviewer a small, legible decision: approve, request changes, or keep the patch out of production.", icon: Users, next: "patches", nextLabel: "Back to patches" },

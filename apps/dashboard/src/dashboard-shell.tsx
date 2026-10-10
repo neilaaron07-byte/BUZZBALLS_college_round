@@ -1,6 +1,6 @@
 "use client";
 
-import { Activity, CircleHelp, FileClock, GitMerge, Grid2X2, Layers3, Menu, Moon, Rocket, ScanSearch, ShieldAlert, Sun, Users, X } from "lucide-react";
+import { Activity, CircleHelp, FileClock, GitMerge, Grid2X2, Layers3, Menu, Moon, Rocket, ScanSearch, ShieldAlert, ShieldCheck, Sun, Users, X } from "lucide-react";
 import { useState } from "react";
 import { CommandPalette } from "./ui/command";
 import { GridBackdrop } from "./ui/backgrounds";
@@ -12,7 +12,7 @@ import { useTheme } from "./ui/theme-provider";
 import type { DashboardData, DashboardView } from "./dashboard-types";
 import { dashboardRoutes, routeLabel } from "./routes";
 
-const iconMap = { grid: Grid2X2, scan: ScanSearch, patch: Layers3, merge: GitMerge, rocket: Rocket, pulse: Activity, users: Users, link: FileClock } as const;
+const iconMap = { grid: Grid2X2, scan: ScanSearch, patch: Layers3, merge: GitMerge, verify: ShieldCheck, rocket: Rocket, pulse: Activity, users: Users, link: FileClock } as const;
 
 export function DashboardShell({ data, view, onNavigate, children }: Readonly<{ data: DashboardData; view: DashboardView; onNavigate: (view: DashboardView) => void; children: React.ReactNode }>) {
   const { resolvedTheme, toggleTheme } = useTheme();

@@ -6,6 +6,13 @@ interface ApiEnvelope<T> {
   requestId: string;
 }
 
+export interface PrivatePreview {
+  patchId: string;
+  previewUrl: string;
+  expiresAt: string;
+  source: "api" | "seed";
+}
+
 function apiBaseUrl(): string {
   return (typeof window !== "undefined" ? window.__PATCHWORK_API_URL : undefined) ??
     (typeof process !== "undefined" ? process.env.NEXT_PUBLIC_API_URL : undefined) ?? "";
@@ -37,6 +44,23 @@ export async function loadDashboardData(signal?: AbortSignal): Promise<Dashboard
     if (error instanceof DOMException && error.name === "AbortError") throw error;
     return cloneFixture();
   }
+}
+
+export async function createPrivatePreview(patchId: string): Promise<PrivatePreview> {
+  const baseUrl = apiBaseUrl();
+  if (baseUrl) {
+    try {
+      const response = await fetch(`${baseUrl}/api/patches/${encodeURIComponent(patchId)}/preview`, { method: "POST", headers: { "content-type": "application/json", accept: "application/json" }, body: JSON.stringify({ ttlMinutes: 30 }) });
+      if (response.ok) {
+        const envelope = await response.json() as ApiEnvelope<{ patchId: string; previewUrl: string; expiresAt: string }>;
+        return { ...envelope.data, source: "api" };
+      }
+    } catch {
+      // The deterministic local preview below keeps the demo usable without hiding the API failure.
+    }
+  }
+  const expiresAt = new Date(Date.now() + 30 * 60_000).toISOString();
+  return { patchId, previewUrl: `https://preview.patchwork.example/${patchId}?expires=${encodeURIComponent(expiresAt)}`, expiresAt, source: "seed" };
 }
 
 declare global {

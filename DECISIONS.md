@@ -207,6 +207,27 @@ demo. A disconnected API should leave the operator with inspectable evidence,
 not a fake spinner or a blank screen, while the visible source label preserves
 trust about what can be changed.
 
+## D-026 — Make site context explicit in the operator overview
+
+Decision: the overview keeps the selected ShopNest site, repository, owner,
+environment, release policy, finding count, and managed patch count in one
+site-overview card, with a direct handoff to release policy.
+
+Reason: the operator needs to confirm scope before editing a live website. The
+card makes the currently selected site legible without forcing a separate page
+or hiding policy posture inside the project selector.
+
+## D-027 — Show health events beside incident controls
+
+Decision: the incidents route renders the API read model's health events as a
+timeline beside the circuit-breaker state and replay scrubber. Empty health
+history is explained explicitly rather than replaced with a fabricated chart.
+
+Reason: rollback decisions need both the current signal and the sequence that
+led to it. Keeping observed event evidence in the route makes the rollback
+recommendation inspectable and preserves the product's plain-English status
+contract.
+
 ## D-006 — Deterministic offline demo data
 
 Decision: seed named actors, releases, findings, timestamps, and ShopNest
