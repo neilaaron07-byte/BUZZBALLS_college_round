@@ -4,7 +4,7 @@ Updated: 2026-10-10
 
 ## Current state
 
-- Current group: Group 1A complete — design language, motion, components, assets, and responsive visual QA.
+- Current group: Group 2 complete — core schemas and patch safety.
 - Baseline surface: the existing vinext Site renders a seeded ShopNest checkout incident with a PATCHWORK inspector dock.
 - Planning: `AGENTS.md`, `BRAINSTORM.md`, and `PLAN.md` are present. The plan contains 244 dependency-aware tasks, including the design-system track.
 - Deployment: the existing private Sites project remains configured in `.openai/hosting.json`; deployment will follow the first validated product milestone.
@@ -28,10 +28,11 @@ Updated: 2026-10-10
 - D021–D027 are complete: signature motion components are exported and demonstrated in the `/design` gallery, including repair morph, before/after, spotlight, story rail, rollback time machine, AI stream, DOM evidence, audit tamper state, and integration marquee.
 - D028–D034 are complete: the deterministic asset generator created 48 original local assets, including 24 ShopNest product illustrations, hero SVG/PNG, state art, social previews, icons, avatars, and PatchPilot orb; manifest validation passes with no external URLs.
 - D035–D038 are complete: six design-system contract tests pass; the Playwright runner captured all 12 route/theme/viewport combinations with zero console errors; representative baselines were reviewed; typecheck, tests, build, lint, contrast, asset validation, judge, and screenshot gates pass.
+- P023–P034 are complete: `@patchwork/core` now exports Zod-backed site, release, manifest, patch, operation, review, verification, health, and audit schemas; canonical normalization and Web Crypto SHA-256 hashing; same-origin and CSS safety checks; plain-English safety errors; and a 40-fixture malicious payload suite. `npm run core:gate` reports no `any` types.
 
 ## Next
 
-1. Start Group 2 with typed core schemas, hashing, audit chains, and deterministic fixtures.
+1. Start Group 3 with semantic fingerprints, weighted resolution, ambiguity blocking, and mutation fixtures.
 2. Add the dashboard SCAN workflow on top of the validated UI primitives.
 3. Add verifier and AI contracts before connecting release controls.
 4. Keep `npm run loc` visible as feature packages grow toward the measured gates.
@@ -43,5 +44,6 @@ Updated: 2026-10-10
 - The LOC gates are intentionally not met yet: current measured handwritten LOC is 788 while the final product requires 25,000+ lines of real feature code and tests.
 - The currently deployed Site reflects the prior validated incident demo, not this rebuild in progress.
 - `npm install` reports 28 transitive audit findings in the existing toolchain; no production feature dependency was added yet.
+- The core safety gate is intentionally narrower than the final release gate: signing, resolver, conflict, scanner, API, and dashboard behavior remain in later groups.
 - The visual primitives are wired into the root layout and global CSS, but the existing ShopNest screen is still being migrated to use them.
 - Browser QA found and fixed a persisted-theme hydration mismatch; a fresh `/design` session now reports no console errors after theme restoration.

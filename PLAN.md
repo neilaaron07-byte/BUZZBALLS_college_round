@@ -96,18 +96,18 @@ offline, and the screenshot/contrast gates are measurable.
 
 ## Group 2 — `packages/core` schemas and safety
 
-- [ ] P023 Create the core package entrypoint and public exports. (depends: P022)
-- [ ] P024 Define site, environment, release, manifest, and kill-switch schemas with Zod. (depends: P023)
-- [ ] P025 Define patch identity, author, revision, lifecycle status, and content hash schemas. (depends: P023)
-- [ ] P026 Define allowed operations: style, text, attribute, hide, reorder, and badge. (depends: P025)
-- [ ] P027 Define allowlisted CSS properties and reject `url()`, external fetches, and unsafe values. (depends: P026)
-- [ ] P028 Define allowlisted attributes and same-origin URL validation. (depends: P026)
-- [ ] P029 Define review, conflict, verification, health event, and audit entry schemas. (depends: P025)
-- [ ] P030 Add patch normalization and canonical JSON serialization. (depends: P025)
-- [ ] P031 Add payload safety errors with plain-English remediation messages. (depends: P027, P028)
-- [ ] P032 Add 40 malicious operation fixtures covering script, iframe, event handler, JavaScript URL, external URL, CSS exfiltration, and oversized payloads. (depends: P031)
-- [ ] P033 Test every core schema boundary with valid, invalid, and backwards-compatible fixtures. (depends: P024, P029, P032)
-- [ ] P034 Run the core safety gate and confirm no `any` types in `packages/core`. (depends: P033)
+- [x] P023 Create the core package entrypoint and public exports. (depends: P022)
+- [x] P024 Define site, environment, release, manifest, and kill-switch schemas with Zod. (depends: P023)
+- [x] P025 Define patch identity, author, revision, lifecycle status, and content hash schemas. (depends: P023)
+- [x] P026 Define allowed operations: style, text, attribute, hide, reorder, and badge. (depends: P025)
+- [x] P027 Define allowlisted CSS properties and reject `url()`, external fetches, and unsafe values. (depends: P026)
+- [x] P028 Define allowlisted attributes and same-origin URL validation. (depends: P026)
+- [x] P029 Define review, conflict, verification, health event, and audit entry schemas. (depends: P025)
+- [x] P030 Add patch normalization and canonical JSON serialization. (depends: P025)
+- [x] P031 Add payload safety errors with plain-English remediation messages. (depends: P027, P028)
+- [x] P032 Add 40 malicious operation fixtures covering script, iframe, event handler, JavaScript URL, external URL, CSS exfiltration, and oversized payloads. (depends: P031)
+- [x] P033 Test every core schema boundary with valid, invalid, and backwards-compatible fixtures. (depends: P024, P029, P032)
+- [x] P034 Run the core safety gate and confirm no `any` types in `packages/core`. (depends: P033)
 
 **Runnable after Group 2:** A standalone core package validates safe patches and
 rejects the seeded malicious payload suite.
