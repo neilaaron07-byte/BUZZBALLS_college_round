@@ -293,9 +293,9 @@ rollback, and report its audit chain without external services.
 - [x] P157 Add evidence screen with resolver benchmark, SDK budget, regression catches, quality gates, and Lighthouse evidence. (depends: P048, P078, P103, P156)
 - [x] P158 Add install screen with SDK snippet, extension steps, copy success, and environment checklist. (depends: P079, P093, P157)
 - [x] P159 Add settings screen with site policy, allowlist, notifications, and safe danger zone. (depends: P123, P158)
-- [ ] P160 Add loading, empty, error, retry, success, optimistic, and toast states to every route. (depends: P143, P144, P145, P146, P147, P149, P150, P151, P152, P153, P154, P155, P156, P157, P158, P159)
-- [ ] P161 Add full keyboard, focus, reduced-motion, touch, and screen-reader coverage. (depends: P160)
-- [ ] P162 Add dashboard component tests, route tests, interaction tests, and console-error guards. (depends: P161)
+- [x] P160 Add loading, empty, error, retry, success, optimistic, and toast states to every route. (depends: P143, P144, P145, P146, P147, P149, P150, P151, P152, P153, P154, P155, P156, P157, P158, P159)
+- [x] P161 Add full keyboard, focus, reduced-motion, touch, and screen-reader coverage. (depends: P160)
+- [x] P162 Add dashboard component tests, route tests, interaction tests, and console-error guards. (depends: P161)
 - [ ] P163 Run dashboard gate and measure `apps/dashboard` LOC against 9,000 lines. (depends: P162)
 
 **Runnable after Group 10:** The dashboard is a commercial-grade SCAN/FIX/SHIP

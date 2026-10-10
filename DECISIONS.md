@@ -239,6 +239,19 @@ proof, setup, or policy without changing products. Keeping these surfaces in
 the shell also lets the API-backed read model and deterministic fallback share
 one trust boundary.
 
+## D-029 — Do not probe a missing API origin from the browser
+
+Decision: when `NEXT_PUBLIC_API_URL` or `window.__PATCHWORK_API_URL` is absent,
+the dashboard enters its explicitly labeled deterministic seed mode without
+issuing a same-origin `/api` request. When an API origin is configured, the
+typed workspace request remains the source of truth and still falls back safely
+if it fails.
+
+Reason: the API is a separate local service in the launch demo. A browser-side
+probe to the dashboard origin created avoidable 404 console noise before the
+fallback could render, which violated the zero-console-error contract and made
+the source banner less trustworthy.
+
 ## D-006 — Deterministic offline demo data
 
 Decision: seed named actors, releases, findings, timestamps, and ShopNest

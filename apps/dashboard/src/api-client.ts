@@ -33,7 +33,7 @@ function siteFromWorkspace(workspace: WorkspaceReadModel): DashboardData["site"]
 
 export async function loadDashboardData(signal?: AbortSignal): Promise<DashboardData> {
   const baseUrl = apiBaseUrl();
-  if (!baseUrl && typeof window === "undefined") return cloneFixture();
+  if (!baseUrl) return cloneFixture();
   try {
     const response = await fetch(`${baseUrl}/api/sites/site_shopnest/workspace`, { headers: { accept: "application/json" }, signal, cache: "no-store" });
     if (!response.ok) throw new Error(`Workspace request returned ${response.status}.`);

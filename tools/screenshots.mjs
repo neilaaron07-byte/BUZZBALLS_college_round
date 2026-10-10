@@ -9,6 +9,19 @@ const baseUrl = process.env.PATCHWORK_BASE_URL ?? "http://localhost:3000";
 const routes = [
   { id: "storefront", path: "/" },
   { id: "design-system", path: "/design" },
+  { id: "dashboard-overview", path: "/dashboard?view=overview" },
+  { id: "dashboard-scan", path: "/dashboard?view=scan" },
+  { id: "dashboard-patches", path: "/dashboard?view=patches" },
+  { id: "dashboard-conflicts", path: "/dashboard?view=conflicts" },
+  { id: "dashboard-verification", path: "/dashboard?view=verification" },
+  { id: "dashboard-releases", path: "/dashboard?view=releases" },
+  { id: "dashboard-incidents", path: "/dashboard?view=incidents" },
+  { id: "dashboard-reviews", path: "/dashboard?view=reviews" },
+  { id: "dashboard-collaborators", path: "/dashboard?view=collaborators" },
+  { id: "dashboard-evidence", path: "/dashboard?view=evidence" },
+  { id: "dashboard-install", path: "/dashboard?view=install" },
+  { id: "dashboard-audit", path: "/dashboard?view=audit" },
+  { id: "dashboard-settings", path: "/dashboard?view=settings" },
 ];
 const viewports = [
   { id: "desktop", width: 1440, height: 1000 },
@@ -29,7 +42,7 @@ for (const route of routes) {
       page.on("pageerror", (error) => consoleErrors.push(error.message));
       await page.addInitScript((selectedTheme) => window.localStorage.setItem("patchwork-theme", selectedTheme), theme);
       try {
-        const response = await page.goto(`${baseUrl}${route.path}`, { waitUntil: "networkidle", timeout: 30000 });
+        const response = await page.goto(`${baseUrl}${route.path}`, { waitUntil: route.path.startsWith("/dashboard") ? "domcontentloaded" : "networkidle", timeout: 30000 });
         if (!response || !response.ok()) throw new Error(`HTTP ${response?.status() ?? "no response"}`);
         await page.waitForTimeout(450);
         if (consoleErrors.length > 0) throw new Error(`console errors: ${consoleErrors.join(" | ")}`);

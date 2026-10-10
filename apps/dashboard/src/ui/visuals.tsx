@@ -18,7 +18,7 @@ export function DiffViewer({ before, after }: Readonly<{ before: string; after: 
 }
 
 export function Timeline({ items }: Readonly<{ items: ReadonlyArray<{ title: string; detail: string; time: string; tone?: "green" | "amber" | "violet" }> }>) {
-  return <ol className="pw-timeline">{items.map((item) => <li key={`${item.time}-${item.title}`}><span className={`pw-timeline-dot pw-timeline-dot-${item.tone ?? "violet"}`} aria-hidden="true" /><div><div className="pw-timeline-top"><strong>{item.title}</strong><time>{item.time}</time></div><p>{item.detail}</p></div></li>)}</ol>;
+  return <ol className="pw-timeline">{items.map((item, index) => <li key={`${item.time}-${item.title}-${index}`}><span className={`pw-timeline-dot pw-timeline-dot-${item.tone ?? "violet"}`} aria-hidden="true" /><div><div className="pw-timeline-top"><strong>{item.title}</strong><time>{item.time}</time></div><p>{item.detail}</p></div></li>)}</ol>;
 }
 
 export function Sparkline({ points, tone = "violet", label }: Readonly<{ points: readonly number[]; tone?: "violet" | "green" | "amber" | "red"; label: string }>) {
