@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { GeistMono, GeistSans } from "geist/font";
+import { ThemeProvider } from "../apps/dashboard/src/ui/theme-provider";
 import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
-  title: "LUMEN — Checkout incident demo",
-  description: "A seeded production checkout failure for the PATCHWORK live-patching demo.",
+  title: "PATCHWORK — Fix any website in 60 seconds",
+  description: "Scan, fix, and ship safe website patches with confidence.",
   openGraph: {
     title: "PATCHWORK — Safe live patches",
     description: "A seeded checkout incident, isolated preview, and fail-before/pass-after verification.",
@@ -20,5 +22,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body>{children}</body></html>;
+  return <html lang="en" suppressHydrationWarning><body className={`${GeistSans.variable} ${GeistMono.variable}`}><ThemeProvider>{children}</ThemeProvider></body></html>;
 }

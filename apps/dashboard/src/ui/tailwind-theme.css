@@ -1,0 +1,16 @@
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --color-pw-ink: var(--pw-ink);
+  --color-pw-surface: var(--pw-surface);
+  --color-pw-raised: var(--pw-raised);
+  --color-pw-elevated: var(--pw-elevated);
+  --color-pw-text: var(--pw-text);
+  --color-pw-muted: var(--pw-muted);
+  --color-pw-faint: var(--pw-faint);
+  --color-pw-violet: var(--pw-violet);
+  --color-pw-cyan: var(--pw-cyan);
+  --color-pw-green: var(--pw-green);
+  --color-pw-amber: var(--pw-amber);
+  --color-pw-red: var(--pw-red);
+}

@@ -23,6 +23,7 @@ Updated: 2026-10-10
 - Converting the single-surface starter into a workspace that can host the dashboard, marketing site, ShopNest demo, API, and safety packages.
 - Building the shared visual foundation before feature screens so every surface uses one product language.
 - Installing the design-system foundation and adding the first shared visual primitives under `apps/dashboard/src/ui`.
+- D001–D010 are complete: Geist, token variables, Tailwind mapping, theme persistence, AA contrast assertions, seam primitives, stitched logo, layered backgrounds, and Motion constants are implemented and exported from the shared dashboard UI boundary.
 
 ## Next
 
@@ -38,3 +39,4 @@ Updated: 2026-10-10
 - The LOC, judge, Lighthouse, and screenshot gates cannot pass until the workspace and routes are implemented.
 - The currently deployed Site reflects the prior validated incident demo, not this rebuild in progress.
 - `npm install` reports 30 transitive audit findings in the existing toolchain; no production feature dependency was added yet.
+- The visual primitives are wired into the root layout and global CSS, but the existing ShopNest screen is still being migrated to use them.

@@ -24,7 +24,7 @@ test("server-renders the seeded checkout incident storefront", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>LUMEN — Checkout incident demo<\/title>/i);
+  assert.match(html, /<title>PATCHWORK — Fix any website in 60 seconds<\/title>/i);
   assert.match(html, /Checkout is currently unavailable/);
   assert.match(html, /Add to cart/);
   assert.match(html, /PATCHWORK/);
