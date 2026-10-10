@@ -270,8 +270,8 @@ rollback, and report its audit chain without external services.
 
 ## Group 10 — `apps/dashboard`
 
-- [ ] P137 Split dashboard into route-level modules under the 1,000-line file limit. (depends: P136, D038)
-- [ ] P138 Create shared design tokens for ink, paper, seam, status colors, type, spacing, and radii. (depends: P137)
+- [x] P137 Split dashboard into route-level modules under the 1,000-line file limit. (depends: P136, D038)
+- [x] P138 Create shared design tokens for ink, paper, seam, status colors, type, spacing, and radii. (depends: P137)
 - [ ] P139 Create reusable Button, Badge, Card, Table, Tabs, Dialog, Toast, EmptyState, Skeleton, and ErrorState primitives. (depends: P138)
 - [ ] P140 Add responsive shell with left navigation, breadcrumbs, account menu, and mobile navigation. (depends: P139)
 - [ ] P141 Add command palette with keyboard navigation and search. (depends: P140)

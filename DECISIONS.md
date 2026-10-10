@@ -185,6 +185,28 @@ Reason: dashboard deep links and offline handoffs need a stable, verifiable
 record of what the operator actually reviewed, without making the browser
 reconstruct the release from mutable collections.
 
+## D-024 — Stage the new operator workspace at `/dashboard`
+
+Decision: keep the seeded ShopNest incident at `/` while the commercial
+operator workspace is introduced at `/dashboard`; the dashboard will become the
+default landing surface after its full route and demo contract is complete.
+
+Reason: this keeps the currently reviewable incident fixture reachable during
+the rebuild while allowing SCAN/FIX/SHIP navigation to evolve independently of
+the storefront fixture and its visual regression evidence.
+
+## D-025 — Keep the dashboard API-first with a deterministic read-only fallback
+
+Decision: the dashboard requests the typed workspace read model from the API when
+available and falls back to the same deterministic ShopNest fixture when the API
+process is offline. The UI labels the fallback as a demo workspace and never
+pretends that a local seed is a live mutation.
+
+Reason: the dashboard and API run as separate local services during the launch
+demo. A disconnected API should leave the operator with inspectable evidence,
+not a fake spinner or a blank screen, while the visible source label preserves
+trust about what can be changed.
+
 ## D-006 — Deterministic offline demo data
 
 Decision: seed named actors, releases, findings, timestamps, and ShopNest

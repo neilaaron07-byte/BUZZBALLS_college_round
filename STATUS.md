@@ -4,7 +4,7 @@ Updated: 2026-10-10
 
 ## Current state
 
-- Current group: Group 10 next — API workflow and its measured size gate are complete; dashboard SCAN/FIX/SHIP surfaces are the next implementation phase.
+- Current group: Group 10 in progress — API workflow is complete; the new operator workspace is being built at `/dashboard`.
 - Baseline surface: the existing vinext Site renders a seeded ShopNest checkout incident with a PATCHWORK inspector dock.
 - Planning: `AGENTS.md`, `BRAINSTORM.md`, and `PLAN.md` are present. The plan contains 244 dependency-aware tasks, including the design-system track.
 - Deployment: the existing private Sites project remains configured in `.openai/hosting.json`; deployment will follow the first validated product milestone.
@@ -40,11 +40,14 @@ Updated: 2026-10-10
 ## API gate closure complete
 
 - P136a–P136l are complete: the API now exposes typed SCAN/FIX/SHIP workspace cards, cursor timelines, release-readiness checks, collaboration ownership, operator handoffs, release deltas, content-hashed snapshots, CSV exports, and safe contract coverage.
+- Group 10 is active: `/dashboard` is the operator control plane; `/` remains the deterministic ShopNest incident fixture during migration.
+- P137–P138 are complete: the dashboard is split into route-level modules with a responsive shell, shared seam/tokens styling, API/seed data contracts, and no file over the 1,000-line limit.
+- The first `/dashboard` overview is now runnable: next action, real session stopwatch, SCAN/FIX/SHIP cards, risk ring, release pipeline, recent activity, review ownership, command palette, theme toggle, and mobile navigation are wired.
 
 ## Next
 
-1. Start Group 10 dashboard SCAN/FIX/SHIP surfaces, beginning with route modules and the API client.
-2. Connect the dashboard to the API read models and durable release controls.
+1. Complete the dashboard primitives and connected overview gate (P139–P143).
+2. Add route-level SCAN/FIX/SHIP screens and interaction coverage (P144–P162).
 3. Connect verifier and PatchPilot contracts to the dashboard’s API client and durable release controls.
 4. Keep `npm run loc` visible as feature packages grow toward the measured gates.
 
@@ -52,7 +55,7 @@ Updated: 2026-10-10
 
 - The repository is still a single vinext app; the target workspace packages do not exist yet.
 - The current ShopNest incident surface still contains the first-pass visual language and will be migrated incrementally.
-- The final LOC gates are intentionally not met yet: current measured handwritten LOC is 9,024 overall; `apps/api` is 4,000/4,000, while dashboard, marketing, ShopNest, core, SDK, extension, verifier, AI, and tests remain below their final thresholds.
+- The final LOC gates are intentionally not met yet: current measured handwritten LOC is 9,329 overall; `apps/api` is 4,000/4,000, while dashboard, marketing, ShopNest, core, SDK, extension, verifier, AI, and tests remain below their final thresholds.
 - The currently deployed Site reflects the prior validated incident demo, not this rebuild in progress.
 - `npm install` reports 28 transitive audit findings in the existing toolchain; no production feature dependency was added yet.
 - The core safety gate is intentionally narrower than the final release gate: signing, resolver, conflict, scanner, API, and dashboard behavior remain in later groups.

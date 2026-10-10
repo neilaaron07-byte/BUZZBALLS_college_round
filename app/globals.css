@@ -1,6 +1,7 @@
 @import "../apps/dashboard/src/ui/tokens.css";
 @import "../apps/dashboard/src/ui/tailwind-theme.css";
 @import "../apps/dashboard/src/ui/ui.css";
+@import "../apps/dashboard/src/dashboard.css";
 
 :root { --ink: #10181c; --ink-soft: #5c686b; --paper: #f6f7f4; --line: #dce3de; --lime: #bbfa45; --lime-dark: #83b62c; --coral: #f17367; --coral-soft: #fff0ed; --mono: "DM Mono", monospace; --sans: "Manrope", sans-serif; --serif: "Playfair Display", Georgia, serif; }
 * { box-sizing: border-box; }
