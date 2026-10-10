@@ -9,6 +9,7 @@ const baseUrl = process.env.PATCHWORK_BASE_URL ?? "http://localhost:3000";
 const routes = [
   { id: "storefront", path: "/" },
   { id: "design-system", path: "/design" },
+  { id: "marketing", path: "/web" },
   { id: "dashboard-overview", path: "/dashboard?view=overview" },
   { id: "dashboard-scan", path: "/dashboard?view=scan" },
   { id: "dashboard-patches", path: "/dashboard?view=patches" },

@@ -252,6 +252,17 @@ probe to the dashboard origin created avoidable 404 console noise before the
 fallback could render, which violated the zero-console-error contract and made
 the source banner less trustworthy.
 
+## D-030 — Stage marketing at `/web` during the storefront migration
+
+Decision: add the marketing landing surface at `/web` while `/` remains the
+seeded ShopNest incident fixture. The marketing surface links into `/dashboard`
+and uses the same measured proof language and seam motif.
+
+Reason: the storefront is still the verifier fixture and is intentionally
+valuable as a public incident reproduction. A separate marketing route lets the
+launch story mature without hiding or destabilizing the end-to-end bug demo;
+the default landing route can switch after the public-surface gate is complete.
+
 ## D-006 — Deterministic offline demo data
 
 Decision: seed named actors, releases, findings, timestamps, and ShopNest

@@ -51,7 +51,7 @@ test("the design gallery keeps the signature moments reachable", async () => {
 test("responsive screenshot coverage is explicit and console errors fail the run", async () => {
   const runner = await source("tools/screenshots.mjs");
 
-  for (const route of ["storefront", "design-system", "dashboard-overview", "dashboard-settings"]) assert.match(runner, new RegExp(route));
+  for (const route of ["storefront", "design-system", "marketing", "dashboard-overview", "dashboard-settings"]) assert.match(runner, new RegExp(route));
   assert.match(runner, /const themes = \["dark", "light"\]/);
   for (const viewport of ["desktop", "tablet", "mobile"]) assert.match(runner, new RegExp(viewport));
   assert.match(runner, /console errors/);

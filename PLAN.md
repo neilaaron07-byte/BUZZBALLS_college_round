@@ -303,11 +303,11 @@ workspace where every mandatory feature is reachable and explained.
 
 ## Group 11 — `apps/web` marketing surface
 
-- [ ] P164 Create marketing app shell with shared brand tokens and seam motif. (depends: P163, D038)
-- [ ] P165 Build landing hero around “Fix any website in 60 seconds”. (depends: P164)
-- [ ] P166 Build interactive SCAN/FIX/SHIP 10-second demo with real local state. (depends: P165)
-- [ ] P167 Build before/after repair slider and time-to-fix stopwatch. (depends: P166)
-- [ ] P168 Build proof metrics from measured local evidence, not invented claims. (depends: P157, P167)
+- [x] P164 Create marketing app shell with shared brand tokens and seam motif. (depends: P163, D038)
+- [x] P165 Build landing hero around “Fix any website in 60 seconds”. (depends: P164)
+- [x] P166 Build interactive SCAN/FIX/SHIP 10-second demo with real local state. (depends: P165)
+- [x] P167 Build before/after repair slider and time-to-fix stopwatch. (depends: P166)
+- [x] P168 Build proof metrics from measured local evidence, not invented claims. (depends: P157, P167)
 - [ ] P169 Build product tour route for scan, patch, preview, verify, release, and rollback. (depends: P168)
 - [ ] P170 Build security route with threat model summary and signed-manifest story. (depends: P169)
 - [ ] P171 Build customers route with agency, storefront, portal, and legacy-app stories. (depends: P169)
