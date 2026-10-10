@@ -368,3 +368,16 @@ contract beside the operation editor.
 Reason: an editor that accepts arbitrary CSS can look useful while undermining
 the safety promise. Making the inverse and the conflict decision first-class
 keeps isolated preview, review, and rollback aligned with the core SDK policy.
+
+## D-036 — Treat verification as a replayable evidence record
+
+Decision: the dashboard verification surface models each browser check with an
+observed value, expected boundary, duration, route, and evidence list. A run has
+a deterministic identity, viewport matrix, replay count, comparison summary,
+and a green/amber/red release posture. The UI derives its score and state from
+that record and can export the check rows as CSV.
+
+Reason: a single green badge is not enough for a launch demo or a real operator.
+Keeping the evidence granular makes regressions visible, gives the release
+screen a trustworthy input, and makes offline handoff possible without claiming
+that an unmeasured check passed.
