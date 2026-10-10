@@ -406,3 +406,41 @@ reachable without changing release state.
 Reason: an operator needs to understand whether a status is measured, local, or
 unavailable before taking action. Making recovery visible prevents a polished
 dashboard from hiding the very failure states PATCHWORK is meant to control.
+
+## D-039 — Treat the launch brief as three evidence-led product surfaces
+
+Decision: the next frontend tranche keeps one PATCHWORK visual language but
+separates the marketing proof, operator workflow, and browser extension into
+their own typed modules. Marketing interactions will use measured evidence
+already present in the repository, while every animated or interactive section
+will have a static, keyboard-accessible state.
+
+Reason: the product promise is easiest to understand when visitors see a safe
+story, operators get the full control plane, and extension users can capture a
+finding where it occurs. A single giant page would make the surface harder to
+test, lazy-load, and evolve without weakening the common seam motif.
+
+## D-040 — Live-site changes require an installed runtime and an explicit ship gate
+
+Decision: PATCHWORK can scan a public URL through an SSRF-protected backend
+fetcher and can create a signed, reviewable patch draft from the returned
+evidence. A live mutation is only applied through the PATCHWORK SDK handshake on
+the target origin after verification and an explicit human release action. The
+local ShopNest fixture remains the offline demo target.
+
+Reason: a server cannot safely or reliably rewrite arbitrary third-party HTML in
+place. Separating remote inspection from SDK-mediated application keeps origins,
+credentials, inverse operations, and rollback boundaries explicit while still
+making the complete live-site workflow real for connected sites.
+
+## D-041 — PatchPilot stays tool-bound and never owns release authority
+
+Decision: PatchPilot receives a typed page and workspace context, calls only
+read or propose tools, and returns an action card that must pass the same core
+schemas as a human draft. The OfflineBrain is the default provider; a remote
+provider is optional and server-side. Publish, rollback, and delete are never
+AI tools.
+
+Reason: useful assistance should shorten diagnosis and authoring without
+turning a language model into an unreviewed deployment actor. The UI therefore
+shows the evidence, diff, confidence, and next human action together.

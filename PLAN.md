@@ -322,6 +322,39 @@ workspace where every mandatory feature is reachable and explained.
 - [x] P174 Add marketing tests, metadata, social preview, and Lighthouse budget. (depends: P173)
 - [ ] P175 Run web gate and measure `apps/web` LOC against 2,500 lines. (depends: P174)
 
+### Launch brief depth tranche
+
+- [x] P175a Split marketing evidence, navigation, and command-menu behavior into typed modules. (depends: P174, D039)
+- [x] P175b Add sticky glass navigation with keyboard command search and route-safe focus handling. (depends: P175a)
+- [x] P175c Add the broken-to-fixed hero visual with scan, patch, and release annotations. (depends: P175a)
+- [x] P175d Add the pinned Break → Patch → Verify → Ship → Rollback scroll story. (depends: P175c)
+- [x] P175e Add the seven-feature bento grid with real mini status animations. (depends: P175d)
+- [x] P175f Add the public SCAN/FIX/SHIP workflow explainer with explicit status tones. (depends: P175e)
+- [x] P175g Add the interactive playground with safe and blocked patch branches. (depends: P175f)
+- [x] P175h Add measured live metrics, resolver evidence, and the integration marquee. (depends: P175g)
+- [x] P175i Add security proof, threat boundaries, and signed-manifest evidence. (depends: P175h)
+- [x] P175j Add PatchPilot AI chat with deterministic streamed explanation states. (depends: P175i)
+- [x] P175k Add the competitor comparison table with accessible row semantics. (depends: P175j)
+- [x] P175l Add FAQ disclosure states, final CTA, and a complete keyboard footer. (depends: P175k)
+- [x] P175m Add marketing empty, offline, reduced-motion, and error states to the new sections. (depends: P175l)
+- [x] P175n Add focused marketing engine and route contract tests for the launch brief. (depends: P175m)
+- [x] P175o Run marketing typecheck, lint, build, screenshot sweep, and LOC measurement. (depends: P175n)
+
+## Group 11B — live-site API and PatchPilot workflow
+
+- [ ] P175p Add a typed live-site target schema with origin, ownership, SDK status, and scan policy. (depends: P175o, D040)
+- [ ] P175q Add SSRF-safe URL validation, redirect limits, private-network blocking, and fetch timeouts. (depends: P175p)
+- [ ] P175r Add live page snapshot extraction with detector evidence and scan-progress events. (depends: P175q)
+- [ ] P175s Add typed patch proposal endpoints that reuse core allowlists and return inverse operations. (depends: P175r)
+- [ ] P175t Add SDK handshake, installation status, and connected-origin health endpoints. (depends: P175s)
+- [ ] P175u Add explicit publish, pause, kill-switch, and rollback boundaries with idempotency keys. (depends: P175t)
+- [ ] P175v Add PatchPilot context, tool routing, action-card contracts, and prompt-injection redaction. (depends: P175u, D041)
+- [ ] P175w Add PatchPilot SSE streaming with offline fallback and typed error recovery. (depends: P175v)
+- [ ] P175x Add global Ask PatchPilot drawer and contextual Explain and fix actions to the dashboard. (depends: P175w)
+- [ ] P175y Add `/fix` guided SCAN → FIX → SHIP route with timer, projected score, verification filmstrip, and undo. (depends: P175x)
+- [ ] P175z Add live-site, PatchPilot, and guided-flow tests including malicious page text. (depends: P175y)
+- [ ] P175aa Run backend/AI/frontend typecheck, lint, build, focused tests, and live-route smoke checks. (depends: P175z)
+
 **Runnable after Group 11:** A non-technical visitor understands the promise,
 sees the repair, and can enter the dashboard without documentation.
 

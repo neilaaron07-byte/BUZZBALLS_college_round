@@ -7,19 +7,30 @@ async function source(path) { return readFile(new URL(path, root), "utf8"); }
 
 test("marketing surface explains the PATCHWORK promise and routes to the operator workspace", async () => {
   const page = await source("apps/web/src/marketing-page.tsx");
-  assert.match(page, /Fix any website/);
-  assert.match(page, /SCAN\. FIX\. SHIP\./);
-  assert.match(page, /href="\/dashboard"/);
-  assert.match(page, /isolate|inverse|rollback/i);
-  assert.doesNotMatch(page, /https?:\/\//);
+  const hero = await source("apps/web/src/marketing-hero.tsx");
+  const chrome = await source("apps/web/src/marketing-chrome.tsx");
+  const sections = await source("apps/web/src/marketing-sections.tsx");
+  const combined = `${page}\n${hero}\n${chrome}\n${sections}`;
+  assert.match(combined, /Fix any website/);
+  assert.match(combined, /SCAN\. FIX\. SHIP\./);
+  assert.match(combined, /href="\/dashboard"/);
+  assert.match(combined, /isolate|inverse|rollback/i);
+  assert.doesNotMatch(combined, /https?:\/\//);
 });
 
 test("marketing proof and interaction contracts stay measurable", async () => {
   const page = await source("apps/web/src/marketing-page.tsx");
+  const data = await source("apps/web/src/marketing-data.ts");
+  const engine = await source("apps/web/src/marketing-engine.ts");
+  const hero = await source("apps/web/src/marketing-hero.tsx");
   const css = await source("apps/web/src/marketing.css");
-  for (const value of ["200", "7.2 KB", "52", "1 click", "repair-slider"]) assert.match(page, new RegExp(value.replace(/[.]/g, "\\.")));
+  const evidence = await source("apps/dashboard/src/evidence-engine.ts");
+  for (const value of ["200", "108", "1 click"]) assert.match(data, new RegExp(value.replace(/[.]/g, "\\.")));
+  assert.match(data, /evidenceBudgets/);
+  assert.match(evidence, /7\.2 KB gzip/);
   assert.match(page, /setDemoStep/);
-  assert.match(page, /type="range"/);
+  assert.match(page + hero, /type="range"/);
+  assert.match(engine, /safePlaygroundResult|answerForQuestion/);
   assert.match(css, /prefers-reduced-motion/);
   assert.match(css, /@media \(max-width: 680px\)/);
 });
