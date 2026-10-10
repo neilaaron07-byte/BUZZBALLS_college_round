@@ -251,7 +251,19 @@ health, and auto-heal proposals with deterministic offline behavior.
 - [x] P133 Add MockGitHubProvider and PR/review/check state mapping. (depends: P126, P130)
 - [x] P134 Add optional OctokitProvider behind server-only configuration. (depends: P133)
 - [x] P135 Add API integration tests for idempotency, rollback, conflicts, tamper, and safe errors. (depends: P118, P121, P127, P131, P132)
-- [ ] P136 Run API gate and measure `apps/api` LOC against its threshold. (depends: P135)
+- [x] P136a Add a typed SCAN/FIX/SHIP workspace read model for dashboard cards, next actions, and release risk. (depends: P135)
+- [x] P136b Add a durable activity timeline projection with filtering, cursor pagination, and event explanations. (depends: P136a)
+- [x] P136c Add API contract coverage for read models, timeline pagination, and policy edge states. (depends: P136b)
+- [x] P136d Add a release-readiness report with policy, verification, health, manifest, audit, and rollback checks. (depends: P136c)
+- [x] P136e Add a collaboration projection for review queue, pull-request checks, permissions, and named next owners. (depends: P136d)
+- [x] P136f Add API contract coverage for readiness comparisons, collaboration states, and export-safe responses. (depends: P136e)
+- [x] P136g Add an operator handoff brief with decision, blockers, metrics, rollback steps, and evidence links. (depends: P136f)
+- [x] P136h Add API contract coverage for operator brief states and CSV handoff export. (depends: P136g)
+- [x] P136i Add release-delta comparison for patch hashes, policy, health, rollout, and audit changes. (depends: P136h)
+- [x] P136j Add API contract coverage for release-delta empty, changed, and missing-candidate states. (depends: P136i)
+- [x] P136k Add a content-hashed release snapshot for dashboard deep links and offline handoff. (depends: P136j)
+- [x] P136l Add API contract coverage for snapshot hashes, patch membership, and missing releases. (depends: P136k)
+- [x] P136 Run API gate and measure `apps/api` LOC against its threshold. (depends: P136l)
 
 **Runnable after Group 9:** One local API can seed, scan, patch, verify, release,
 rollback, and report its audit chain without external services.

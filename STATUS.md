@@ -4,7 +4,7 @@ Updated: 2026-10-10
 
 ## Current state
 
-- Current group: Group 9 in progress — API workflow is functional; the measured API size gate remains open.
+- Current group: Group 10 next — API workflow and its measured size gate are complete; dashboard SCAN/FIX/SHIP surfaces are the next implementation phase.
 - Baseline surface: the existing vinext Site renders a seeded ShopNest checkout incident with a PATCHWORK inspector dock.
 - Planning: `AGENTS.md`, `BRAINSTORM.md`, and `PLAN.md` are present. The plan contains 244 dependency-aware tasks, including the design-system track.
 - Deployment: the existing private Sites project remains configured in `.openai/hosting.json`; deployment will follow the first validated product milestone.
@@ -37,10 +37,14 @@ Updated: 2026-10-10
 - P106–P116 are complete: `@patchwork/ai` now exposes typed scan/explain/suggest/summarize/draft tools, evidence-constrained prompts for findings/conflicts/release risk/rollback, a deterministic offline PatchPilot engine, moved-target auto-heal proposals that stay review-only, blast-radius and health narratives, cancellable answer streaming, and an optional provider adapter with offline fallback. The deterministic fixture is in `docs/evidence/ai/offline-fixture.json`.
 - P117–P135 are complete: `apps/api` now provides an Express-compatible local server, atomic JSON persistence with corruption recovery, deterministic ShopNest seed state, request IDs/logs/rate limits/idempotency, scan lifecycle and findings, content-hashed patch revisions, reviews/collaborators/approval policy, conflicts and merge previews, expiring previews, verifier report replay, release/canary/pause/kill-switch/rollback controls, automatic health-triggered rollback, audit export/verification/tamper testing, MockGitHub plus optional Octokit boundaries, analytics, workspace export/import, diagnostics, and 38 full workspace tests.
 
+## API gate closure complete
+
+- P136a–P136l are complete: the API now exposes typed SCAN/FIX/SHIP workspace cards, cursor timelines, release-readiness checks, collaboration ownership, operator handoffs, release deltas, content-hashed snapshots, CSV exports, and safe contract coverage.
+
 ## Next
 
-1. Finish P136 by growing `apps/api` from 2,968 to the required 4,000 measured handwritten LOC with additional used API features and tests; do not count generated output.
-2. Start Group 10 dashboard SCAN/FIX/SHIP surfaces only after P136 is checked.
+1. Start Group 10 dashboard SCAN/FIX/SHIP surfaces, beginning with route modules and the API client.
+2. Connect the dashboard to the API read models and durable release controls.
 3. Connect verifier and PatchPilot contracts to the dashboard’s API client and durable release controls.
 4. Keep `npm run loc` visible as feature packages grow toward the measured gates.
 
@@ -48,7 +52,7 @@ Updated: 2026-10-10
 
 - The repository is still a single vinext app; the target workspace packages do not exist yet.
 - The current ShopNest incident surface still contains the first-pass visual language and will be migrated incrementally.
-- The LOC gates are intentionally not met yet: current measured handwritten LOC is 7,684 overall; `apps/api` is 2,968/4,000 and the final product requires 25,000+ lines of real feature code and tests.
+- The final LOC gates are intentionally not met yet: current measured handwritten LOC is 9,024 overall; `apps/api` is 4,000/4,000, while dashboard, marketing, ShopNest, core, SDK, extension, verifier, AI, and tests remain below their final thresholds.
 - The currently deployed Site reflects the prior validated incident demo, not this rebuild in progress.
 - `npm install` reports 28 transitive audit findings in the existing toolchain; no production feature dependency was added yet.
 - The core safety gate is intentionally narrower than the final release gate: signing, resolver, conflict, scanner, API, and dashboard behavior remain in later groups.
@@ -56,6 +60,6 @@ Updated: 2026-10-10
 - SDK runtime guards intentionally stay lightweight for the browser bundle; the authoritative Zod schema boundary remains in `packages/core` for authoring and server surfaces.
 - The extension side panel currently hands off draft intent through the protocol boundary; dashboard persistence and private preview URLs land in the API/verifier groups.
 - PatchPilot defaults to the deterministic offline provider; remote model credentials and server-side adapters are intentionally deferred to the API boundary.
-- Group 9 is not marked complete because P136 is still open. The next continuation should add used API behavior/tests, then rerun `npm run loc`, `npm run judge`, `npm test`, and `npm run api:smoke` before ticking it.
+- Group 9 is complete. The API gate is green at exactly 4,000 handwritten lines, but the final 25,000+ LOC and product-surface gates remain open by design.
 - The visual primitives are wired into the root layout and global CSS, but the existing ShopNest screen is still being migrated to use them.
 - Browser QA found and fixed a persisted-theme hydration mismatch; a fresh `/design` session now reports no console errors after theme restoration.

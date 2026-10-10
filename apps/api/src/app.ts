@@ -16,6 +16,8 @@ import { analyticsRoutes } from "./routes/analytics";
 import { workspaceRoutes } from "./routes/workspace";
 import { operationRoutes } from "./routes/operations";
 import { scanDetailRoutes } from "./routes/scan-details";
+import { readModelRoutes } from "./routes/read-models";
+import { readinessRoutes } from "./routes/readiness";
 import { errorHandler, ApiError } from "./errors";
 import { rateLimit, requestContext } from "./middleware";
 import { JsonRepository } from "./store";
@@ -52,6 +54,8 @@ export function createApiApp(context: ApiContext, options: Pick<ApiContextOption
   app.use("/api", workspaceRoutes(context));
   app.use("/api", operationRoutes(context));
   app.use("/api", scanDetailRoutes(context));
+  app.use("/api", readModelRoutes(context));
+  app.use("/api", readinessRoutes(context));
   app.use("/api", patchRoutes(context));
   app.use("/api", conflictRoutes(context));
   app.use("/api", verificationRoutes(context));

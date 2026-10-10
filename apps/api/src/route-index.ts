@@ -1,4 +1,4 @@
-export const routeGroups = ["system", "sites", "scans", "patches", "reviews", "collaborators", "conflicts", "previews", "verification", "releases", "health", "audit", "integrations", "dashboard", "analytics", "workspace"] as const;
+export const routeGroups = ["system", "sites", "scans", "patches", "reviews", "collaborators", "conflicts", "previews", "verification", "releases", "health", "audit", "integrations", "dashboard", "analytics", "workspace", "read-models", "readiness"] as const;
 
 export type RouteGroup = (typeof routeGroups)[number];
 

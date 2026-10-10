@@ -5,7 +5,7 @@ import { ApiError, notFound } from "./errors";
 import { collaboratorRequestSchema, patchCreateRequestSchema, revisionCreateRequestSchema, reviewRequestSchema, scanRequestSchema } from "./contracts";
 import { evaluateReleasePolicy, type ReleasePolicyResult } from "./policies";
 import type { ApiContext, ApiState, Collaborator, PatchRevisionRecord, ReviewRecord, RolloutState, ScanRunRecord } from "./types";
-import { activityFromState, conflictView, findingView, publicPatch, publicSite, releaseTimeline, reviewView, type ActivityItem } from "./normalizers";
+import { activityFromState, conflictView, findingView, publicPatch, publicSite, releaseTimeline, reviewView, toCsv, type ActivityItem } from "./normalizers";
 import { checkStateInvariants, dependentPatches, unresolvedConflictsFor } from "./workflow";
 import { filterByQuery } from "./query";
 import { evaluatePatchPolicy, operationLabels, type PatchPolicyResult } from "./patch-policy";
@@ -17,6 +17,13 @@ import { detectorHealth, findingTrend, siteAnalytics, type SiteAnalytics } from 
 import { exportWorkspace, type WorkspaceExport } from "./exports";
 import { domainEvents, eventCounts, type DomainEvent } from "./domain-events";
 import { importSummary, mergeImportedState, validateImport, type ImportResult } from "./importer";
+import { buildWorkspaceReadModel, type WorkspaceReadModel } from "./workspace-read-model";
+import { buildTimeline, timelineCsvRows, type TimelinePage } from "./activity-timeline";
+import { buildReleaseReadiness, compareReleaseReadiness, readinessCsvRows, type ReadinessComparison, type ReleaseReadiness } from "./release-readiness";
+import { buildCollaborationReport, collaborationCsvRows, type CollaborationReport } from "./collaboration-readiness";
+import { buildOperatorBrief, operatorBriefCsv, type OperatorBrief } from "./operator-brief";
+import { buildReleaseDelta, deltaCsvRows, type ReleaseDelta } from "./release-delta";
+import { buildReleaseSnapshot, snapshotCsvRows, type ReleaseSnapshot } from "./release-snapshot";
 
 function nowIso(): string {
   return new Date().toISOString();
@@ -116,6 +123,81 @@ export async function getDashboardOverview(context: ApiContext, siteId: string):
   const openConflicts = state.conflicts.filter((conflict) => conflict.resolvedAt === null).map(conflictView);
   const activity = activityFromState(state, siteId).slice(0, 12);
   return { site: publicSite(site), counts: { findings: openFindings.length, conflicts: openConflicts.length, patches: patches.length, releases: releases.length, collaborators: state.collaborators.filter((collaborator) => collaborator.siteId === siteId).length }, patches: patches.map((patch) => publicPatch(patch, state.collaborators)), releases: releaseTimeline(releases, state.rollouts), findings: openFindings, conflicts: openConflicts, activity };
+}
+
+export async function getWorkspaceReadModel(context: ApiContext, siteId: string): Promise<WorkspaceReadModel> {
+  return buildWorkspaceReadModel(await readState(context), siteId);
+}
+
+export async function getSiteTimeline(context: ApiContext, siteId: string, query: Record<string, unknown> = {}): Promise<TimelinePage> {
+  const state = await readState(context);
+  findSite(state, siteId);
+  return buildTimeline(state, siteId, query);
+}
+
+export async function getSiteTimelineCsv(context: ApiContext, siteId: string, query: Record<string, unknown> = {}): Promise<string> {
+  const page = await getSiteTimeline(context, siteId, { ...query, limit: 100 });
+  return `${toCsv(timelineCsvRows(page.items))}\n`;
+}
+
+export async function getReleaseReadiness(context: ApiContext, releaseId: string): Promise<ReleaseReadiness> {
+  const report = await buildReleaseReadiness(await readState(context), releaseId);
+  if (!report) throw notFound("Release", releaseId);
+  return report;
+}
+
+export async function getReleaseReadinessComparison(context: ApiContext, currentId: string, candidateId: string): Promise<ReadinessComparison> {
+  if (!candidateId) throw new ApiError(400, "CANDIDATE_RELEASE_REQUIRED", "The comparison needs a candidate release id in the with query parameter.");
+  const comparison = await compareReleaseReadiness(await readState(context), currentId, candidateId);
+  if (!comparison) throw notFound("Release comparison", `${currentId}:${candidateId}`);
+  return comparison;
+}
+
+export async function getReleaseReadinessCsv(context: ApiContext, releaseId: string): Promise<string> {
+  const report = await getReleaseReadiness(context, releaseId);
+  return `${toCsv(readinessCsvRows(report))}\n`;
+}
+
+export async function getCollaborationReport(context: ApiContext, siteId: string): Promise<CollaborationReport> {
+  const state = await readState(context);
+  findSite(state, siteId);
+  return buildCollaborationReport(state, siteId);
+}
+
+export async function getCollaborationCsv(context: ApiContext, siteId: string): Promise<string> {
+  const report = await getCollaborationReport(context, siteId);
+  return `${toCsv(collaborationCsvRows(report))}\n`;
+}
+
+export async function getOperatorBrief(context: ApiContext, siteId: string, releaseId?: string): Promise<OperatorBrief> {
+  const brief = await buildOperatorBrief(await readState(context), siteId, releaseId);
+  if (!brief) throw notFound("Site", siteId);
+  return brief;
+}
+
+export async function getOperatorBriefCsv(context: ApiContext, siteId: string, releaseId?: string): Promise<string> {
+  return operatorBriefCsv(await getOperatorBrief(context, siteId, releaseId));
+}
+
+export async function getReleaseDelta(context: ApiContext, currentId: string, candidateId: string): Promise<ReleaseDelta> {
+  if (!candidateId) throw new ApiError(400, "CANDIDATE_RELEASE_REQUIRED", "The comparison needs a candidate release id in the with query parameter.");
+  const delta = await buildReleaseDelta(await readState(context), currentId, candidateId);
+  if (!delta) throw notFound("Release comparison", `${currentId}:${candidateId}`);
+  return delta;
+}
+
+export async function getReleaseDeltaCsv(context: ApiContext, currentId: string, candidateId: string): Promise<string> {
+  return `${toCsv(deltaCsvRows(await getReleaseDelta(context, currentId, candidateId)))}\n`;
+}
+
+export async function getReleaseSnapshot(context: ApiContext, releaseId: string): Promise<ReleaseSnapshot> {
+  const snapshot = await buildReleaseSnapshot(await readState(context), releaseId);
+  if (!snapshot) throw notFound("Release", releaseId);
+  return snapshot;
+}
+
+export async function getReleaseSnapshotCsv(context: ApiContext, releaseId: string): Promise<string> {
+  return `${toCsv(snapshotCsvRows(await getReleaseSnapshot(context, releaseId)))}\n`;
 }
 
 export async function getSiteActivity(context: ApiContext, siteId: string, query?: string): Promise<readonly ActivityItem[]> {

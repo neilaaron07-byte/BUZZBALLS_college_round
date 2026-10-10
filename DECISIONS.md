@@ -134,6 +134,57 @@ Reason: the API needs real persistence, replayable demos, and corruption
 recovery now, while the current Site runtime must remain Worker-compatible and
 the dashboard should not depend on an external database during local review.
 
+## D-019 — Add dashboard read models before building the dashboard surface
+
+Decision: expose typed SCAN/FIX/SHIP read models and a cursor-paginated activity
+timeline from the API instead of making the dashboard reconstruct workflow state
+from many low-level collections.
+
+Reason: the launch demo needs one obvious next action, consistent status
+language, and stable loading/error contracts. Keeping this projection server-side
+also makes the future dashboard thinner, faster, and less likely to disagree
+with release policy or audit state.
+
+## D-020 — Keep release readiness and collaboration as server projections
+
+Decision: calculate release-readiness checks and collaboration ownership on the
+API boundary, including the manifest, policy, verification, health, audit, PR,
+review, and permission signals used by the dashboard.
+
+Reason: these signals have different source collections and failure modes. A
+single typed projection gives operators one explainable decision surface and
+prevents the UI from silently treating missing evidence as a passing check.
+
+## D-021 — Give operators a handoff brief, not raw collections
+
+Decision: expose a compact operator brief that joins current risk, release
+readiness, collaboration ownership, rollback steps, metrics, and evidence links.
+The brief is also exportable as CSV for incident handoff.
+
+Reason: the first dashboard action must be obvious within seconds. A brief keeps
+the narrative and the underlying evidence together without making users visit
+five screens to decide whether to ship or undo.
+
+## D-022 — Keep release comparison explainable at field level
+
+Decision: expose a release delta that compares patch hashes, policy outcomes,
+runtime health, rollout controls, audit counts, and verification scores with an
+explicit changed/unchanged state.
+
+Reason: a numeric score alone cannot tell an operator why a candidate release is
+safer. Field-level differences make before/after review and rollback decisions
+auditable in the dashboard and in exported handoffs.
+
+## D-023 — Hash release snapshots for stable handoff links
+
+Decision: expose a content-hashed release snapshot containing the manifest,
+patch membership, policy posture, rollout state, health summary, and audit
+reference for a release.
+
+Reason: dashboard deep links and offline handoffs need a stable, verifiable
+record of what the operator actually reviewed, without making the browser
+reconstruct the release from mutable collections.
+
 ## D-006 — Deterministic offline demo data
 
 Decision: seed named actors, releases, findings, timestamps, and ShopNest
