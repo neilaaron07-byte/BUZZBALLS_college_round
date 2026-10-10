@@ -309,3 +309,13 @@ Playwright capture runner.
 Reason: browser captures prove runtime health, while small deterministic tests
 make regressions in the shared primitives obvious during every build without
 requiring a long-lived browser process.
+
+## D-031 — Keep public marketing routes static and offline-safe
+
+Decision: the tour, security, customers, and docs pages share one subpage shell,
+use only local assets, and expose a local offline/retry state rather than
+depending on the API to render public product education.
+
+Reason: visitors should be able to understand PATCHWORK during an API outage,
+and one shared shell keeps evidence language, navigation, and responsive
+behavior consistent across the marketing surface.

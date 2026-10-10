@@ -4,7 +4,7 @@ Updated: 2026-10-10
 
 ## Current state
 
-- Current group: Group 10 in progress — API workflow is complete; the new operator workspace is being built at `/dashboard`.
+- Current group: Group 11 complete; Group 12 is next — the operator workspace is live at `/dashboard`, and the public marketing surface is staged at `/web` with product, security, customer, and docs routes.
 - Baseline surface: the existing vinext Site renders a seeded ShopNest checkout incident with a PATCHWORK inspector dock.
 - Planning: `AGENTS.md`, `BRAINSTORM.md`, and `PLAN.md` are present. The plan contains 244 dependency-aware tasks, including the design-system track.
 - Deployment: the existing private Sites project remains configured in `.openai/hosting.json`; deployment will follow the first validated product milestone.
@@ -51,19 +51,19 @@ Updated: 2026-10-10
 - P156–P159 are complete: collaborators expose named ownership and PR checks; evidence reports measured resolver, SDK, regression, and test proof while explicitly marking Lighthouse as not yet measured; install provides SDK/extension steps and an environment checklist; settings provide scoped policy, allowlist, notification switches, and a reviewed local reset.
 - P160–P162 are complete: dashboard loading/error/retry, empty, success, toast, and local optimistic states are represented through the shared state primitives and route controls; all screens were captured in dark/light at desktop/tablet/mobile; source contracts cover route wiring, accessible toggles, recoverable loading/error states, and zero-console-error screenshot failures.
 - P164–P168 are complete: `/web` has a dark-first marketing shell with stitched PATCHWORK branding, the “Fix any website in 60 seconds” hero, an interactive SCAN/FIX/SHIP state machine, a real session stopwatch, draggable before/after repair evidence, and proof metrics sourced from the measured local resolver, SDK, test, and rollback contracts.
+- P169–P174 are complete: `/web/tour`, `/web/security`, `/web/customers`, and `/web/docs` share an offline-safe public shell with tour evidence, signed-manifest boundaries, realistic team stories, first-run documentation, keyboard/mobile/reduced-motion states, metadata, local social preview, contract tests, and a documented Lighthouse budget. The 20-route dark/light desktop/tablet/mobile sweep captured 120 pages with zero console errors.
 
 ## Next
 
-1. Run the dashboard LOC gate honestly; it is not yet near 9,000 handwritten lines (P163).
-2. Add marketing product-tour, security, customer, docs, and metadata states (P169–P174).
-3. Build the richer ShopNest route/release fixture toward its 2,500-line gate (P176–P188).
-4. Add the demo supervisor and final public-surface browser/Lighthouse gates after those surfaces exist (P189–P203).
+1. Run the dashboard and marketing LOC gates honestly; they are not yet near their thresholds (P163, P175).
+2. Build the richer ShopNest route/release fixture toward its 2,500-line gate (P176–P188).
+3. Add the demo supervisor and final public-surface browser/Lighthouse gates after those surfaces exist (P189–P203).
 
 ## Known issues
 
 - The repository is still a single vinext app; the target workspace packages do not exist yet.
 - The current ShopNest incident surface still contains the first-pass visual language and will be migrated incrementally.
-- The final LOC gates are intentionally not met yet: current measured handwritten LOC is 9,792 overall; `apps/api` is 4,000/4,000, while dashboard (1,219/9,000), marketing (35/2,500), ShopNest (0/2,500), core, SDK, extension, verifier, AI, and tests remain below their final thresholds.
+- The final LOC gates are intentionally not met yet: current measured handwritten LOC is 9,849 overall; `apps/api` is 4,000/4,000, while dashboard (1,219/9,000), marketing (57/2,500), ShopNest (0/2,500), core, SDK, extension, verifier, AI, and tests remain below their final thresholds.
 - The currently deployed Site reflects the prior validated incident demo, not this rebuild in progress.
 - `npm install` reports 28 transitive audit findings in the existing toolchain; no production feature dependency was added yet.
 - The core safety gate is intentionally narrower than the final release gate: signing, resolver, conflict, scanner, API, and dashboard behavior remain in later groups.

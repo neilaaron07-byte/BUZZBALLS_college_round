@@ -308,12 +308,12 @@ workspace where every mandatory feature is reachable and explained.
 - [x] P166 Build interactive SCAN/FIX/SHIP 10-second demo with real local state. (depends: P165)
 - [x] P167 Build before/after repair slider and time-to-fix stopwatch. (depends: P166)
 - [x] P168 Build proof metrics from measured local evidence, not invented claims. (depends: P157, P167)
-- [ ] P169 Build product tour route for scan, patch, preview, verify, release, and rollback. (depends: P168)
-- [ ] P170 Build security route with threat model summary and signed-manifest story. (depends: P169)
-- [ ] P171 Build customers route with agency, storefront, portal, and legacy-app stories. (depends: P169)
-- [ ] P172 Build docs route with first-run guide and no dead links. (depends: P170)
-- [ ] P173 Add marketing empty, error, reduced-motion, keyboard, and mobile states. (depends: P172)
-- [ ] P174 Add marketing tests, metadata, social preview, and Lighthouse budget. (depends: P173)
+- [x] P169 Build product tour route for scan, patch, preview, verify, release, and rollback. (depends: P168)
+- [x] P170 Build security route with threat model summary and signed-manifest story. (depends: P169)
+- [x] P171 Build customers route with agency, storefront, portal, and legacy-app stories. (depends: P169)
+- [x] P172 Build docs route with first-run guide and no dead links. (depends: P170)
+- [x] P173 Add marketing empty, error, reduced-motion, keyboard, and mobile states. (depends: P172)
+- [x] P174 Add marketing tests, metadata, social preview, and Lighthouse budget. (depends: P173)
 - [ ] P175 Run web gate and measure `apps/web` LOC against 2,500 lines. (depends: P174)
 
 **Runnable after Group 11:** A non-technical visitor understands the promise,

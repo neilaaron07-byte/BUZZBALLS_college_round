@@ -23,3 +23,30 @@ test("marketing proof and interaction contracts stay measurable", async () => {
   assert.match(css, /prefers-reduced-motion/);
   assert.match(css, /@media \(max-width: 680px\)/);
 });
+
+test("public marketing routes share a complete, offline-safe subpage shell", async () => {
+  const page = await source("apps/web/src/marketing-subpage.tsx");
+  const screenshots = await source("tools/screenshots.mjs");
+  for (const kind of ["tour", "security", "customers", "docs"]) {
+    const route = await source(`app/web/${kind}/page.tsx`);
+    assert.ok(route.includes('kind="' + kind + '"' ));
+  }
+  for (const path of ["/web/tour", "/web/security", "/web/customers", "/web/docs"]) assert.match(screenshots, new RegExp(path));
+  assert.match(page, /Test offline state/);
+  assert.match(page, /role="alert"/);
+  assert.match(page, /role="status"/);
+  assert.doesNotMatch(page, /https?:\/\//);
+});
+
+test("marketing metadata and social preview stay local and measurable", async () => {
+  const layout = await source("app/layout.tsx");
+  const budget = await source("docs/evidence/lighthouse-budget.md");
+  assert.match(layout, /Fix any website in 60 seconds/);
+  assert.match(layout, /openGraph/);
+  assert.match(layout, /\/og\.png/);
+  assert.match(layout, /summary_large_image/);
+  assert.match(budget, /`\/web`/);
+  assert.match(budget, /Performance \| Accessibility \| Best practices/);
+  assert.match(budget, /90\+/);
+  assert.match(budget, /95\+/);
+});
