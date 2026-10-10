@@ -1,6 +1,30 @@
 import { z } from "zod";
 import { identifierSchema } from "./schemas";
 
+const targetAttributesSchema = z.object({
+  id: z.string().optional(),
+  testId: z.string().optional(),
+  name: z.string().optional(),
+  role: z.string().optional(),
+  ariaLabel: z.string().optional(),
+  hrefPattern: z.string().optional(),
+  meaningfulClasses: z.array(z.string()).max(30),
+}).strict();
+
+export const targetEvidenceSchema = z.object({
+  version: z.literal(1),
+  tag: z.string().min(1).max(40),
+  attributes: targetAttributesSchema,
+  normalizedText: z.string().max(2_000),
+  textTokens: z.array(z.string().max(120)).max(200),
+  textNgrams: z.array(z.string().max(240)).max(200),
+  path: z.array(z.string().max(120)).max(50),
+  siblingSignature: z.array(z.string().max(120)).max(50),
+  landmarkChain: z.array(z.string().max(120)).max(30),
+  region: z.enum(["top-left", "top-center", "top-right", "middle-left", "middle-center", "middle-right", "bottom-left", "bottom-center", "bottom-right"]),
+  visualRole: z.enum(["button", "link", "input", "heading", "navigation", "card", "media", "text", "unknown"]),
+}).strict();
+
 export const cssPropertySchema = z.enum([
   "backgroundColor",
   "color",
@@ -33,6 +57,7 @@ export const targetSelectorSchema = z.object({
   fallbackLabel: z.string().min(1).max(120),
   expectedTag: z.string().min(1).max(40).regex(/^[a-z][a-z0-9-]*$/),
   expectedRole: z.string().max(80).optional(),
+  evidence: targetEvidenceSchema.optional(),
 }).strict();
 
 const operationBase = z.object({

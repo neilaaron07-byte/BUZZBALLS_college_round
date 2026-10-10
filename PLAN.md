@@ -157,20 +157,20 @@ conflicts, signed manifests, audit integrity, and scan findings.
 
 ## Group 5 — `packages/sdk`
 
-- [ ] P066 Create SDK package entrypoint with zero runtime dependencies. (depends: P065)
-- [ ] P067 Implement `PatchworkSDK.init()` configuration and lifecycle. (depends: P066)
-- [ ] P068 Implement manifest fetch, cache, version, expiry, and kill-switch handling. (depends: P058, P059)
-- [ ] P069 Implement signature verification and safe no-op behavior on failure. (depends: P068)
-- [ ] P070 Implement patch schema validation at runtime. (depends: P024, P025)
-- [ ] P071 Implement semantic target resolution against the live DOM. (depends: P043, P070)
-- [ ] P072 Implement transactional mutation applier with inverse operations. (depends: P026, P071)
-- [ ] P073 Implement MutationObserver re-application with debounce and loop protection. (depends: P072)
-- [ ] P074 Implement telemetry batching with exponential backoff and health events. (depends: P073)
-- [ ] P075 Implement circuit breaker and automatic patch disable threshold. (depends: P074)
-- [ ] P076 Add last-verified manifest fallback when the endpoint is unavailable. (depends: P069)
-- [ ] P077 Add SDK jsdom tests for React remounts, ambiguous targets, safe skips, rollback, and circuit breaker. (depends: P071, P072, P073, P075, P076)
-- [ ] P078 Add bundle-size budget and gzip measurement. (depends: P077)
-- [ ] P079 Run SDK gate and confirm under-15KB gzipped target is measured honestly. (depends: P078)
+- [x] P066 Create SDK package entrypoint with zero runtime dependencies. (depends: P065)
+- [x] P067 Implement `PatchworkSDK.init()` configuration and lifecycle. (depends: P066)
+- [x] P068 Implement manifest fetch, cache, version, expiry, and kill-switch handling. (depends: P058, P059)
+- [x] P069 Implement signature verification and safe no-op behavior on failure. (depends: P068)
+- [x] P070 Implement patch schema validation at runtime. (depends: P024, P025)
+- [x] P071 Implement semantic target resolution against the live DOM. (depends: P043, P070)
+- [x] P072 Implement transactional mutation applier with inverse operations. (depends: P026, P071)
+- [x] P073 Implement MutationObserver re-application with debounce and loop protection. (depends: P072)
+- [x] P074 Implement telemetry batching with exponential backoff and health events. (depends: P073)
+- [x] P075 Implement circuit breaker and automatic patch disable threshold. (depends: P074)
+- [x] P076 Add last-verified manifest fallback when the endpoint is unavailable. (depends: P069)
+- [x] P077 Add SDK jsdom tests for React remounts, ambiguous targets, safe skips, rollback, and circuit breaker. (depends: P071, P072, P073, P075, P076)
+- [x] P078 Add bundle-size budget and gzip measurement. (depends: P077)
+- [x] P079 Run SDK gate and confirm under-15KB gzipped target is measured honestly. (depends: P078)
 
 **Runnable after Group 5:** ShopNest can load a signed manifest and safely apply
 patches without importing dashboard code.

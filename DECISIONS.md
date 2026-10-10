@@ -78,6 +78,18 @@ collection is a later boundary.
 Reason: deterministic fixtures make detector behavior testable and portable;
 the verifier can later populate the same snapshot from an isolated page.
 
+## D-014 — Keep the SDK portable and small
+
+Decision: the browser runtime imports only portable core algorithms and uses
+lightweight structural guards; it does not bundle the full Zod authoring layer.
+The emitted minified artifact is measured with esbuild and gzip in
+`npm run sdk:size`.
+
+Reason: the SDK must run on arbitrary customer pages without dashboard code or
+third-party runtime dependencies. The schema boundary remains authoritative in
+core and server-side consumers, while the browser still fails closed on unsafe
+operations and malformed manifests.
+
 ## D-006 — Deterministic offline demo data
 
 Decision: seed named actors, releases, findings, timestamps, and ShopNest
