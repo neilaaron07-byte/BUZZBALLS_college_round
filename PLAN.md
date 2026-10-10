@@ -177,20 +177,20 @@ patches without importing dashboard code.
 
 ## Group 6 — `packages/extension`
 
-- [ ] P080 Create Chrome Manifest V3 package, permissions, service worker, content script, and side panel. (depends: P079)
-- [ ] P081 Implement connection handshake with the active page and API. (depends: P080)
-- [ ] P082 Implement hover highlight and click-to-select inspector. (depends: P081)
-- [ ] P083 Implement DOM breadcrumb for parent and child target selection. (depends: P082)
-- [ ] P084 Render fingerprint preview with stable attributes and fragile-selector warnings. (depends: P043, P083)
-- [ ] P085 Render resolver confidence and “why this target” signal bars. (depends: P045, P084)
-- [ ] P086 Implement visual controls for color, typography, spacing, visibility, and text. (depends: P084)
-- [ ] P087 Implement safe attribute editor and same-origin link checks. (depends: P028, P086)
-- [ ] P088 Implement reorder interaction constrained to one parent. (depends: P026, P086)
-- [ ] P089 Implement local undo/redo stack and preview-only mutation state. (depends: P072, P086)
-- [ ] P090 Implement save draft, open dashboard, and preview privately actions. (depends: P089)
-- [ ] P091 Add extension empty, offline, unsafe-value, cross-origin, and disappeared-target states. (depends: P081, P090)
-- [ ] P092 Add extension unit and component tests for keyboard and pointer behavior. (depends: P083, P091)
-- [ ] P093 Run extension build and package smoke test against a local ShopNest page. (depends: P092)
+- [x] P080 Create Chrome Manifest V3 package, permissions, service worker, content script, and side panel. (depends: P079)
+- [x] P081 Implement connection handshake with the active page and API. (depends: P080)
+- [x] P082 Implement hover highlight and click-to-select inspector. (depends: P081)
+- [x] P083 Implement DOM breadcrumb for parent and child target selection. (depends: P082)
+- [x] P084 Render fingerprint preview with stable attributes and fragile-selector warnings. (depends: P043, P083)
+- [x] P085 Render resolver confidence and “why this target” signal bars. (depends: P045, P084)
+- [x] P086 Implement visual controls for color, typography, spacing, visibility, and text. (depends: P084)
+- [x] P087 Implement safe attribute editor and same-origin link checks. (depends: P028, P086)
+- [x] P088 Implement reorder interaction constrained to one parent. (depends: P026, P086)
+- [x] P089 Implement local undo/redo stack and preview-only mutation state. (depends: P072, P086)
+- [x] P090 Implement save draft, open dashboard, and preview privately actions. (depends: P089)
+- [x] P091 Add extension empty, offline, unsafe-value, cross-origin, and disappeared-target states. (depends: P081, P090)
+- [x] P092 Add extension unit and component tests for keyboard and pointer behavior. (depends: P083, P091)
+- [x] P093 Run extension build and package smoke test against a local ShopNest page. (depends: P092)
 
 **Runnable after Group 6:** A developer can scan a live page in the extension,
 draft a patch, undo it locally, and hand it to the dashboard.

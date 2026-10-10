@@ -90,6 +90,16 @@ third-party runtime dependencies. The schema boundary remains authoritative in
 core and server-side consumers, while the browser still fails closed on unsafe
 operations and malformed manifests.
 
+## D-015 — Keep extension edits preview-only until dashboard handoff
+
+Decision: the MV3 inspector owns selection, local visual edits, undo/redo, and
+stateful draft intent, but it does not publish or mutate production state. Save,
+dashboard, and private-preview actions cross the connection protocol boundary.
+
+Reason: the extension runs inside arbitrary customer pages and must remain
+recoverable even when the workspace is offline; release policy belongs in the
+dashboard and API surfaces.
+
 ## D-006 — Deterministic offline demo data
 
 Decision: seed named actors, releases, findings, timestamps, and ShopNest

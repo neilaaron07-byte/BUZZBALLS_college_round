@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "PATCHWORK — visual hotfix inspector",
+  "version": "0.1.0",
+  "description": "Inspect a live website, draft a safe patch, and hand it to PATCHWORK for review.",
+  "permissions": ["activeTab", "storage", "scripting", "sidePanel"],
+  "host_permissions": ["<all_urls>"],
+  "background": { "service_worker": "service-worker.js", "type": "module" },
+  "action": { "default_title": "Open PATCHWORK inspector" },
+  "content_scripts": [{ "matches": ["<all_urls>"], "js": ["content-script.js"], "run_at": "document_idle" }],
+  "icons": {
+    "16": "assets/icons/extension-16.svg",
+    "32": "assets/icons/extension-32.svg",
+    "48": "assets/icons/extension-48.svg",
+    "128": "assets/icons/extension-128.svg"
+  },
+  "side_panel": { "default_path": "side-panel.html" }
+}
