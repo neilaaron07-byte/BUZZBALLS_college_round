@@ -19,22 +19,27 @@ function resolveTheme(theme: PatchworkTheme): "light" | "dark" {
   return typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
 }
 
-function initialTheme(): PatchworkTheme {
-  if (typeof window === "undefined") return "system";
-  const stored = window.localStorage.getItem(storageKey);
-  return stored === "light" || stored === "dark" || stored === "system" ? stored : "system";
-}
-
 export function ThemeProvider({ children }: Readonly<{ children: React.ReactNode }>) {
-  const [theme, setThemeState] = useState<PatchworkTheme>(initialTheme);
-  const resolvedTheme = resolveTheme(theme);
+  const [theme, setThemeState] = useState<PatchworkTheme>("system");
+  const [mounted, setMounted] = useState(false);
+  const resolvedTheme = mounted ? resolveTheme(theme) : "dark";
 
   useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      const stored = window.localStorage.getItem(storageKey);
+      if (stored === "light" || stored === "dark" || stored === "system") setThemeState(stored);
+      setMounted(true);
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
     const root = document.documentElement;
     root.dataset.theme = resolvedTheme;
     root.style.colorScheme = resolvedTheme;
     window.localStorage.setItem(storageKey, theme);
-  }, [resolvedTheme, theme]);
+  }, [mounted, resolvedTheme, theme]);
 
   useEffect(() => {
     if (theme !== "system") return;

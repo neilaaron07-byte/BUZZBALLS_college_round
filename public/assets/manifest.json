@@ -1,0 +1,198 @@
+{
+  "seed": "patchwork-assets-v1",
+  "generatedAt": "2026-10-10T12:00:00.000Z",
+  "assets": [
+    {
+      "path": "/shopnest/products/product-01.svg",
+      "bytes": 1058
+    },
+    {
+      "path": "/shopnest/products/product-02.svg",
+      "bytes": 1006
+    },
+    {
+      "path": "/shopnest/products/product-03.svg",
+      "bytes": 962
+    },
+    {
+      "path": "/shopnest/products/product-04.svg",
+      "bytes": 901
+    },
+    {
+      "path": "/shopnest/products/product-05.svg",
+      "bytes": 961
+    },
+    {
+      "path": "/shopnest/products/product-06.svg",
+      "bytes": 969
+    },
+    {
+      "path": "/shopnest/products/product-07.svg",
+      "bytes": 1056
+    },
+    {
+      "path": "/shopnest/products/product-08.svg",
+      "bytes": 1005
+    },
+    {
+      "path": "/shopnest/products/product-09.svg",
+      "bytes": 961
+    },
+    {
+      "path": "/shopnest/products/product-10.svg",
+      "bytes": 904
+    },
+    {
+      "path": "/shopnest/products/product-11.svg",
+      "bytes": 958
+    },
+    {
+      "path": "/shopnest/products/product-12.svg",
+      "bytes": 967
+    },
+    {
+      "path": "/shopnest/products/product-13.svg",
+      "bytes": 1055
+    },
+    {
+      "path": "/shopnest/products/product-14.svg",
+      "bytes": 1013
+    },
+    {
+      "path": "/shopnest/products/product-15.svg",
+      "bytes": 966
+    },
+    {
+      "path": "/shopnest/products/product-16.svg",
+      "bytes": 904
+    },
+    {
+      "path": "/shopnest/products/product-17.svg",
+      "bytes": 959
+    },
+    {
+      "path": "/shopnest/products/product-18.svg",
+      "bytes": 964
+    },
+    {
+      "path": "/shopnest/products/product-19.svg",
+      "bytes": 1055
+    },
+    {
+      "path": "/shopnest/products/product-20.svg",
+      "bytes": 1008
+    },
+    {
+      "path": "/shopnest/products/product-21.svg",
+      "bytes": 964
+    },
+    {
+      "path": "/shopnest/products/product-22.svg",
+      "bytes": 901
+    },
+    {
+      "path": "/shopnest/products/product-23.svg",
+      "bytes": 956
+    },
+    {
+      "path": "/shopnest/products/product-24.svg",
+      "bytes": 967
+    },
+    {
+      "path": "/hero/patchwork-hero.svg",
+      "bytes": 1756
+    },
+    {
+      "path": "/hero/patchwork-hero@2x.png",
+      "bytes": 87661
+    },
+    {
+      "path": "/states/empty-sites.svg",
+      "bytes": 857
+    },
+    {
+      "path": "/states/empty-patches.svg",
+      "bytes": 859
+    },
+    {
+      "path": "/states/empty-audit.svg",
+      "bytes": 859
+    },
+    {
+      "path": "/states/404.svg",
+      "bytes": 860
+    },
+    {
+      "path": "/states/error.svg",
+      "bytes": 861
+    },
+    {
+      "path": "/ai/patchpilot-orb.svg",
+      "bytes": 608
+    },
+    {
+      "path": "/icons/extension-16.svg",
+      "bytes": 327
+    },
+    {
+      "path": "/icons/extension-32.svg",
+      "bytes": 327
+    },
+    {
+      "path": "/icons/extension-48.svg",
+      "bytes": 327
+    },
+    {
+      "path": "/icons/extension-128.svg",
+      "bytes": 328
+    },
+    {
+      "path": "/favicon.svg",
+      "bytes": 327
+    },
+    {
+      "path": "/og.svg",
+      "bytes": 1756
+    },
+    {
+      "path": "/og.png",
+      "bytes": 54958
+    },
+    {
+      "path": "/og-1200x630.png",
+      "bytes": 54958
+    },
+    {
+      "path": "/avatars/avatar-01.svg",
+      "bytes": 721
+    },
+    {
+      "path": "/avatars/avatar-02.svg",
+      "bytes": 721
+    },
+    {
+      "path": "/avatars/avatar-03.svg",
+      "bytes": 721
+    },
+    {
+      "path": "/avatars/avatar-04.svg",
+      "bytes": 721
+    },
+    {
+      "path": "/avatars/avatar-05.svg",
+      "bytes": 721
+    },
+    {
+      "path": "/avatars/avatar-06.svg",
+      "bytes": 721
+    },
+    {
+      "path": "/avatars/avatar-07.svg",
+      "bytes": 721
+    },
+    {
+      "path": "/avatars/avatar-08.svg",
+      "bytes": 721
+    }
+  ]
+}

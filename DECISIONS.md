@@ -78,3 +78,23 @@ seam, color, and motion language.
 
 Reason: operators need scanability while the public story needs a clear visual
 hierarchy and confident pacing.
+
+## D-009 — Make responsive QA a first-class local command
+
+Decision: `npm run screenshots` defaults to the vinext server’s `localhost`
+binding, captures both live routes in dark and light at desktop, tablet, and
+mobile widths, and fails on console or page errors.
+
+Reason: a screenshot can look polished while still hiding hydration failures,
+mobile overflow, or an unreachable state. Keeping the runner deterministic and
+offline makes visual QA repeatable for every later product group.
+
+## D-010 — Test design contracts without coupling to a browser session
+
+Decision: keep fast source-level contracts for reduced motion, keyboard labels,
+announcement semantics, and signature-moment reachability alongside the
+Playwright capture runner.
+
+Reason: browser captures prove runtime health, while small deterministic tests
+make regressions in the shared primitives obvious during every build without
+requiring a long-lived browser process.
