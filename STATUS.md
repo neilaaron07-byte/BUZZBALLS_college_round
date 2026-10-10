@@ -16,11 +16,13 @@ Updated: 2026-10-10
 - Added the design-system contract for dark/light themes, Geist, motion, procedural assets, component primitives, `/design`, accessibility, and screenshot QA.
 - Added architecture, threat-model, contribution, demo, decision, and feature-proof documentation.
 - Group 0 validation: `npm run build`, `npm test`, `npm run lint`, `npx tsc --noEmit`, and `git diff --check` pass when run serially. The initial parallel check exposed a build-artifact race in the existing wrapper; the serial test is green.
+- Group 1 validation: workspace package graph, strict typecheck, lint, build, rendered HTML smoke tests, demo reset, judge, and LOC report pass. Current measured LOC is intentionally below final gates because feature packages are not implemented yet.
 
 ## In progress
 
 - Converting the single-surface starter into a workspace that can host the dashboard, marketing site, ShopNest demo, API, and safety packages.
 - Building the shared visual foundation before feature screens so every surface uses one product language.
+- Installing the design-system foundation and adding the first shared visual primitives under `apps/dashboard/src/ui`.
 
 ## Next
 
@@ -35,3 +37,4 @@ Updated: 2026-10-10
 - The current ShopNest incident surface still contains the first-pass visual language and will be migrated incrementally.
 - The LOC, judge, Lighthouse, and screenshot gates cannot pass until the workspace and routes are implemented.
 - The currently deployed Site reflects the prior validated incident demo, not this rebuild in progress.
+- `npm install` reports 30 transitive audit findings in the existing toolchain; no production feature dependency was added yet.

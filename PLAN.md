@@ -29,18 +29,18 @@ file-existence checks pass.
 
 ## Group 1 — workspace and contracts
 
-- [ ] P011 Convert the root package into npm workspaces for `packages/*` and `apps/*`. (depends: P004, P005)
-- [ ] P012 Create strict shared TypeScript configuration for packages and apps. (depends: P011)
-- [ ] P013 Create workspace-level scripts for `typecheck`, `test`, `build`, `lint`, `demo`, `demo:reset`, `loc`, and `judge`. (depends: P011)
-- [ ] P014 Create package naming and export conventions for core, sdk, extension, verifier, ai, api, dashboard, web, and shopnest. (depends: P012)
-- [ ] P015 Create shared environment variable validation and `.env.example` without secrets. (depends: P012)
-- [ ] P016 Add deterministic clock, random seed, and fixture helpers shared by tests. (depends: P012)
-- [ ] P017 Add structured logger contract with request ID, actor, site ID, and severity. (depends: P012)
-- [ ] P018 Add common result, error, status, pagination, and cursor types. (depends: P012)
-- [ ] P019 Add accessibility and focus testing helpers for React surfaces. (depends: P012)
-- [ ] P020 Add test fixture naming, snapshot policy, and console-error failure policy. (depends: P013)
-- [ ] P021 Add Node LOC counter that excludes generated files, assets, SVG, lockfiles, and `node_modules`. (depends: P013)
-- [ ] P022 Run the workspace gate: typecheck, unit smoke test, build, lint, and `npm run loc` report. (depends: P014, P015, P016, P017, P018, P019, P020, P021)
+- [x] P011 Convert the root package into npm workspaces for `packages/*` and `apps/*`. (depends: P004, P005)
+- [x] P012 Create strict shared TypeScript configuration for packages and apps. (depends: P011)
+- [x] P013 Create workspace-level scripts for `typecheck`, `test`, `build`, `lint`, `demo`, `demo:reset`, `loc`, and `judge`. (depends: P011)
+- [x] P014 Create package naming and export conventions for core, sdk, extension, verifier, ai, api, dashboard, web, and shopnest. (depends: P012)
+- [x] P015 Create shared environment variable validation and `.env.example` without secrets. (depends: P012)
+- [x] P016 Add deterministic clock, random seed, and fixture helpers shared by tests. (depends: P012)
+- [x] P017 Add structured logger contract with request ID, actor, site ID, and severity. (depends: P012)
+- [x] P018 Add common result, error, status, pagination, and cursor types. (depends: P012)
+- [x] P019 Add accessibility and focus testing helpers for React surfaces. (depends: P012)
+- [x] P020 Add test fixture naming, snapshot policy, and console-error failure policy. (depends: P013)
+- [x] P021 Add Node LOC counter that excludes generated files, assets, SVG, lockfiles, and `node_modules`. (depends: P013)
+- [x] P022 Run the workspace gate: typecheck, unit smoke test, build, lint, and `npm run loc` report. (depends: P014, P015, P016, P017, P018, P019, P020, P021)
 
 **Runnable after Group 1:** Workspace boots the existing surface and prints
 deterministic size metrics through `npm run loc`.

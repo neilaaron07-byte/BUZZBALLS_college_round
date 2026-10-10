@@ -1,0 +1,12 @@
+{
+  "name": "@patchwork/dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./ui": "./src/ui/index.ts"
+  },
+  "dependencies": {
+    "@patchwork/shared": "0.1.0"
+  }
+}

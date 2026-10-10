@@ -1,0 +1,9 @@
+{
+  "name": "@patchwork/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@patchwork/shared": "0.1.0"
+  }
+}
