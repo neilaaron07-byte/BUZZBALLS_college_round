@@ -82,3 +82,7 @@ export const patchRevisionSchema = z.object({
   author: authorSchema,
   message: z.string().min(1).max(500),
 }).strict();
+
+export type Author = z.infer<typeof authorSchema>;
+export type Manifest = z.infer<typeof manifestSchema>;
+export type Release = z.infer<typeof releaseSchema>;

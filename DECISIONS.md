@@ -52,6 +52,32 @@ proposal until the resolver margin is safe.
 Reason: the product promise is safe hotfixing. A missed fix is visible and
 recoverable; a wrong-element mutation can damage customer trust.
 
+## D-011 — Keep resolver thresholds explicit and reviewable
+
+Decision: exact matches require 0.96 confidence, recovered moved targets require
+0.72 confidence plus a 0.10 runner-up margin, and ambiguous or weak matches
+return no target id.
+
+Reason: the UI can explain and review a conservative recovery, while the
+runtime cannot accidentally apply a low-confidence guess.
+
+## D-012 — Use Web Crypto for release integrity
+
+Decision: canonical content hashes and Ed25519 signatures use `globalThis.crypto`
+and Web Crypto-compatible encodings rather than Node-only crypto imports.
+
+Reason: the same core package must run in Cloudflare Workers, the browser SDK,
+the verifier, and Node-based tests without duplicating signing logic.
+
+## D-013 — Make scanning pure before making it browser-aware
+
+Decision: scanner detectors accept a serializable page snapshot and return
+typed findings with severity, confidence, evidence, and blast radius. Browser
+collection is a later boundary.
+
+Reason: deterministic fixtures make detector behavior testable and portable;
+the verifier can later populate the same snapshot from an isolated page.
+
 ## D-006 — Deterministic offline demo data
 
 Decision: seed named actors, releases, findings, timestamps, and ShopNest

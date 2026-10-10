@@ -34,6 +34,8 @@ export const conflictSchema = z.object({
   resolvedBy: identifierSchema.nullable(),
 }).strict();
 
+export type Conflict = z.infer<typeof conflictSchema>;
+
 export const verificationCheckSchema = z.object({
   id: identifierSchema,
   name: z.string().min(1).max(160),
@@ -76,3 +78,5 @@ export const auditEntrySchema = z.object({
   previousHash: contentHashSchema.nullable(),
   entryHash: contentHashSchema,
 }).strict();
+
+export type AuditEntry = z.infer<typeof auditEntrySchema>;

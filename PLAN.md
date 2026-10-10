@@ -135,22 +135,22 @@ DOM mutations and explain every decision.
 
 ## Group 4 — `packages/core` conflicts, integrity, audit, scanner
 
-- [ ] P050 Implement target identity and operation property keys for three-way merge. (depends: P049)
-- [ ] P051 Detect direct property conflicts across two patch revisions. (depends: P050)
-- [ ] P052 Detect hide-versus-style and reorder-versus-reorder semantic conflicts. (depends: P050)
-- [ ] P053 Detect stale base manifest conflicts. (depends: P050)
-- [ ] P054 Detect invalid, ambiguous, and cyclic patch dependencies. (depends: P043, P050)
-- [ ] P055 Generate conflict explanations and suggested resolutions. (depends: P051, P052, P053, P054)
-- [ ] P056 Add conflict matrix tests for mergeable and non-mergeable operations. (depends: P055)
-- [ ] P057 Implement SHA-256 canonical content hashing. (depends: P030)
-- [ ] P058 Implement Ed25519 manifest signing and verification interfaces. (depends: P057)
-- [ ] P059 Add manifest version, expiry, site, and release replay protections. (depends: P058)
-- [ ] P060 Implement hash-chained audit entries and `verifyChain()`. (depends: P057)
-- [ ] P061 Add tamper fixtures, missing-link fixtures, and invalid-signature fixtures. (depends: P060)
-- [ ] P062 Implement scanner detectors for contrast, duplicate actions, stale copy, missing labels, broken links, and layout overflow. (depends: P035, P042)
-- [ ] P063 Add scan finding severity, confidence, evidence, and blast-radius schemas. (depends: P062)
-- [ ] P064 Test scanner detectors and audit tamper behavior. (depends: P056, P061, P063)
-- [ ] P065 Run the core gate and verify the `packages/core` LOC threshold is approached through real modules and tests. (depends: P064)
+- [x] P050 Implement target identity and operation property keys for three-way merge. (depends: P049)
+- [x] P051 Detect direct property conflicts across two patch revisions. (depends: P050)
+- [x] P052 Detect hide-versus-style and reorder-versus-reorder semantic conflicts. (depends: P050)
+- [x] P053 Detect stale base manifest conflicts. (depends: P050)
+- [x] P054 Detect invalid, ambiguous, and cyclic patch dependencies. (depends: P043, P050)
+- [x] P055 Generate conflict explanations and suggested resolutions. (depends: P051, P052, P053, P054)
+- [x] P056 Add conflict matrix tests for mergeable and non-mergeable operations. (depends: P055)
+- [x] P057 Implement SHA-256 canonical content hashing. (depends: P030)
+- [x] P058 Implement Ed25519 manifest signing and verification interfaces. (depends: P057)
+- [x] P059 Add manifest version, expiry, site, and release replay protections. (depends: P058)
+- [x] P060 Implement hash-chained audit entries and `verifyChain()`. (depends: P057)
+- [x] P061 Add tamper fixtures, missing-link fixtures, and invalid-signature fixtures. (depends: P060)
+- [x] P062 Implement scanner detectors for contrast, duplicate actions, stale copy, missing labels, broken links, and layout overflow. (depends: P035, P042)
+- [x] P063 Add scan finding severity, confidence, evidence, and blast-radius schemas. (depends: P062)
+- [x] P064 Test scanner detectors and audit tamper behavior. (depends: P056, P061, P063)
+- [x] P065 Run the core gate and verify the `packages/core` LOC threshold is approached through real modules and tests. (depends: P064)
 
 **Runnable after Group 4:** Core supports schema safety, resolver evidence,
 conflicts, signed manifests, audit integrity, and scan findings.
