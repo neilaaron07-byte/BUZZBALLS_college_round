@@ -4,7 +4,7 @@ Updated: 2026-10-10
 
 ## Current state
 
-- Current group: Group 12 in progress — the operator workspace is live at `/dashboard`, the public marketing surface is staged at `/web`, and ShopNest now has a deterministic multi-route commerce fixture.
+- Current group: Group 13 complete — the operator workspace is live at `/dashboard`, the public marketing surface is staged at `/web`, ShopNest has a deterministic multi-route commerce fixture, and dashboard evidence/release controls now share typed operator logic.
 - Baseline surface: the existing vinext Site renders a seeded ShopNest checkout incident with a PATCHWORK inspector dock.
 - Planning: `AGENTS.md`, `BRAINSTORM.md`, and `PLAN.md` are present. The plan contains 244 dependency-aware tasks, including the design-system track.
 - Deployment: the existing private Sites project remains configured in `.openai/hosting.json`; deployment will follow the first validated product milestone.
@@ -54,18 +54,20 @@ Updated: 2026-10-10
 - P169–P174 are complete: `/web/tour`, `/web/security`, `/web/customers`, and `/web/docs` share an offline-safe public shell with tour evidence, signed-manifest boundaries, realistic team stories, first-run documentation, keyboard/mobile/reduced-motion states, metadata, local social preview, contract tests, and a documented Lighthouse budget. The 20-route dark/light desktop/tablet/mobile sweep captured 120 pages with zero console errors.
 - P176–P187 are complete: ShopNest now has a coherent catalog, search/filtering, product detail, saved items, cart, checkout, login lockout, local release switching, seeded v1/v2/v3 findings, and the PATCHWORK inspector handoff. The expanded 25-route dark/light desktop/tablet/mobile sweep captured 150 pages with zero console errors.
 - ShopNest depth pass is validated: catalog query engines now drive search summaries and empty-state copy; shipping regions and delivery options drive checkout; deterministic order IDs, validation, and totals drive the review/success path; product pages expose review evidence and recommendations; release pages expose policy gates and preview decisions. The 28-route dark/light desktop/tablet/mobile sweep captured 168 pages with zero console errors.
+- Dashboard evidence tranche is validated: typed query, finding, patch, activity, workspace-metric, policy, rollout, and release engines now drive SCAN/FIX/SHIP panels; the evidence engine exposes measured records, quality budgets, verification checks, and export-safe CSV; Overview, Scan, Patches, Releases, Audit, and Evidence visibly consume the same plain-English status logic.
+- Group 13 validation is green: `npm run typecheck`, `npm run lint`, `npm run build`, `npm test`, focused dashboard engine tests, and the full 28-route dark/light desktop/tablet/mobile sweep passed. The sweep captured 168 pages with zero console errors; representative Overview, Releases, and Evidence captures were reviewed across desktop, tablet, and mobile.
 
 ## Next
 
-1. Continue feature-complete ShopNest depth and run its LOC gate honestly; it is currently 1,178/2,500 handwritten lines (P188).
-2. Run the dashboard and marketing LOC gates honestly; they are not yet near their thresholds (P163, P175).
-3. Add the demo supervisor and final public-surface browser/Lighthouse gates after those surfaces exist (P189–P203).
+1. Continue feature-complete dashboard depth and run its LOC gate honestly; it is currently 1,694/9,000 handwritten lines (P163).
+2. Continue ShopNest depth and run its LOC gate honestly; it is currently 1,178/2,500 handwritten lines (P188).
+3. Run the marketing LOC gate honestly; it is currently 57/2,500 handwritten lines (P175), then add the demo supervisor and final public-surface browser/Lighthouse gates (P189–P203).
 
 ## Known issues
 
 - The repository is still a single vinext app; the target workspace packages do not exist yet.
 - The current ShopNest incident surface still contains the first-pass visual language and will be migrated incrementally.
-- The final LOC gates are intentionally not met yet: current measured handwritten LOC is 11,218 overall; `apps/api` is 4,000/4,000, while dashboard (1,219/9,000), marketing (57/2,500), ShopNest (1,178/2,500), tests (1,621/4,000), core, SDK, extension, verifier, and AI remain below their final thresholds.
+- The final LOC gates are intentionally not met yet: current measured handwritten LOC is 11,855 overall; `apps/api` is 4,000/4,000, while dashboard (1,694/9,000), marketing (57/2,500), ShopNest (1,178/2,500), tests (1,783/4,000), core, SDK, extension, verifier, and AI remain below their final thresholds.
 - The currently deployed Site reflects the prior validated incident demo, not this rebuild in progress.
 - `npm install` reports 28 transitive audit findings in the existing toolchain; no production feature dependency was added yet.
 - The core safety gate is intentionally narrower than the final release gate: signing, resolver, conflict, scanner, API, and dashboard behavior remain in later groups.

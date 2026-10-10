@@ -342,3 +342,17 @@ Reason: the commerce fixture is a proof surface for PATCHWORK quality, not a
 static screenshot. Keeping the calculations and policy decisions at the domain
 boundary makes search, checkout, and release evidence deterministic and easier
 to audit without adding a network dependency.
+
+## D-034 — Keep dashboard evidence typed, shared, and honest
+
+Decision: dashboard operator screens consume pure typed engines for query state,
+finding and patch filters, workspace metrics, policy gates, rollout decisions,
+release narratives, evidence records, quality budgets, and verification checks.
+The UI exposes the resulting green/amber/red state directly, while Lighthouse
+remains explicitly amber until a measured capture exists. Evidence and browser
+verification can be exported as deterministic CSV without credentials.
+
+Reason: SCAN, FIX, and SHIP need one explainable decision model. Keeping the
+logic outside dense JSX prevents screens from drifting into contradictory copy,
+makes edge states testable, and avoids inventing launch evidence just to make a
+score appear green.
