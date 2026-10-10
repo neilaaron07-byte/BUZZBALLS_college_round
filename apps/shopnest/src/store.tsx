@@ -2,6 +2,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { getProduct, releaseFor } from "./catalog";
+import { cartItemCount as calculateCartItemCount, cartSubtotal, mergeCartLines } from "./checkout-engine";
 import type { CartLine, Product, ReleaseMode, ShopNestSnapshot } from "./types";
 
 type ShopNestContextValue = {
@@ -65,8 +66,8 @@ export function ShopNestProvider({ children, initialMode = "v2" }: Readonly<{ ch
   const addToCart = useCallback((product: Product, quantity = 1, finish = product.finish) => {
     setCart((current) => {
       const existing = current.find((line) => line.product.slug === product.slug && line.finish === finish);
-      if (existing) return current.map((line) => line === existing ? { ...line, quantity: Math.min(9, line.quantity + quantity) } : line);
-      return [...current, { product, quantity: Math.min(9, Math.max(1, quantity)), finish }];
+      if (existing) return mergeCartLines(current.map((line) => line === existing ? { ...line, quantity: Math.min(9, line.quantity + quantity) } : line));
+      return mergeCartLines([...current, { product, quantity: Math.min(9, Math.max(1, quantity)), finish }]);
     });
   }, []);
 
@@ -74,8 +75,8 @@ export function ShopNestProvider({ children, initialMode = "v2" }: Readonly<{ ch
   const updateQuantity = useCallback((slug: string, quantity: number) => setCart((current) => current.flatMap((line) => line.product.slug === slug ? (quantity > 0 ? [{ ...line, quantity: Math.min(9, quantity) }] : []) : [line])), []);
   const toggleSaved = useCallback((slug: string) => setSavedSlugs((current) => current.includes(slug) ? current.filter((value) => value !== slug) : [...current, slug]), []);
   const clearCart = useCallback(() => setCart([]), []);
-  const cartItemCount = cart.reduce((total, line) => total + line.quantity, 0);
-  const cartTotalCents = cart.reduce((total, line) => total + line.product.priceCents * line.quantity, 0);
+  const cartItemCount = calculateCartItemCount(cart);
+  const cartTotalCents = cartSubtotal(cart);
   const value = useMemo(() => ({ mode, setMode, cart, savedSlugs, cartItemCount, cartTotalCents, addToCart, removeFromCart, updateQuantity, toggleSaved, clearCart }), [addToCart, cart, cartItemCount, cartTotalCents, clearCart, mode, removeFromCart, savedSlugs, toggleSaved, updateQuantity]);
 
   return <ShopNestContext.Provider value={value}>{children}</ShopNestContext.Provider>;

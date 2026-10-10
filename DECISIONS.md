@@ -330,3 +330,15 @@ for patch evidence and release decisions.
 Reason: the storefront needs to be useful as a normal commerce journey while
 remaining resettable, offline-safe, and able to demonstrate healthy, breaking,
 and ambiguous releases without shipping hardcoded repairs into the product.
+
+## D-033 — Keep ShopNest domain engines on the customer path
+
+Decision: catalog, checkout, shipping, review, recommendation, and release
+health logic must be imported by the corresponding visible ShopNest routes, with
+pure-function tests covering the edge states. A helper that is only counted by
+the LOC script does not qualify as feature depth.
+
+Reason: the commerce fixture is a proof surface for PATCHWORK quality, not a
+static screenshot. Keeping the calculations and policy decisions at the domain
+boundary makes search, checkout, and release evidence deterministic and easier
+to audit without adding a network dependency.

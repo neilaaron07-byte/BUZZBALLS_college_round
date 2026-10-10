@@ -1,0 +1,23 @@
+"use client";
+/* The public fixture keeps its root link as a normal document boundary. */
+/* eslint-disable @next/next/no-html-link-for-pages */
+
+import { Check, ChevronDown, MessageCircle, SlidersHorizontal, Star } from "lucide-react";
+import { useMemo, useState } from "react";
+import { getProduct } from "./catalog";
+import { filterReviews, ratingBarWidth, responseToReview, reviewLabel, reviewSummary, sortedReviews } from "./review-engine";
+import type { Product } from "./types";
+
+export function ReviewsPanel({ product }: Readonly<{ product: Product }>) {
+  const summary = reviewSummary(product);
+  const [rating, setRating] = useState<"all" | 1 | 2 | 3 | 4 | 5>("all");
+  const [verifiedOnly, setVerifiedOnly] = useState(false);
+  const [sort, setSort] = useState<"recent" | "helpful" | "highest" | "lowest">("recent");
+  const visible = useMemo(() => rating === "all" && !verifiedOnly ? sortedReviews(product, sort) : filterReviews(product, rating, verifiedOnly), [product, rating, sort, verifiedOnly]);
+  return <section className="sn-reviews-panel" aria-labelledby="reviews-title"><div className="sn-reviews-heading"><div><span className="sn-overline">FIELD NOTES / {summary.total} REVIEWS</span><h2 id="reviews-title">The details people <em>noticed.</em></h2><p>{summary.verifiedPercent}% of these notes come from verified orders.</p></div><label className="sn-review-sort"><span>Sort</span><select value={sort} onChange={(event) => setSort(event.target.value as typeof sort)}><option value="recent">Most recent</option><option value="helpful">Most helpful</option><option value="highest">Highest rated</option><option value="lowest">Lowest rated</option></select><ChevronDown size={13} aria-hidden="true" /></label></div><div className="sn-review-summary"><div className="sn-review-score"><strong>{summary.average.toFixed(1)}</strong><span><span className="sn-stars" aria-hidden="true">★★★★★</span><small>Based on {summary.total} notes</small></span></div><div className="sn-rating-bars">{([5, 4, 3, 2, 1] as const).map((value) => <div key={value}><span>{value} <Star size={10} fill="currentColor" aria-hidden="true" /></span><i><b style={{ width: `${ratingBarWidth(summary, value)}%` }} /></i><small>{summary.distribution[value]}</small></div>)}</div><div className="sn-review-tags"><span>People mention</span>{summary.topTags.map((tag) => <b key={tag}>{tag}</b>)}</div></div><div className="sn-review-filters"><span><SlidersHorizontal size={13} aria-hidden="true" /> Filter notes</span>{(["all", 5, 4, 3, 2, 1] as const).map((value) => <button type="button" className={rating === value ? "is-active" : ""} key={value} onClick={() => setRating(value)}>{value === "all" ? "All" : `${value} stars`}</button>)}<button type="button" className={verifiedOnly ? "is-active" : ""} onClick={() => setVerifiedOnly((value) => !value)}><Check size={12} aria-hidden="true" /> Verified only</button></div><div className="sn-review-list">{visible.length ? visible.map((review) => <article className="sn-review" key={review.id}><div className="sn-review-avatar">{review.initials}</div><div className="sn-review-copy"><div className="sn-review-meta"><strong>{review.author}</strong>{review.verified ? <span><Check size={11} aria-hidden="true" /> Verified order</span> : null}<time>{review.date}</time></div><div className="sn-review-rating"><span className="sn-stars" aria-label={reviewLabel(review)}>★★★★★</span><b>{review.title}</b></div><p>{review.body}</p><div className="sn-review-foot"><span>{review.helpful} people found this helpful</span><button type="button"><MessageCircle size={12} aria-hidden="true" /> Reply</button></div><small className="sn-review-response">{responseToReview(review)}</small></div></article>) : <div className="sn-empty-state"><span><SlidersHorizontal size={16} aria-hidden="true" /></span><h3>No notes in this view.</h3><p>Clear a filter to see the full field report.</p></div>}</div></section>;
+}
+
+export function ReviewsScreen() {
+  const product = getProduct("aurora-headphones");
+  return <main className="sn-app"><div className="sn-page sn-reviews-page"><div className="sn-breadcrumb"><a href="/">ShopNest</a><span>/</span><b>Field notes</b></div><ReviewsPanel product={product} /><div className="sn-review-callout"><Star size={18} aria-hidden="true" /><div><strong>Reviews are part of the evidence surface.</strong><p>ShopNest keeps customer context beside the release fixture so a team can understand impact before it ships a patch.</p></div><a href="/dashboard?view=evidence">Open evidence <ChevronDown size={14} aria-hidden="true" /></a></div></div></main>;
+}

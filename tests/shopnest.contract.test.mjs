@@ -7,8 +7,8 @@ async function source(path) { return readFile(new URL(path, root), "utf8"); }
 
 test("ShopNest exposes the complete product route matrix", async () => {
   const routes = await source("tools/screenshots.mjs");
-  for (const path of ["/", "/search", "/product/aurora-headphones", "/cart", "/checkout", "/login"]) assert.match(routes, new RegExp(path));
-  for (const path of ["app/search/page.tsx", "app/product/[slug]/page.tsx", "app/cart/page.tsx", "app/checkout/page.tsx", "app/login/page.tsx"]) assert.match(await source(path), /ShopNestProvider/);
+  for (const path of ["/", "/search", "/product/aurora-headphones", "/cart", "/checkout", "/login", "/reviews", "/account", "/wishlist", "/support", "/release"]) assert.match(routes, new RegExp(path));
+  for (const path of ["app/search/page.tsx", "app/product/[slug]/page.tsx", "app/cart/page.tsx", "app/checkout/page.tsx", "app/login/page.tsx", "app/reviews/page.tsx", "app/account/page.tsx", "app/wishlist/page.tsx", "app/support/page.tsx", "app/release/page.tsx"]) assert.match(await source(path), /ShopNestProvider/);
 });
 
 test("ShopNest fixture modes make the seeded incident explicit", async () => {
@@ -36,4 +36,17 @@ test("ShopNest safety handoff stays visible on the product and home surfaces", a
   const inspector = await source("apps/shopnest/src/components.tsx");
   for (const text of ["Open the finding", "Safe preview", "Undo in one click", "Run verification gate", "Pass-after confirmed"]) assert.match(`${home}\n${product}\n${inspector}`, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.doesNotMatch(`${home}\n${product}\n${inspector}`, /alert\(|confirm\(|prompt\(/);
+});
+
+test("ShopNest gives saved objects, support, and release health a reachable surface", async () => {
+  const wishlist = await source("apps/shopnest/src/wishlist-screen.tsx");
+  const support = await source("apps/shopnest/src/support-screen.tsx");
+  const release = await source("apps/shopnest/src/release-screen.tsx");
+  const releaseEngine = await source("apps/shopnest/src/release-engine.ts");
+  assert.match(wishlist, /Nothing saved yet/);
+  assert.match(support, /Write to the studio/);
+  assert.match(support, /role="alert"/);
+  assert.match(release, /Release health/);
+  assert.match(releaseEngine, /Resolve the duplicate/);
+  assert.match(release, /Undo stays available/);
 });
