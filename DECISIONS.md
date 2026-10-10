@@ -112,6 +112,17 @@ from leaking between baselines. Attaching listeners before navigation catches
 load-time regressions, while portable evidence keeps the committed fixture
 reviewable outside the originating machine.
 
+## D-017 — Make PatchPilot evidence-first with an offline default
+
+Decision: PatchPilot responses must carry typed evidence items, confidence, and
+one safe next action. The local provider derives output from scanner, resolver,
+verification, health, and release signals; optional providers sit behind an
+adapter and fall back to the same offline engine on failure.
+
+Reason: the demo must be useful without credentials and must not turn a model
+guess into a production mutation. Keeping the proposal review-only also makes
+auto-heal explainable and preserves the one-click rollback promise.
+
 ## D-006 — Deterministic offline demo data
 
 Decision: seed named actors, releases, findings, timestamps, and ShopNest

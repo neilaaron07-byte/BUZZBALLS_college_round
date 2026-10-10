@@ -215,17 +215,17 @@ patch is demonstrably caught.
 
 ## Group 8 — `packages/ai`
 
-- [ ] P106 Create PatchPilot package and provider interface with offline default. (depends: P105)
-- [ ] P107 Define tool schemas for scan, explain, suggest, summarize, and draft. (depends: P106)
-- [ ] P108 Implement prompt templates for findings, conflicts, release risk, and rollback explanation. (depends: P107)
-- [ ] P109 Implement deterministic offline PatchPilot engine backed by resolver and scanner evidence. (depends: P108, P062)
-- [ ] P110 Implement plain-English confidence and next-action summaries. (depends: P109)
-- [ ] P111 Implement auto-heal proposal generation for moved targets without auto-approval. (depends: P043, P109)
-- [ ] P112 Implement blast-radius narrative for pages, elements, and viewports. (depends: P063, P109)
-- [ ] P113 Implement health-score narrative combining confidence, verification, SDK errors, and age. (depends: P109)
-- [ ] P114 Add AI safety tests for hallucinated targets, unsafe operations, and unsupported claims. (depends: P110, P111, P112, P113)
-- [ ] P115 Add optional provider adapter boundary without requiring credentials in local demo. (depends: P106)
-- [ ] P116 Run PatchPilot gate with deterministic fixture outputs. (depends: P114, P115)
+- [x] P106 Create PatchPilot package and provider interface with offline default. (depends: P105)
+- [x] P107 Define tool schemas for scan, explain, suggest, summarize, and draft. (depends: P106)
+- [x] P108 Implement prompt templates for findings, conflicts, release risk, and rollback explanation. (depends: P107)
+- [x] P109 Implement deterministic offline PatchPilot engine backed by resolver and scanner evidence. (depends: P108, P062)
+- [x] P110 Implement plain-English confidence and next-action summaries. (depends: P109)
+- [x] P111 Implement auto-heal proposal generation for moved targets without auto-approval. (depends: P043, P109)
+- [x] P112 Implement blast-radius narrative for pages, elements, and viewports. (depends: P063, P109)
+- [x] P113 Implement health-score narrative combining confidence, verification, SDK errors, and age. (depends: P109)
+- [x] P114 Add AI safety tests for hallucinated targets, unsafe operations, and unsupported claims. (depends: P110, P111, P112, P113)
+- [x] P115 Add optional provider adapter boundary without requiring credentials in local demo. (depends: P106)
+- [x] P116 Run PatchPilot gate with deterministic fixture outputs. (depends: P114, P115)
 
 **Runnable after Group 8:** The system can explain scan findings, conflicts,
 health, and auto-heal proposals with deterministic offline behavior.

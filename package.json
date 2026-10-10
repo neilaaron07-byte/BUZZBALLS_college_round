@@ -30,6 +30,8 @@
     "extension:smoke": "npm run extension:build && node tools/extension-smoke.mjs",
     "verifier:smoke": "npm run --workspace @patchwork/verifier smoke",
     "verifier:evidence": "tsx tools/verifier-evidence.ts",
+    "ai:smoke": "npm run --workspace @patchwork/ai smoke",
+    "ai:evidence": "tsx tools/ai-evidence.ts",
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {

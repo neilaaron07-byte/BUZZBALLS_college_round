@@ -2,5 +2,11 @@
   "name": "@patchwork/ai",
   "version": "0.1.0",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "scripts": {
+    "smoke": "node ../../tools/ai-smoke.mjs"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  }
 }

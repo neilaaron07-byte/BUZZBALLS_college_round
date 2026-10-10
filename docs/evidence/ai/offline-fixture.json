@@ -1,0 +1,183 @@
+{
+  "provider": "offline",
+  "generatedAt": "2026-10-10T08:00:00.000Z",
+  "scan": {
+    "intent": "scan",
+    "status": "amber",
+    "headline": "Text contrast is below the accessible threshold.",
+    "answer": "price measures 4.48:1 contrast; this text needs at least 4.5:1 at its current size. PATCHWORK found this with 99% detector confidence.",
+    "confidence": {
+      "score": 0.99,
+      "status": "green",
+      "label": "high",
+      "explanation": "The explanation is grounded in the scanner finding and its recorded evidence."
+    },
+    "nextAction": {
+      "label": "Review the affected element",
+      "reason": "Confirm the visual context before drafting a change.",
+      "safe": true
+    },
+    "evidence": [
+      {
+        "id": "finding:contrast-price",
+        "source": "scanner",
+        "text": "Text contrast is below the accessible threshold."
+      },
+      {
+        "id": "finding:contrast-price:evidence:1",
+        "source": "scanner",
+        "text": "Foreground #777777"
+      },
+      {
+        "id": "finding:contrast-price:evidence:2",
+        "source": "scanner",
+        "text": "Background #ffffff"
+      },
+      {
+        "id": "finding:contrast-price:evidence:3",
+        "source": "scanner",
+        "text": "Measured ratio 4.48:1"
+      }
+    ]
+  },
+  "suggest": {
+    "intent": "suggest",
+    "status": "amber",
+    "headline": "A reviewable fix is ready",
+    "answer": "A reviewable contrast patch is ready for price; it changes only the text color and does not publish automatically.",
+    "confidence": {
+      "score": 0.99,
+      "status": "green",
+      "label": "high",
+      "explanation": "The resolver found a unique target and the operation uses an allowed core property."
+    },
+    "nextAction": {
+      "label": "Open the isolated preview",
+      "reason": "Verify the visual result and accessibility delta before review.",
+      "safe": true
+    },
+    "evidence": [
+      {
+        "id": "finding:contrast-price",
+        "source": "scanner",
+        "text": "Text contrast is below the accessible threshold."
+      },
+      {
+        "id": "finding:contrast-price:evidence:1",
+        "source": "scanner",
+        "text": "Foreground #777777"
+      },
+      {
+        "id": "finding:contrast-price:evidence:2",
+        "source": "scanner",
+        "text": "Background #ffffff"
+      },
+      {
+        "id": "finding:contrast-price:evidence:3",
+        "source": "scanner",
+        "text": "Measured ratio 4.48:1"
+      },
+      {
+        "id": "resolver:contrast-price",
+        "source": "resolver",
+        "text": "Exact target match: price scored 1.00, above the 0.96 exact-match threshold."
+      },
+      {
+        "id": "operation:contrast-price",
+        "source": "scanner",
+        "text": "Operation limited to the core CSS color allowlist."
+      }
+    ],
+    "proposal": {
+      "id": "proposal-contrast-price",
+      "status": "review",
+      "operation": {
+        "id": "op-contrast-price",
+        "kind": "style",
+        "target": {
+          "fingerprint": "sha256-cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "fallbackLabel": "price",
+          "expectedTag": "p",
+          "evidence": {
+            "version": 1,
+            "tag": "p",
+            "attributes": {
+              "id": "price",
+              "meaningfulClasses": []
+            },
+            "normalizedText": "#",
+            "textTokens": [
+              "#"
+            ],
+            "textNgrams": [
+              "#"
+            ],
+            "path": [
+              "html",
+              "body",
+              "main",
+              "p"
+            ],
+            "siblingSignature": [
+              "p",
+              "button"
+            ],
+            "landmarkChain": [
+              "main"
+            ],
+            "region": "top-left",
+            "visualRole": "text"
+          }
+        },
+        "property": "color",
+        "value": "#172033"
+      },
+      "targetLabel": "price",
+      "confidence": {
+        "score": 0.99,
+        "status": "green",
+        "label": "high",
+        "explanation": "The resolver found a unique target and the operation uses an allowed core property."
+      },
+      "explanation": "A reviewable contrast patch is ready for price; it changes only the text color and does not publish automatically.",
+      "nextAction": {
+        "label": "Open the isolated preview",
+        "reason": "Verify the visual result and accessibility delta before review.",
+        "safe": true
+      },
+      "autoApproved": false,
+      "evidence": [
+        {
+          "id": "finding:contrast-price",
+          "source": "scanner",
+          "text": "Text contrast is below the accessible threshold."
+        },
+        {
+          "id": "finding:contrast-price:evidence:1",
+          "source": "scanner",
+          "text": "Foreground #777777"
+        },
+        {
+          "id": "finding:contrast-price:evidence:2",
+          "source": "scanner",
+          "text": "Background #ffffff"
+        },
+        {
+          "id": "finding:contrast-price:evidence:3",
+          "source": "scanner",
+          "text": "Measured ratio 4.48:1"
+        },
+        {
+          "id": "resolver:contrast-price",
+          "source": "resolver",
+          "text": "Exact target match: price scored 1.00, above the 0.96 exact-match threshold."
+        },
+        {
+          "id": "operation:contrast-price",
+          "source": "scanner",
+          "text": "Operation limited to the core CSS color allowlist."
+        }
+      ]
+    }
+  }
+}
