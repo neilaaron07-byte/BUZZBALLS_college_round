@@ -228,6 +228,17 @@ led to it. Keeping observed event evidence in the route makes the rollback
 recommendation inspectable and preserves the product's plain-English status
 contract.
 
+## D-028 — Keep operational support routes inside the same dashboard shell
+
+Decision: collaborators, evidence, install, and settings are first-class
+dashboard routes with the same navigation, source banner, theme system, focus
+states, and stitched seams as SCAN/FIX/SHIP.
+
+Reason: launch-demo users need to move from a patch decision to its ownership,
+proof, setup, or policy without changing products. Keeping these surfaces in
+the shell also lets the API-backed read model and deterministic fallback share
+one trust boundary.
+
 ## D-006 — Deterministic offline demo data
 
 Decision: seed named actors, releases, findings, timestamps, and ShopNest

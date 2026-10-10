@@ -13,6 +13,10 @@ import { AuditScreen } from "../../apps/dashboard/src/audit-screen";
 import { ReviewsScreen } from "../../apps/dashboard/src/reviews-screen";
 import { ConflictsScreen } from "../../apps/dashboard/src/conflicts-screen";
 import { VerificationScreen } from "../../apps/dashboard/src/verification-screen";
+import { CollaboratorsScreen } from "../../apps/dashboard/src/collaborators-screen";
+import { EvidenceScreen } from "../../apps/dashboard/src/evidence-screen";
+import { InstallScreen } from "../../apps/dashboard/src/install-screen";
+import { SettingsScreen } from "../../apps/dashboard/src/settings-screen";
 import { ErrorState, Skeleton } from "../../apps/dashboard/src/ui/feedback";
 import { cloneFixture } from "../../apps/dashboard/src/fixture";
 import type { DashboardData, DashboardView } from "../../apps/dashboard/src/dashboard-types";
@@ -41,7 +45,7 @@ export default function DashboardPage() {
   if (!data && !error) return <DashboardLoading />;
   if (error) return <div className="pw-dashboard-error-page"><ErrorState title="Workspace unavailable" description="PATCHWORK could not load the operator workspace. The local demo can still be opened from the retry action." onRetry={() => { setData(cloneFixture()); setError(null); }} /></div>;
   if (!data) return null;
-  return <DashboardShell data={data} view={view} onNavigate={navigate}>{view === "overview" ? <OverviewScreen data={data} onNavigate={navigate} /> : view === "scan" ? <ScanScreen data={data} onNavigate={navigate} /> : view === "patches" ? <PatchesScreen data={data} onNavigate={navigate} /> : view === "conflicts" ? <ConflictsScreen data={data} onNavigate={navigate} /> : view === "releases" ? <ReleasesScreen data={data} onNavigate={navigate} /> : view === "incidents" ? <IncidentsScreen data={data} onNavigate={navigate} /> : view === "audit" ? <AuditScreen data={data} onNavigate={navigate} /> : view === "reviews" ? <ReviewsScreen data={data} onNavigate={navigate} /> : view === "verification" ? <VerificationScreen data={data} onNavigate={navigate} /> : <RoutePlaceholder data={data} view={view} onNavigate={navigate} />}</DashboardShell>;
+  return <DashboardShell data={data} view={view} onNavigate={navigate}>{view === "overview" ? <OverviewScreen data={data} onNavigate={navigate} /> : view === "scan" ? <ScanScreen data={data} onNavigate={navigate} /> : view === "patches" ? <PatchesScreen data={data} onNavigate={navigate} /> : view === "conflicts" ? <ConflictsScreen data={data} onNavigate={navigate} /> : view === "releases" ? <ReleasesScreen data={data} onNavigate={navigate} /> : view === "incidents" ? <IncidentsScreen data={data} onNavigate={navigate} /> : view === "audit" ? <AuditScreen data={data} onNavigate={navigate} /> : view === "reviews" ? <ReviewsScreen data={data} onNavigate={navigate} /> : view === "verification" ? <VerificationScreen data={data} onNavigate={navigate} /> : view === "collaborators" ? <CollaboratorsScreen data={data} onNavigate={navigate} /> : view === "evidence" ? <EvidenceScreen data={data} onNavigate={navigate} /> : view === "install" ? <InstallScreen data={data} onNavigate={navigate} /> : view === "settings" ? <SettingsScreen data={data} onNavigate={navigate} /> : <RoutePlaceholder data={data} view={view} onNavigate={navigate} />}</DashboardShell>;
 }
 
 function DashboardLoading() {

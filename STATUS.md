@@ -48,19 +48,20 @@ Updated: 2026-10-10
 - FIX is active: Patches has list and kanban modes, realistic queue data, filters, sorting, a saved view, reviewer/approval state, an operation editor, one-operation diff, conflict warning, API-backed private-preview state, and explicit handoff to release control. P144, P146, P147, and P149 are complete.
 - P150–P151 are complete: review inbox and conflicts make approvals, required checks, people, side-by-side operations, PatchPilot guidance, keep/archive decisions, and audit-ready resolution state visible.
 - P152–P155 are complete: verification exposes interaction, visual, accessibility, and console evidence; incidents expose observed health events, circuit-breaker posture, rollback, and replay; SHIP includes policy checks, signed manifest evidence, bounded canary controls, pause/promote/kill-switch/rollback interactions, release comparison, chain integrity, tamper testing, filters, and exportable audit evidence.
+- P156–P159 are complete: collaborators expose named ownership and PR checks; evidence reports measured resolver, SDK, regression, and test proof while explicitly marking Lighthouse as not yet measured; install provides SDK/extension steps and an environment checklist; settings provide scoped policy, allowlist, notification switches, and a reviewed local reset.
 
 ## Next
 
-1. Build collaborators/PR, evidence, install, and settings routes (P156–P159).
-2. Add route-wide loading, empty, error, keyboard, reduced-motion, touch, and console coverage (P160–P162).
-3. Grow the dashboard and remaining packages with real features toward the measured LOC gates (P163 onward).
+1. Add route-wide loading, empty, error, optimistic, keyboard, reduced-motion, touch, and screen-reader coverage (P160–P162).
+2. Expand dashboard interaction tests and screenshot coverage, then measure its gate (P163).
+3. Build the marketing and ShopNest surfaces with real product stories toward the remaining LOC gates (P164 onward).
 4. Keep the local demo and Sites hosting handoff validated as the public surfaces are migrated.
 
 ## Known issues
 
 - The repository is still a single vinext app; the target workspace packages do not exist yet.
 - The current ShopNest incident surface still contains the first-pass visual language and will be migrated incrementally.
-- The final LOC gates are intentionally not met yet: current measured handwritten LOC is 9,596 overall; `apps/api` is 4,000/4,000, while dashboard, marketing, ShopNest, core, SDK, extension, verifier, AI, and tests remain below their final thresholds.
+- The final LOC gates are intentionally not met yet: current measured handwritten LOC is 9,722 overall; `apps/api` is 4,000/4,000, while dashboard, marketing, ShopNest, core, SDK, extension, verifier, AI, and tests remain below their final thresholds.
 - The currently deployed Site reflects the prior validated incident demo, not this rebuild in progress.
 - `npm install` reports 28 transitive audit findings in the existing toolchain; no production feature dependency was added yet.
 - The core safety gate is intentionally narrower than the final release gate: signing, resolver, conflict, scanner, API, and dashboard behavior remain in later groups.

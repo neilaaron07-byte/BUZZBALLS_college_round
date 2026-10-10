@@ -9,7 +9,11 @@ export const dashboardRoutes: readonly DashboardRoute[] = [
   { id: "releases", label: "Releases", shortLabel: "Ship", description: "Policy, canary, and promotion", icon: "rocket" },
   { id: "incidents", label: "Incidents", shortLabel: "Health", description: "Signals, rollback, and recovery", icon: "pulse" },
   { id: "reviews", label: "Review inbox", shortLabel: "Reviews", description: "Owners, approvals, and checks", icon: "users" },
+  { id: "collaborators", label: "Collaborators", shortLabel: "People", description: "PR context, owners, and checks", icon: "people" },
+  { id: "evidence", label: "Evidence", shortLabel: "Proof", description: "Benchmarks, budgets, and quality gates", icon: "chart" },
+  { id: "install", label: "Install", shortLabel: "Install", description: "SDK and extension setup", icon: "download" },
   { id: "audit", label: "Audit trail", shortLabel: "Audit", description: "Immutable history and evidence", icon: "link" },
+  { id: "settings", label: "Settings", shortLabel: "Settings", description: "Site policy and notifications", icon: "settings" },
 ];
 
 export function routeForView(view: string | null): DashboardView {

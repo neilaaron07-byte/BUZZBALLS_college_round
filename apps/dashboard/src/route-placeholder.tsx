@@ -18,7 +18,11 @@ const routeCopy: Record<DashboardView, { eyebrow: string; title: string; descrip
   releases: { eyebrow: "SHIP / release control", title: "Releases", description: "Promote a signed manifest one gate at a time. The canary, policy, and health evidence stay together.", icon: Rocket, next: "incidents", nextLabel: "Open health" },
   incidents: { eyebrow: "SHIP / health", title: "Incidents", description: "See the live signal that would pause or roll back a release, with a clear undo path when the boundary is crossed.", icon: ShieldAlert, next: "audit", nextLabel: "Open audit" },
   reviews: { eyebrow: "FIX / people", title: "Review inbox", description: "Give every reviewer a small, legible decision: approve, request changes, or keep the patch out of production.", icon: Users, next: "patches", nextLabel: "Back to patches" },
+  collaborators: { eyebrow: "FIX / people", title: "Collaborators", description: "Keep PR context, ownership, checks, and release responsibility visible beside the patch.", icon: Users, next: "reviews", nextLabel: "Open review inbox" },
+  evidence: { eyebrow: "SHIP / proof", title: "Evidence", description: "A measured handoff of resolver accuracy, runtime budget, regression catches, and quality gates.", icon: ShieldCheck, next: "verification", nextLabel: "Open verification" },
+  install: { eyebrow: "Workspace / setup", title: "Install", description: "Connect a site with the SDK and extension while keeping the first safe scan close at hand.", icon: FileClock, next: "scan", nextLabel: "Start a scan" },
   audit: { eyebrow: "SHIP / proof", title: "Audit trail", description: "Follow the hash-chained evidence from scan to patch to release. Exportable history is part of the release, not an afterthought.", icon: FileClock, next: "overview", nextLabel: "Back to overview" },
+  settings: { eyebrow: "Workspace / policy", title: "Settings", description: "Tune the site's allowlist, review policy, and notifications without hiding the safe boundaries.", icon: ShieldAlert, next: "overview", nextLabel: "Back to overview" },
 };
 
 export function RoutePlaceholder({ data, view, onNavigate }: Readonly<{ data: DashboardData; view: DashboardView; onNavigate: (view: DashboardView) => void }>) {
