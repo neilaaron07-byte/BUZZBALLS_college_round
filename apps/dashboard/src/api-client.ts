@@ -14,8 +14,11 @@ export interface PrivatePreview {
 }
 
 function apiBaseUrl(): string {
-  return (typeof window !== "undefined" ? window.__PATCHWORK_API_URL : undefined) ??
-    (typeof process !== "undefined" ? process.env.NEXT_PUBLIC_API_URL : undefined) ?? "";
+  const configured = (typeof window !== "undefined" ? window.__PATCHWORK_API_URL : undefined) ??
+    (typeof process !== "undefined" ? process.env.NEXT_PUBLIC_API_URL : undefined);
+  if (configured) return configured;
+  if (typeof window !== "undefined" && ["localhost", "127.0.0.1"].includes(window.location.hostname)) return "http://127.0.0.1:8787";
+  return "";
 }
 
 function siteFromWorkspace(workspace: WorkspaceReadModel): DashboardData["site"] {

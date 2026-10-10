@@ -37,3 +37,26 @@ test("dashboard loading and failure states are explicit and recoverable", async 
   assert.match(feedback, /aria-live="polite"|role="alert"/);
   assert.match(client, /cloneFixture\(\)/);
 });
+
+test("PatchPilot is globally reachable and keeps release authority human-only", async () => {
+  const shell = await source("apps/dashboard/src/dashboard-shell.tsx");
+  const drawer = await source("apps/dashboard/src/patchpilot-drawer.tsx");
+  assert.match(shell, /PatchPilotDrawer/);
+  assert.match(drawer, /patchwork:open-patchpilot/);
+  assert.match(drawer, /key\.toLowerCase\(\) === "j"/);
+  assert.match(drawer, /actionCardFromProposal/);
+  assert.match(drawer, /never publish, rollback, or delete/);
+});
+
+test("guided fix route exposes SCAN, FIX, SHIP, live API recovery, and undo", async () => {
+  const route = await readFile(new URL("../app/fix/page.tsx", import.meta.url), "utf8");
+  const page = await readFile(new URL("../apps/dashboard/src/fix-page.tsx", import.meta.url), "utf8");
+  assert.match(route, /FixPage/);
+  assert.match(page, /SCAN/);
+  assert.match(page, /FIX/);
+  assert.match(page, /SHIP/);
+  assert.match(page, /api\/v1\/live-sites\/scan/);
+  assert.match(page, /Stage 10% canary/);
+  assert.match(page, /Undo canary/);
+  assert.match(page, /Nothing changed/);
+});

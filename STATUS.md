@@ -4,7 +4,7 @@ Updated: 2026-10-10
 
 ## Current state
 
-- Current group: Group 11B in progress — the operator workspace is live at `/dashboard`, the public marketing surface is staged at `/web`, ShopNest has a deterministic multi-route commerce fixture, and the next tranche is wiring safe live-site inspection plus PatchPilot into the local product.
+- Current group: Group 11B complete — `/dashboard`, `/web`, `/fix`, and ShopNest are runnable locally; public-page scanning, inverse-aware patch proposals, SDK runtime handshakes, human-gated ship boundaries, and PatchPilot SSE are wired into the local API.
 - Baseline surface: the existing vinext Site renders a seeded ShopNest checkout incident with a PATCHWORK inspector dock.
 - Planning: `AGENTS.md`, `BRAINSTORM.md`, and `PLAN.md` are present. The plan contains 244 dependency-aware tasks, including the design-system track.
 - Deployment: the existing private Sites project remains configured in `.openai/hosting.json`; deployment will follow the first validated product milestone.
@@ -57,8 +57,11 @@ Updated: 2026-10-10
 - Dashboard evidence tranche is validated: typed query, finding, patch, activity, workspace-metric, policy, rollout, and release engines now drive SCAN/FIX/SHIP panels; the evidence engine exposes measured records, quality budgets, verification checks, and export-safe CSV; Overview, Scan, Patches, Releases, Audit, and Evidence visibly consume the same plain-English status logic.
 - Group 13 validation is green: `npm run typecheck`, `npm run lint`, `npm run build`, `npm test`, focused dashboard engine tests, and the full 28-route dark/light desktop/tablet/mobile sweep passed. The sweep captured 168 pages with zero console errors; representative Overview, Releases, and Evidence captures were reviewed across desktop, tablet, and mobile.
 - Launch brief validation is green: the marketing surface is split into typed evidence, chrome, hero, interaction, and section modules; `npm run typecheck`, `npm run lint`, `npm run build`, `npm test` (108 tests), `node --test tests/marketing.contract.test.mjs`, and the full 168-page dark/light desktop/tablet/mobile screenshot sweep pass. The measured total is 13,527 handwritten lines, with `apps/web` at 460 lines; the final marketing size gate remains open rather than being padded.
-- Live-site scan tranche is green: typed target policy, SSRF-safe URL/DNS validation, bounded redirects and body reads, inert JSDOM extraction, detector-backed findings, asynchronous job state, versioned `/api/v1/live-sites/scan`, and replayable SSE progress are implemented. The focused live-site suite and full repository suite pass at 113 tests.
+- Live-site scan tranche is green: typed target policy, SSRF-safe URL/DNS validation, bounded redirects and body reads, inert JSDOM extraction, detector-backed findings, asynchronous job state, versioned `/api/v1/live-sites/scan`, and replayable SSE progress are implemented. The focused live-site suite and full repository suite pass at 116 tests.
 - PatchPilot safety tranche is green: the AI package now exposes all 15 requested read/propose tools, redacts secrets and hostile page instructions before provider context, creates inverse-aware review-only action cards, and keeps publish/rollback/delete outside the tool catalog. The focused AI suite and full repository suite pass at 114 tests.
+- Group 11B runtime tranche is green: typed live patch proposals persist through the core allowlist, inverses are checked against the same target, SDK installation status and manifest handshakes are explicit, ship actions require a connected runtime plus `humanApproval: confirmed`, idempotency is preserved, and the `/api/v1/ai/stream` route emits deterministic offline SSE tokens. The runtime boundary suite passes and the full repository suite is green at 116 tests.
+- PatchPilot dashboard tranche is green: the global Ctrl/Cmd+J drawer provides contextual explain/fix/ship-risk actions, emits review-only action cards, redacts hostile evidence, and routes to the existing review workspace. `/fix` provides a one-screen SCAN → FIX → SHIP flow with a real timer, verification state, canary staging, undo, public-URL recovery, and explicit SDK/runtime copy. Browser smoke confirmed the scan, verify, canary, undo, drawer, and zero-console-error paths.
+- Local demo orchestration is green: `npm run demo` supervises the API on port 8787 and the unified vinext surface on port 3000, with the verifier embedded in the API package and ShopNest/dashboard/marketing routes available through the same deterministic server. `npm run demo:reset` resets the API seed state when online and falls back to the browser fixture marker when offline. The final smoke returned 200 for `/dashboard`, `/fix`, and `/web`, plus `healthz` green.
 - P163a is complete: the Scan screen now consumes a six-detector scan-session engine with measured finding triage, repeat-run comparisons, explicit clear/finding/blocked states, and export-safe detector CSV. Seven focused scan-session tests cover repeat runs, resolved/new findings, filtering, dangerous targets, and CSV evidence.
 - P163b is complete: Patches now consumes a typed draft contract with allowlisted operations, inverse rollback values, preview/review/conflict states, audit timeline events, safety checks, and an unsafe-value guard. Seven focused patch-workflow tests cover blocked, review, approved, changes-requested, archived, and export states.
 - P163c is complete: Verification now consumes a typed replay model with interaction, visual, accessibility, console, and network checks; deterministic run IDs; warning/failure states; viewport matrix summaries; run comparison; selected-check narratives; and CSV proof export. Seven focused verification tests cover pass, warning, failure, replay recovery, regression, gate counts, and export evidence.
@@ -68,15 +71,15 @@ Updated: 2026-10-10
 
 ## Next
 
-1. Add typed patch proposals that reuse core allowlists and inverses, then expose SDK handshake, installation status, and explicit release boundaries (P175s–P175u).
-2. Expand PatchPilot from the typed safety layer into streamed recovery, dashboard context, and contextual action cards (P175w–P175x).
-3. Add the guided `/fix` SCAN → FIX → SHIP flow and its live/AI/security tests, while continuing the dashboard, web, ShopNest, and tests LOC tranches (P175y–P203).
+1. Close the remaining measured LOC gates with real package features and tests; current `npm run loc` evidence remains intentionally below the final thresholds.
+2. Add the deterministic `npm run demo` supervisor and `npm run demo:reset` orchestration for API, dashboard, marketing, ShopNest, and verifier.
+3. Finish Playwright full-flow, Lighthouse, judge-report, documentation, clean-room, and private Sites deployment tasks.
 
 ## Known issues
 
 - The repository is still a single vinext app; the target workspace packages do not exist yet.
 - The current ShopNest incident surface still contains the first-pass visual language and will be migrated incrementally.
-- The final LOC gates are intentionally not met yet: current measured handwritten LOC is 13,527 overall; `apps/api` is 4,000/4,000, while dashboard (2,574/9,000), marketing (460/2,500), ShopNest (1,178/2,500), tests (2,172/4,000), core, SDK, extension, verifier, and AI remain below their final thresholds.
+- The final LOC gates are intentionally not met yet: current measured handwritten LOC is 14,519 overall; `apps/api` is 4,434/4,000, while dashboard (2,769/9,000), marketing (460/2,500), ShopNest (1,178/2,500), tests (2,369/4,000), core, SDK, extension, verifier, and AI remain below their final thresholds.
 - The currently deployed Site reflects the prior validated incident demo, not this rebuild in progress.
 - `npm install` reports 28 transitive audit findings in the existing toolchain; no production feature dependency was added yet.
 - The core safety gate is intentionally narrower than the final release gate: signing, resolver, conflict, scanner, API, and dashboard behavior remain in later groups.
@@ -89,3 +92,4 @@ Updated: 2026-10-10
 - Browser QA found and fixed a persisted-theme hydration mismatch; a fresh `/design` session now reports no console errors after theme restoration.
 - The screenshot sweep requires the host environment to allow Playwright Chromium; the sandboxed invocation is blocked by macOS Mach-port permissions, while the approved run passes the 168-page sweep.
 - Live-site scanning is intentionally an inert HTML stage; it does not execute third-party scripts or claim browser layout/runtime proof until the verifier and connected SDK stages run.
+- Live-site mutation is intentionally not an arbitrary server-side HTML rewrite: a target origin must install the PATCHWORK SDK, complete a manifest handshake, pass verification/policy, and receive a human-confirmed ship action. The local `/fix` sample uses a deterministic ShopNest fixture when no API base is configured.

@@ -1,6 +1,6 @@
 "use client";
 
-import { Activity, BarChart3, CircleHelp, Download, FileClock, GitMerge, Grid2X2, Layers3, Menu, Moon, Rocket, ScanSearch, Settings2, ShieldAlert, ShieldCheck, Sun, UserRound, Users, X } from "lucide-react";
+import { Activity, BarChart3, Bot, CircleHelp, Download, FileClock, GitMerge, Grid2X2, Layers3, Menu, Moon, Rocket, ScanSearch, Settings2, ShieldAlert, ShieldCheck, Sun, UserRound, Users, X } from "lucide-react";
 import { useState } from "react";
 import { CommandPalette } from "./ui/command";
 import { GridBackdrop } from "./ui/backgrounds";
@@ -11,6 +11,7 @@ import { ToastRegion, toast, Tooltip } from "./ui/overlays";
 import { useTheme } from "./ui/theme-provider";
 import type { DashboardData, DashboardView } from "./dashboard-types";
 import { dashboardRoutes, routeLabel } from "./routes";
+import { PatchPilotDrawer } from "./patchpilot-drawer";
 
 const iconMap = { grid: Grid2X2, scan: ScanSearch, patch: Layers3, merge: GitMerge, verify: ShieldCheck, rocket: Rocket, pulse: Activity, users: Users, people: UserRound, chart: BarChart3, download: Download, link: FileClock, settings: Settings2 } as const;
 
@@ -31,10 +32,11 @@ export function DashboardShell({ data, view, onNavigate, children }: Readonly<{ 
     </aside>
     {mobileNavOpen ? <button type="button" className="pw-dashboard-scrim" aria-label="Close navigation" onClick={() => setMobileNavOpen(false)} /> : null}
     <section className="pw-dashboard-main">
-      <header className="pw-dashboard-topbar"><IconButton className="pw-dashboard-mobile-menu" label="Open navigation" size="sm" onClick={() => setMobileNavOpen(true)}><Menu size={17} aria-hidden="true" /></IconButton><div className="pw-dashboard-breadcrumb"><span>ShopNest</span><span aria-hidden="true">/</span><strong>{routeLabel(view)}</strong></div><div className="pw-dashboard-topbar-actions"><CommandPalette items={commandItems} /><Tooltip label={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} theme`}><IconButton label="Toggle theme" size="sm" onClick={toggleTheme}>{resolvedTheme === "dark" ? <Sun size={15} aria-hidden="true" /> : <Moon size={15} aria-hidden="true" />}</IconButton></Tooltip><Button size="sm" variant="secondary" leadingIcon={<Rocket size={14} aria-hidden="true" />} onClick={() => navigate("releases")}>Ship</Button></div></header>
+      <header className="pw-dashboard-topbar"><IconButton className="pw-dashboard-mobile-menu" label="Open navigation" size="sm" onClick={() => setMobileNavOpen(true)}><Menu size={17} aria-hidden="true" /></IconButton><div className="pw-dashboard-breadcrumb"><span>ShopNest</span><span aria-hidden="true">/</span><strong>{routeLabel(view)}</strong></div><div className="pw-dashboard-topbar-actions"><CommandPalette items={commandItems} /><Button className="pw-pilot-topbar-trigger" size="sm" variant="secondary" leadingIcon={<Bot size={14} aria-hidden="true" />} onClick={() => window.dispatchEvent(new Event("patchwork:open-patchpilot"))}>Ask PatchPilot</Button><Tooltip label={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} theme`}><IconButton label="Toggle theme" size="sm" onClick={toggleTheme}>{resolvedTheme === "dark" ? <Sun size={15} aria-hidden="true" /> : <Moon size={15} aria-hidden="true" />}</IconButton></Tooltip><Button size="sm" variant="secondary" leadingIcon={<Rocket size={14} aria-hidden="true" />} onClick={() => navigate("releases")}>Ship</Button></div></header>
       {isSeed ? <div className="pw-dashboard-source-banner"><ShieldAlert size={14} aria-hidden="true" /><span><strong>Demo workspace</strong> showing deterministic ShopNest evidence while the API connection is offline.</span><button type="button" onClick={() => toast.message("API connection is checked when this workspace refreshes")}>Why?</button></div> : null}
       <main className="pw-dashboard-content" aria-labelledby="dashboard-page-title">{children}</main>
     </section>
+    <PatchPilotDrawer data={data} view={view} onNavigate={navigate} />
     <ToastRegion />
   </div></GridBackdrop>;
 }

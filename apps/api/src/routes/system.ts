@@ -1,9 +1,12 @@
 import { Router } from "express";
 import { verifyChain } from "../../../../packages/core/src/index";
+import { asyncRoute } from "../route-helpers";
 import { send } from "../middleware";
 import type { ApiContext } from "../types";
 import { readState } from "../services";
 import { openApiDocument } from "../openapi";
+import { resetAllowed, resetDemo } from "../demo-reset";
+import { ApiError } from "../errors";
 
 export function systemRoutes(context: ApiContext): Router {
   const router = Router();
@@ -21,5 +24,9 @@ export function systemRoutes(context: ApiContext): Router {
     const state = await readState(context);
     send(request, response, { entries: state.auditEntries, chain: await verifyChain(state.auditEntries) });
   });
+  router.post("/demo/reset", asyncRoute(async (request, response) => {
+    if (!resetAllowed(process.env.NODE_ENV ?? "development")) throw new ApiError(403, "RESET_DISABLED", "Seed reset is disabled in production.");
+    send(request, response, await resetDemo(context));
+  }));
   return router;
 }

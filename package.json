@@ -20,7 +20,7 @@
     "assets:generate": "node tools/assets/generate.mjs",
     "assets:validate": "node tools/assets/validate.mjs",
     "screenshots": "node tools/screenshots.mjs",
-    "demo": "npm run dev",
+    "demo": "node tools/demo-supervisor.mjs",
     "demo:reset": "node tools/demo-reset.mjs",
     "loc": "node tools/loc.mjs",
     "judge": "node tools/judge.mjs",

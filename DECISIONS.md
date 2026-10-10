@@ -458,3 +458,44 @@ Reason: remote HTML is untrusted input and a server-side scanner must not become
 an SSRF proxy or execute arbitrary page code. Keeping the inert snapshot small
 and explicit makes the first live workflow safe while preserving a clear path to
 SDK-mediated runtime verification.
+
+## D-043 — Keep live mutation behind a connected SDK runtime
+
+Decision: live patch proposals are persisted as ordinary PATCHWORK drafts with
+an explicit inverse operation for every target, but the API never rewrites a
+third-party origin directly. A target must report a connected SDK, origin, SDK
+version, and signed manifest hash before a publish, pause, promote, rollback, or
+kill-switch action can cross the runtime boundary. Every ship action requires a
+human confirmation literal and supports idempotency replay.
+
+Reason: a live-site fixing product needs a real application path without
+pretending that an HTTP fetch can safely own another site's runtime. The
+handshake makes installation and ownership visible, while the existing release
+state machine keeps verification, audit, and rollback semantics in one place.
+
+## D-044 — Make PatchPilot useful offline while keeping release authority human
+
+Decision: the API exposes a deterministic SSE stream backed by the offline
+PatchPilot provider. It accepts typed page context, emits an announced answer,
+and surfaces only read or propose capabilities; action cards navigate to review
+or editing and never publish, rollback, or delete. The dashboard drawer and
+`/fix` flow use the same safety copy and runtime boundary.
+
+Reason: the demo must remain reliable without remote credentials while still
+showing the product's assistant loop. Keeping the response stream deterministic
+makes tests and local handoff stable, and the strict action boundary prevents
+AI convenience from becoming release authority.
+
+## D-045 — Run one local surface with an embedded verifier boundary
+
+Decision: `npm run demo` supervises the Express API on port 8787 and the
+vinext surface on port 3000. Dashboard, marketing, and ShopNest remain routes of
+that unified frontend, while the verifier is loaded as a typed API/package
+boundary rather than a second HTTP process. The supervisor reuses a healthy
+existing frontend, clears only a stale generated vinext lock, and starts the API
+when needed.
+
+Reason: the repository's verifier is a library that produces browser evidence,
+not an independent daemon. A second fake service would add port fragility
+without adding capability. Keeping the real verifier embedded preserves the
+single local URL while the API remains independently health-checkable.

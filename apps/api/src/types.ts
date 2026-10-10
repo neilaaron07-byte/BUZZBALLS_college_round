@@ -62,6 +62,16 @@ export interface RolloutState {
   updatedAt: string;
 }
 
+export interface RuntimeConnection {
+  siteId: string;
+  origin: string;
+  sdkVersion: string;
+  manifestHash: string;
+  status: "connected" | "stale";
+  connectedAt: string;
+  lastSeenAt: string;
+}
+
 export interface GithubPullRequest {
   id: string;
   number: number;
@@ -113,6 +123,7 @@ export interface ApiContext {
   startedAt: number;
   requestCache: Map<string, { status: number; body: unknown; expiresAt: number }>;
   liveScanJobs: Map<string, import("./live-site").LiveScanJob>;
+  runtimeConnections: Map<string, RuntimeConnection>;
   idempotencyTtlMs: number;
   volatileMetrics: { requests: number; errors: number; idempotentReplays: number; bytesRejected: number };
 }

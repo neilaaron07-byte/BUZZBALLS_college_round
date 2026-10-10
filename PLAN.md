@@ -345,15 +345,15 @@ workspace where every mandatory feature is reachable and explained.
 - [x] P175p Add a typed live-site target schema with origin, ownership, SDK status, and scan policy. (depends: P175o, D040)
 - [x] P175q Add SSRF-safe URL validation, redirect limits, private-network blocking, and fetch timeouts. (depends: P175p)
 - [x] P175r Add live page snapshot extraction with detector evidence and scan-progress events. (depends: P175q)
-- [ ] P175s Add typed patch proposal endpoints that reuse core allowlists and return inverse operations. (depends: P175r)
-- [ ] P175t Add SDK handshake, installation status, and connected-origin health endpoints. (depends: P175s)
-- [ ] P175u Add explicit publish, pause, kill-switch, and rollback boundaries with idempotency keys. (depends: P175t)
+- [x] P175s Add typed patch proposal endpoints that reuse core allowlists and return inverse operations. (depends: P175r)
+- [x] P175t Add SDK handshake, installation status, and connected-origin health endpoints. (depends: P175s)
+- [x] P175u Add explicit publish, pause, kill-switch, and rollback boundaries with idempotency keys. (depends: P175t)
 - [x] P175v Add PatchPilot context, tool routing, action-card contracts, and prompt-injection redaction. (depends: P175u, D041)
-- [ ] P175w Add PatchPilot SSE streaming with offline fallback and typed error recovery. (depends: P175v)
-- [ ] P175x Add global Ask PatchPilot drawer and contextual Explain and fix actions to the dashboard. (depends: P175w)
-- [ ] P175y Add `/fix` guided SCAN → FIX → SHIP route with timer, projected score, verification filmstrip, and undo. (depends: P175x)
-- [ ] P175z Add live-site, PatchPilot, and guided-flow tests including malicious page text. (depends: P175y)
-- [ ] P175aa Run backend/AI/frontend typecheck, lint, build, focused tests, and live-route smoke checks. (depends: P175z)
+- [x] P175w Add PatchPilot SSE streaming with offline fallback and typed error recovery. (depends: P175v)
+- [x] P175x Add global Ask PatchPilot drawer and contextual Explain and fix actions to the dashboard. (depends: P175w)
+- [x] P175y Add `/fix` guided SCAN → FIX → SHIP route with timer, projected score, verification filmstrip, and undo. (depends: P175x)
+- [x] P175z Add live-site, PatchPilot, and guided-flow tests including malicious page text. (depends: P175y)
+- [x] P175aa Run backend/AI/frontend typecheck, lint, build, focused tests, and live-route smoke checks. (depends: P175z)
 
 **Runnable after Group 11:** A non-technical visitor understands the promise,
 sees the repair, and can enter the dashboard without documentation.
@@ -379,8 +379,8 @@ states for the full demo without hardcoded fixes.
 
 ## Group 13 — orchestration, tests, evidence, and launch
 
-- [ ] P189 Create `npm run demo` supervisor that boots API, dashboard, web, ShopNest, and verifier with deterministic ports. (depends: P175, P188)
-- [ ] P190 Create `npm run demo:reset` that restores seed state in under five seconds. (depends: P189)
+- [x] P189 Create `npm run demo` supervisor that boots the API and unified dashboard, marketing, ShopNest, and embedded verifier surfaces with deterministic ports. (depends: P175, P188)
+- [x] P190 Create `npm run demo:reset` that restores API seed state in under five seconds, with a browser-fixture fallback when the API is offline. (depends: P189)
 - [ ] P191 Add full-flow Playwright test for scan, visual patch, preview, review, conflict resolution, and verification. (depends: P189)
 - [ ] P192 Add full-flow Playwright test for canary, promotion, visitor SDK behavior, and rollback. (depends: P191)
 - [ ] P193 Add full-flow Playwright test for v3 relocation, ambiguous skip, health degradation, and audit replay. (depends: P192)

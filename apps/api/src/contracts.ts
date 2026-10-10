@@ -112,6 +112,24 @@ export const liveScanRequestSchema = liveSiteTargetSchema.extend({
   viewport: z.object({ width: z.number().int().min(320).max(2_880), height: z.number().int().min(480).max(2_880) }).strict().default({ width: 1_440, height: 900 }),
 }).strict();
 
+export const livePatchProposalRequestSchema = patchCreateRequestSchema.merge(z.object({
+  inverseOperations: z.array(patchOperationSchema).min(1).max(100),
+  source: z.enum(["live_scan", "patchpilot"]).default("live_scan"),
+}).strict());
+
+export const runtimeHandshakeRequestSchema = z.object({
+  origin: z.string().url().max(2_048),
+  sdkVersion: z.string().min(1).max(80),
+  manifestHash: z.string().regex(/^sha256-[a-f0-9]{64}$/),
+}).strict();
+
+export const runtimeReleaseActionSchema = z.object({
+  releaseId: identifierSchema,
+  action: z.enum(["publish", "pause", "promote", "rollback", "kill_switch"]),
+  reason: z.string().min(1).max(500),
+  humanApproval: z.literal("confirmed"),
+}).strict();
+
 export function parseLimit(value: unknown, fallback = 25): number {
   const parsed = z.coerce.number().int().min(1).max(100).safeParse(value);
   return parsed.success ? parsed.data : fallback;
@@ -127,3 +145,4 @@ export type ReviewRequest = z.infer<typeof reviewRequestSchema>;
 export type ReleasePolicy = z.infer<typeof releasePolicySchema>;
 export type LiveSiteTarget = z.infer<typeof liveSiteTargetSchema>;
 export type LiveScanRequest = z.infer<typeof liveScanRequestSchema>;
+export type LivePatchProposalRequest = z.infer<typeof livePatchProposalRequestSchema>;

@@ -36,6 +36,10 @@ export default function DashboardPage() {
   }, []);
 
   useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("pilot") === "1") window.requestAnimationFrame(() => window.dispatchEvent(new Event("patchwork:open-patchpilot")));
+  }, [data]);
+
+  useEffect(() => {
     const controller = new AbortController();
     void loadDashboardData(controller.signal).then(setData).catch((reason: unknown) => { if (reason instanceof DOMException && reason.name === "AbortError") return; setError("The workspace could not be loaded."); });
     return () => controller.abort();
