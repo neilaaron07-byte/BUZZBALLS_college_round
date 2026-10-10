@@ -60,18 +60,20 @@ Updated: 2026-10-10
 - P163b is complete: Patches now consumes a typed draft contract with allowlisted operations, inverse rollback values, preview/review/conflict states, audit timeline events, safety checks, and an unsafe-value guard. Seven focused patch-workflow tests cover blocked, review, approved, changes-requested, archived, and export states.
 - P163c is complete: Verification now consumes a typed replay model with interaction, visual, accessibility, console, and network checks; deterministic run IDs; warning/failure states; viewport matrix summaries; run comparison; selected-check narratives; and CSV proof export. Seven focused verification tests cover pass, warning, failure, replay recovery, regression, gate counts, and export evidence.
 - P163d is complete: Releases now consume typed health signals, policy gates, canary readiness, conservative transitions, rollback/restore decisions, and a measured health boundary; Audit now derives its hash-linked records, tamper state, narrative, and CSV from the same domain layer. Seven focused SHIP tests cover healthy/degraded/critical signals, blocked gates, pause/promote/rollback/kill-switch transitions, and audit export.
+- P163e is complete: Overview now includes a typed SCAN → FIX → SHIP decision graph, local/API recovery state, recent audit handoff, and reusable empty/error/progress/gate panels with actionable navigation. Two focused route-contract tests keep the panel exports and Overview placement reachable.
+- P163f is complete: five route-contract checks now keep SCAN export evidence, FIX safety validation, verification replay proof, SHIP health/audit models, and Overview recovery placement wired to visible routes. The full repository suite is green at 108 tests; `npm run typecheck`, `npm run lint`, `npm run build`, and `npm run loc` also pass.
 
 ## Next
 
-1. Complete P163e–P163f dashboard depth engines and tests before running the dashboard LOC gate; it is currently 2,499/9,000 handwritten lines (P163).
-2. Continue ShopNest depth and run its LOC gate honestly; it is currently 1,178/2,500 handwritten lines (P188).
-3. Run the marketing LOC gate honestly; it is currently 57/2,500 handwritten lines (P175), then add the demo supervisor and final public-surface browser/Lighthouse gates (P189–P203).
+1. Continue the dashboard LOC tranche with the Web Studio, command-center, and collaboration surfaces before running the gate; it is currently 2,574/9,000 handwritten lines (P163).
+2. Expand the marketing surface into the attached three-surface launch brief, then run its LOC gate honestly; it is currently 57/2,500 handwritten lines (P175).
+3. Continue ShopNest depth and the extension UI, then add the demo supervisor and final public-surface browser/Lighthouse gates (P188–P203).
 
 ## Known issues
 
 - The repository is still a single vinext app; the target workspace packages do not exist yet.
 - The current ShopNest incident surface still contains the first-pass visual language and will be migrated incrementally.
-- The final LOC gates are intentionally not met yet: current measured handwritten LOC is 12,979 overall; `apps/api` is 4,000/4,000, while dashboard (2,499/9,000), marketing (57/2,500), ShopNest (1,178/2,500), tests (2,102/4,000), core, SDK, extension, verifier, and AI remain below their final thresholds.
+- The final LOC gates are intentionally not met yet: current measured handwritten LOC is 13,113 overall; `apps/api` is 4,000/4,000, while dashboard (2,574/9,000), marketing (57/2,500), ShopNest (1,178/2,500), tests (2,161/4,000), core, SDK, extension, verifier, and AI remain below their final thresholds.
 - The currently deployed Site reflects the prior validated incident demo, not this rebuild in progress.
 - `npm install` reports 28 transitive audit findings in the existing toolchain; no production feature dependency was added yet.
 - The core safety gate is intentionally narrower than the final release gate: signing, resolver, conflict, scanner, API, and dashboard behavior remain in later groups.

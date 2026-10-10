@@ -300,8 +300,8 @@ rollback, and report its audit chain without external services.
 - [x] P163b Add patch-draft, inverse-operation, review-decision, and conflict-resolution engines for safe FIX handoffs. (depends: P163a)
 - [x] P163c Add verification-run, browser-check, and evidence-matrix engines for replayable proof. (depends: P163b)
 - [x] P163d Add release-health, rollback, and audit-summary engines for explainable SHIP decisions. (depends: P163c)
-- [ ] P163e Add dashboard recovery, activity, and workflow panels that consume the depth engines on visible routes. (depends: P163d)
-- [ ] P163f Add focused tests for the depth engines, edge states, and route contracts. (depends: P163e)
+- [x] P163e Add dashboard recovery, activity, and workflow panels that consume the depth engines on visible routes. (depends: P163d)
+- [x] P163f Add focused tests for the depth engines, edge states, and route contracts. (depends: P163e)
 - [ ] P163 Run dashboard gate and measure `apps/dashboard` LOC against 9,000 lines. (depends: P163f)
 
 **Runnable after Group 10:** The dashboard is a commercial-grade SCAN/FIX/SHIP

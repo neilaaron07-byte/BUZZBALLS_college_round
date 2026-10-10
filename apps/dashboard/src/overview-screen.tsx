@@ -11,6 +11,7 @@ import { toast } from "./ui/overlays";
 import type { DashboardData, DashboardStage, DashboardView } from "./dashboard-types";
 import { formatAge, releaseNarrative, stageProgress, viewFromHref, workspaceMetrics, readinessLabel } from "./dashboard-engine";
 import { EvidenceSnapshot, FindingSeverityMap, PolicyChecklist, StageLegend, WorkspaceMetricStrip, WorkspaceSeam } from "./workspace-panels";
+import { DashboardWorkflowPanels } from "./dashboard-workflow-panels";
 
 export function OverviewScreen({ data, onNavigate }: Readonly<{ data: DashboardData; onNavigate: (view: DashboardView) => void }>) {
   const { workspace } = data;
@@ -26,6 +27,7 @@ export function OverviewScreen({ data, onNavigate }: Readonly<{ data: DashboardD
     <section className="pw-stage-section" aria-labelledby="stage-title"><div className="pw-section-heading"><div><span className="pw-dashboard-kicker">THE THREE VERBS</span><h2 id="stage-title">Every change has a visible seam.</h2></div><StageLegend /></div><div className="pw-stage-grid">{stageList.map((stage, index) => <StageCard key={stage.stage} stage={stage} index={index} onOpen={() => onNavigate(viewFromHref(stage.href))} />)}</div></section>
     <div className="pw-dashboard-grid pw-dashboard-grid-bottom"><Card eyebrow="Recent activity" title="What changed" action={<Button size="sm" variant="quiet" trailingIcon={<ArrowRight size={13} aria-hidden="true" />} onClick={() => onNavigate("audit")}>Open audit</Button>}><ActivityList data={data} /></Card><Card eyebrow="People in the loop" title="Review ownership" action={<Badge tone="green">Evidence attached</Badge>}><div className="pw-review-card"><AvatarStack people={[{ name: data.site.owner }, { name: "Lena Ortiz" }, { name: "Owen Brooks" }]} /><strong>{data.site.owner} owns the next decision.</strong><p>PATCHWORK keeps reviewer context beside the patch so a safe change never depends on a private message.</p><Button size="sm" variant="secondary" leadingIcon={<GitBranch size={14} aria-hidden="true" />} onClick={() => onNavigate("reviews")}>Open review inbox</Button></div></Card></div>
     <section className="pw-overview-evidence-grid"><FindingSeverityMap data={data} onNavigate={onNavigate} /><EvidenceSnapshot data={data} onNavigate={onNavigate} /><PolicyChecklist data={data} onNavigate={onNavigate} /></section>
+    <DashboardWorkflowPanels data={data} onNavigate={onNavigate} />
     <WorkspaceSeam label="SCANNED 8:00 AM UTC · SHOPNEST / PRODUCTION" />
   </div>;
 }

@@ -394,3 +394,15 @@ Reason: independent release, incident, and audit copy can make the operator see
 contradictory truth. One domain boundary keeps promotion, kill-switch, rollback,
 and tamper states explainable and testable while preserving the deterministic
 offline demo.
+
+## D-038 — Make recovery part of the operator workflow
+
+Decision: the Overview decision graph always includes a recoverable connection
+state, recent audit handoff, and explicit empty/error/progress panel contracts.
+When the API is offline, the deterministic local workspace remains visible but
+is labeled as non-publishing evidence; retry and connection-guide actions stay
+reachable without changing release state.
+
+Reason: an operator needs to understand whether a status is measured, local, or
+unavailable before taking action. Making recovery visible prevents a polished
+dashboard from hiding the very failure states PATCHWORK is meant to control.
