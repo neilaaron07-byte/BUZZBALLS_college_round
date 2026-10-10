@@ -1,0 +1,313 @@
+# PATCHWORK Rebuild Plan
+
+This is the executable task graph for the commercial-grade rebuild. Tasks are
+ordered; each task is intentionally small enough for one sitting. `depends`
+lists task IDs that must be complete first. A group is considered complete only
+when its group gate passes and the application is still runnable and demoable.
+
+The rebuild is organized as a real monorepo while preserving the current Sites
+starter's Cloudflare-compatible build shape. Every group ends with typecheck,
+tests, build, lint, and a deterministic demo smoke check. Each completed task
+gets ticked here, committed with a conventional commit, and reflected in
+`STATUS.md`.
+
+## Group 0 — governance and working memory
+
+- [x] P001 Create `AGENTS.md` with the operating contract, banned list, size gates, and definition of done. (depends: none)
+- [x] P002 Create `BRAINSTORM.md` with personas, problems, competitor lessons, delights, IA, and seam motif. (depends: P001)
+- [x] P003 Create this `PLAN.md` with at least 120 dependency-aware checkbox tasks. (depends: P001, P002)
+- [ ] P004 Create `STATUS.md` with baseline, current group, next group, and known issues. (depends: P003)
+- [ ] P005 Create `DECISIONS.md` with initial architecture, offline-demo, and precision-over-recall decisions. (depends: P003)
+- [ ] P006 Add `CONTRIBUTING.md` with local setup, quality gates, commit style, and demo expectations. (depends: P003)
+- [ ] P007 Add `THREAT_MODEL.md` covering patch injection, manifest replay, collaborator compromise, SDK DoS, SSRF, and CSS exfiltration. (depends: P003)
+- [ ] P008 Add `ARCHITECTURE.md` with draft, review, verify, release, rollback, and telemetry flows. (depends: P003)
+- [ ] P009 Add `DEMO.md` with a timed three-minute script, 60-second script, and ten judge answers. (depends: P003)
+- [ ] P010 Add the final feature-to-proof matrix and known-limitations template to `README.md`. (depends: P003)
+
+**Runnable after Group 0:** Existing dashboard still runs; documentation lint and
+file-existence checks pass.
+
+## Group 1 — workspace and contracts
+
+- [ ] P011 Convert the root package into npm workspaces for `packages/*` and `apps/*`. (depends: P004, P005)
+- [ ] P012 Create strict shared TypeScript configuration for packages and apps. (depends: P011)
+- [ ] P013 Create workspace-level scripts for `typecheck`, `test`, `build`, `lint`, `demo`, `demo:reset`, `loc`, and `judge`. (depends: P011)
+- [ ] P014 Create package naming and export conventions for core, sdk, extension, verifier, ai, api, dashboard, web, and shopnest. (depends: P012)
+- [ ] P015 Create shared environment variable validation and `.env.example` without secrets. (depends: P012)
+- [ ] P016 Add deterministic clock, random seed, and fixture helpers shared by tests. (depends: P012)
+- [ ] P017 Add structured logger contract with request ID, actor, site ID, and severity. (depends: P012)
+- [ ] P018 Add common result, error, status, pagination, and cursor types. (depends: P012)
+- [ ] P019 Add accessibility and focus testing helpers for React surfaces. (depends: P012)
+- [ ] P020 Add test fixture naming, snapshot policy, and console-error failure policy. (depends: P013)
+- [ ] P021 Add Node LOC counter that excludes generated files, assets, SVG, lockfiles, and `node_modules`. (depends: P013)
+- [ ] P022 Run the workspace gate: typecheck, unit smoke test, build, lint, and `npm run loc` report. (depends: P014, P015, P016, P017, P018, P019, P020, P021)
+
+**Runnable after Group 1:** Workspace boots the existing surface and prints
+deterministic size metrics through `npm run loc`.
+
+## Group 2 — `packages/core` schemas and safety
+
+- [ ] P023 Create the core package entrypoint and public exports. (depends: P022)
+- [ ] P024 Define site, environment, release, manifest, and kill-switch schemas with Zod. (depends: P023)
+- [ ] P025 Define patch identity, author, revision, lifecycle status, and content hash schemas. (depends: P023)
+- [ ] P026 Define allowed operations: style, text, attribute, hide, reorder, and badge. (depends: P025)
+- [ ] P027 Define allowlisted CSS properties and reject `url()`, external fetches, and unsafe values. (depends: P026)
+- [ ] P028 Define allowlisted attributes and same-origin URL validation. (depends: P026)
+- [ ] P029 Define review, conflict, verification, health event, and audit entry schemas. (depends: P025)
+- [ ] P030 Add patch normalization and canonical JSON serialization. (depends: P025)
+- [ ] P031 Add payload safety errors with plain-English remediation messages. (depends: P027, P028)
+- [ ] P032 Add 40 malicious operation fixtures covering script, iframe, event handler, JavaScript URL, external URL, CSS exfiltration, and oversized payloads. (depends: P031)
+- [ ] P033 Test every core schema boundary with valid, invalid, and backwards-compatible fixtures. (depends: P024, P029, P032)
+- [ ] P034 Run the core safety gate and confirm no `any` types in `packages/core`. (depends: P033)
+
+**Runnable after Group 2:** A standalone core package validates safe patches and
+rejects the seeded malicious payload suite.
+
+## Group 3 — `packages/core` fingerprinting and resolver
+
+- [ ] P035 Define semantic fingerprint types for tag, attributes, text, path, siblings, landmarks, region, and visual role. (depends: P034)
+- [ ] P036 Normalize text, tokens, whitespace, numbers, and casing for stable comparison. (depends: P035)
+- [ ] P037 Detect hashed or noisy class tokens without discarding meaningful classes. (depends: P035)
+- [ ] P038 Capture stable attributes including id, test ID, name, role, aria label, and href pattern. (depends: P035)
+- [ ] P039 Capture normalized n-gram signatures and structural DOM path. (depends: P036)
+- [ ] P040 Capture sibling signatures and nearest landmark chain. (depends: P035)
+- [ ] P041 Calculate coarse viewport region and visual role. (depends: P035)
+- [ ] P042 Implement weighted signal similarity with the specified 0.30/0.20/0.15/0.10/0.10/0.05/0.05/0.05 weights. (depends: P036, P037, P038, P039, P040, P041)
+- [ ] P043 Implement exact, moved, ambiguous, and missing resolver outcomes with confidence and runner-up. (depends: P042)
+- [ ] P044 Implement configurable confidence thresholds and margin rules. (depends: P043)
+- [ ] P045 Add human-readable resolver reasons and per-signal score breakdown. (depends: P043)
+- [ ] P046 Add mutation fixtures for wrappers, moves, renamed classes, edited text, duplicates, reorder, and removal. (depends: P043)
+- [ ] P047 Add at least 30 resolver mutation tests with wrong-element application asserted to zero. (depends: P046)
+- [ ] P048 Add a deterministic 200-scenario benchmark generator for later judge evidence. (depends: P047)
+- [ ] P049 Run the resolver gate and publish an explainable confidence fixture. (depends: P048)
+
+**Runnable after Group 3:** Core can resolve ShopNest targets through realistic
+DOM mutations and explain every decision.
+
+## Group 4 — `packages/core` conflicts, integrity, audit, scanner
+
+- [ ] P050 Implement target identity and operation property keys for three-way merge. (depends: P049)
+- [ ] P051 Detect direct property conflicts across two patch revisions. (depends: P050)
+- [ ] P052 Detect hide-versus-style and reorder-versus-reorder semantic conflicts. (depends: P050)
+- [ ] P053 Detect stale base manifest conflicts. (depends: P050)
+- [ ] P054 Detect invalid, ambiguous, and cyclic patch dependencies. (depends: P043, P050)
+- [ ] P055 Generate conflict explanations and suggested resolutions. (depends: P051, P052, P053, P054)
+- [ ] P056 Add conflict matrix tests for mergeable and non-mergeable operations. (depends: P055)
+- [ ] P057 Implement SHA-256 canonical content hashing. (depends: P030)
+- [ ] P058 Implement Ed25519 manifest signing and verification interfaces. (depends: P057)
+- [ ] P059 Add manifest version, expiry, site, and release replay protections. (depends: P058)
+- [ ] P060 Implement hash-chained audit entries and `verifyChain()`. (depends: P057)
+- [ ] P061 Add tamper fixtures, missing-link fixtures, and invalid-signature fixtures. (depends: P060)
+- [ ] P062 Implement scanner detectors for contrast, duplicate actions, stale copy, missing labels, broken links, and layout overflow. (depends: P035, P042)
+- [ ] P063 Add scan finding severity, confidence, evidence, and blast-radius schemas. (depends: P062)
+- [ ] P064 Test scanner detectors and audit tamper behavior. (depends: P056, P061, P063)
+- [ ] P065 Run the core gate and verify the `packages/core` LOC threshold is approached through real modules and tests. (depends: P064)
+
+**Runnable after Group 4:** Core supports schema safety, resolver evidence,
+conflicts, signed manifests, audit integrity, and scan findings.
+
+## Group 5 — `packages/sdk`
+
+- [ ] P066 Create SDK package entrypoint with zero runtime dependencies. (depends: P065)
+- [ ] P067 Implement `PatchworkSDK.init()` configuration and lifecycle. (depends: P066)
+- [ ] P068 Implement manifest fetch, cache, version, expiry, and kill-switch handling. (depends: P058, P059)
+- [ ] P069 Implement signature verification and safe no-op behavior on failure. (depends: P068)
+- [ ] P070 Implement patch schema validation at runtime. (depends: P024, P025)
+- [ ] P071 Implement semantic target resolution against the live DOM. (depends: P043, P070)
+- [ ] P072 Implement transactional mutation applier with inverse operations. (depends: P026, P071)
+- [ ] P073 Implement MutationObserver re-application with debounce and loop protection. (depends: P072)
+- [ ] P074 Implement telemetry batching with exponential backoff and health events. (depends: P073)
+- [ ] P075 Implement circuit breaker and automatic patch disable threshold. (depends: P074)
+- [ ] P076 Add last-verified manifest fallback when the endpoint is unavailable. (depends: P069)
+- [ ] P077 Add SDK jsdom tests for React remounts, ambiguous targets, safe skips, rollback, and circuit breaker. (depends: P071, P072, P073, P075, P076)
+- [ ] P078 Add bundle-size budget and gzip measurement. (depends: P077)
+- [ ] P079 Run SDK gate and confirm under-15KB gzipped target is measured honestly. (depends: P078)
+
+**Runnable after Group 5:** ShopNest can load a signed manifest and safely apply
+patches without importing dashboard code.
+
+## Group 6 — `packages/extension`
+
+- [ ] P080 Create Chrome Manifest V3 package, permissions, service worker, content script, and side panel. (depends: P079)
+- [ ] P081 Implement connection handshake with the active page and API. (depends: P080)
+- [ ] P082 Implement hover highlight and click-to-select inspector. (depends: P081)
+- [ ] P083 Implement DOM breadcrumb for parent and child target selection. (depends: P082)
+- [ ] P084 Render fingerprint preview with stable attributes and fragile-selector warnings. (depends: P043, P083)
+- [ ] P085 Render resolver confidence and “why this target” signal bars. (depends: P045, P084)
+- [ ] P086 Implement visual controls for color, typography, spacing, visibility, and text. (depends: P084)
+- [ ] P087 Implement safe attribute editor and same-origin link checks. (depends: P028, P086)
+- [ ] P088 Implement reorder interaction constrained to one parent. (depends: P026, P086)
+- [ ] P089 Implement local undo/redo stack and preview-only mutation state. (depends: P072, P086)
+- [ ] P090 Implement save draft, open dashboard, and preview privately actions. (depends: P089)
+- [ ] P091 Add extension empty, offline, unsafe-value, cross-origin, and disappeared-target states. (depends: P081, P090)
+- [ ] P092 Add extension unit and component tests for keyboard and pointer behavior. (depends: P083, P091)
+- [ ] P093 Run extension build and package smoke test against a local ShopNest page. (depends: P092)
+
+**Runnable after Group 6:** A developer can scan a live page in the extension,
+draft a patch, undo it locally, and hand it to the dashboard.
+
+## Group 7 — `packages/verifier`
+
+- [ ] P094 Create verifier package and browser-runner contract. (depends: P093)
+- [ ] P095 Implement published-versus-patched URL loading. (depends: P094)
+- [ ] P096 Implement desktop, tablet, and mobile viewport matrix. (depends: P095)
+- [ ] P097 Implement patch resolution check with exact/moved/ambiguous/missing outcomes. (depends: P071, P095)
+- [ ] P098 Implement add-to-cart, search, login, and checkout interaction scripts. (depends: P095)
+- [ ] P099 Implement screenshot capture and visual diff changed-region bounding boxes. (depends: P096)
+- [ ] P100 Implement accessibility baseline delta checks with axe-core integration. (depends: P096)
+- [ ] P101 Implement console and network regression checks. (depends: P095)
+- [ ] P102 Implement structured verification report and score calculation. (depends: P097, P098, P099, P100, P101)
+- [ ] P103 Seed a deliberately bad hidden-Buy-button patch and assert the verifier blocks it. (depends: P102)
+- [ ] P104 Add verifier fixtures and report snapshots. (depends: P103)
+- [ ] P105 Run verifier gate with offline stored-report replay. (depends: P104)
+
+**Runnable after Group 7:** A patch can be verified across viewports and the bad
+patch is demonstrably caught.
+
+## Group 8 — `packages/ai`
+
+- [ ] P106 Create PatchPilot package and provider interface with offline default. (depends: P105)
+- [ ] P107 Define tool schemas for scan, explain, suggest, summarize, and draft. (depends: P106)
+- [ ] P108 Implement prompt templates for findings, conflicts, release risk, and rollback explanation. (depends: P107)
+- [ ] P109 Implement deterministic offline PatchPilot engine backed by resolver and scanner evidence. (depends: P108, P062)
+- [ ] P110 Implement plain-English confidence and next-action summaries. (depends: P109)
+- [ ] P111 Implement auto-heal proposal generation for moved targets without auto-approval. (depends: P043, P109)
+- [ ] P112 Implement blast-radius narrative for pages, elements, and viewports. (depends: P063, P109)
+- [ ] P113 Implement health-score narrative combining confidence, verification, SDK errors, and age. (depends: P109)
+- [ ] P114 Add AI safety tests for hallucinated targets, unsafe operations, and unsupported claims. (depends: P110, P111, P112, P113)
+- [ ] P115 Add optional provider adapter boundary without requiring credentials in local demo. (depends: P106)
+- [ ] P116 Run PatchPilot gate with deterministic fixture outputs. (depends: P114, P115)
+
+**Runnable after Group 8:** The system can explain scan findings, conflicts,
+health, and auto-heal proposals with deterministic offline behavior.
+
+## Group 9 — `apps/api`
+
+- [ ] P117 Create Express API workspace and strict route/module layout. (depends: P116)
+- [ ] P118 Create atomic JSON store with repository interface and corruption recovery. (depends: P117)
+- [ ] P119 Create deterministic seed dataset for ShopNest, people, patches, releases, findings, and audit events. (depends: P118)
+- [ ] P120 Add request ID middleware, structured JSON logs, and consistent error envelope. (depends: P117, P017)
+- [ ] P121 Add rate limiting, idempotency keys, and payload size limits. (depends: P120)
+- [ ] P122 Add `/healthz`, `/readyz`, and metrics endpoints. (depends: P120)
+- [ ] P123 Add sites and environments routes with policy configuration. (depends: P119)
+- [ ] P124 Add scans and findings routes with scan lifecycle state. (depends: P062, P123)
+- [ ] P125 Add patches and revisions routes with schema validation and content hash. (depends: P025, P030, P123)
+- [ ] P126 Add reviews, collaborators, and approval routes. (depends: P125)
+- [ ] P127 Add conflicts route with resolution suggestions and safe merge action. (depends: P055, P126)
+- [ ] P128 Add isolated preview route with expiring draft-only manifest. (depends: P068, P125)
+- [ ] P129 Add verification run route and stored-report replay. (depends: P102, P128)
+- [ ] P130 Add release, canary, promote, pause, kill-switch, and rollback routes. (depends: P058, P129)
+- [ ] P131 Add health event ingestion and automatic rollback threshold. (depends: P075, P130)
+- [ ] P132 Add audit route, chain verification, export, and tamper-test endpoint. (depends: P060, P130)
+- [ ] P133 Add MockGitHubProvider and PR/review/check state mapping. (depends: P126, P130)
+- [ ] P134 Add optional OctokitProvider behind server-only configuration. (depends: P133)
+- [ ] P135 Add API integration tests for idempotency, rollback, conflicts, tamper, and safe errors. (depends: P118, P121, P127, P131, P132)
+- [ ] P136 Run API gate and measure `apps/api` LOC against its threshold. (depends: P135)
+
+**Runnable after Group 9:** One local API can seed, scan, patch, verify, release,
+rollback, and report its audit chain without external services.
+
+## Group 10 — `apps/dashboard`
+
+- [ ] P137 Split dashboard into route-level modules under the 1,000-line file limit. (depends: P136)
+- [ ] P138 Create shared design tokens for ink, paper, seam, status colors, type, spacing, and radii. (depends: P137)
+- [ ] P139 Create reusable Button, Badge, Card, Table, Tabs, Dialog, Toast, EmptyState, Skeleton, and ErrorState primitives. (depends: P138)
+- [ ] P140 Add responsive shell with left navigation, breadcrumbs, account menu, and mobile navigation. (depends: P139)
+- [ ] P141 Add command palette with keyboard navigation and search. (depends: P140)
+- [ ] P142 Add global status language and green/amber/red explanation component. (depends: P139)
+- [ ] P143 Add `/dashboard` summary with next best action and 60-second time-to-fix stopwatch. (depends: P140, P142)
+- [ ] P144 Add sites list and site overview with release health and policy gates. (depends: P123, P143)
+- [ ] P145 Add scan progress, findings, confidence, evidence, and blast-radius screen. (depends: P124, P144)
+- [ ] P146 Add patch list and kanban with filters, sort, saved view, and realistic data. (depends: P125, P144)
+- [ ] P147 Add patch composer with operation editor and plain-English explanation. (depends: P086, P146)
+- [ ] P148 Add target evidence panel with DOM snapshot, signal bars, runner-up, and moved-state explanation. (depends: P045, P147)
+- [ ] P149 Add isolated preview split view with expiry and share link. (depends: P128, P148)
+- [ ] P150 Add review inbox, thread, approvals, and collaborator presence. (depends: P126, P147)
+- [ ] P151 Add conflicts screen with side-by-side changes and one-sentence PatchPilot explanation. (depends: P127, P150)
+- [ ] P152 Add verification report screen with interaction checks, visual diff, accessibility delta, and console state. (depends: P129, P151)
+- [ ] P153 Add releases screen with policy checklist, signed manifest, canary slider, promote, pause, and kill switch. (depends: P130, P152)
+- [ ] P154 Add incidents screen with health event timeline, circuit breaker state, and replay scrubber. (depends: P131, P153)
+- [ ] P155 Add audit screen with filters, export, chain integrity badge, and tamper details. (depends: P132, P154)
+- [ ] P156 Add collaborators and PR screen with named people, PR titles, checks, and review state. (depends: P133, P150)
+- [ ] P157 Add evidence screen with resolver benchmark, SDK budget, regression catches, quality gates, and Lighthouse evidence. (depends: P048, P078, P103, P156)
+- [ ] P158 Add install screen with SDK snippet, extension steps, copy success, and environment checklist. (depends: P079, P093, P157)
+- [ ] P159 Add settings screen with site policy, allowlist, notifications, and safe danger zone. (depends: P123, P158)
+- [ ] P160 Add loading, empty, error, retry, success, optimistic, and toast states to every route. (depends: P143, P144, P145, P146, P147, P149, P150, P151, P152, P153, P154, P155, P156, P157, P158, P159)
+- [ ] P161 Add full keyboard, focus, reduced-motion, touch, and screen-reader coverage. (depends: P160)
+- [ ] P162 Add dashboard component tests, route tests, interaction tests, and console-error guards. (depends: P161)
+- [ ] P163 Run dashboard gate and measure `apps/dashboard` LOC against 9,000 lines. (depends: P162)
+
+**Runnable after Group 10:** The dashboard is a commercial-grade SCAN/FIX/SHIP
+workspace where every mandatory feature is reachable and explained.
+
+## Group 11 — `apps/web` marketing surface
+
+- [ ] P164 Create marketing app shell with shared brand tokens and seam motif. (depends: P163)
+- [ ] P165 Build landing hero around “Fix any website in 60 seconds”. (depends: P164)
+- [ ] P166 Build interactive SCAN/FIX/SHIP 10-second demo with real local state. (depends: P165)
+- [ ] P167 Build before/after repair slider and time-to-fix stopwatch. (depends: P166)
+- [ ] P168 Build proof metrics from measured local evidence, not invented claims. (depends: P157, P167)
+- [ ] P169 Build product tour route for scan, patch, preview, verify, release, and rollback. (depends: P168)
+- [ ] P170 Build security route with threat model summary and signed-manifest story. (depends: P169)
+- [ ] P171 Build customers route with agency, storefront, portal, and legacy-app stories. (depends: P169)
+- [ ] P172 Build docs route with first-run guide and no dead links. (depends: P170)
+- [ ] P173 Add marketing empty, error, reduced-motion, keyboard, and mobile states. (depends: P172)
+- [ ] P174 Add marketing tests, metadata, social preview, and Lighthouse budget. (depends: P173)
+- [ ] P175 Run web gate and measure `apps/web` LOC against 2,500 lines. (depends: P174)
+
+**Runnable after Group 11:** A non-technical visitor understands the promise,
+sees the repair, and can enter the dashboard without documentation.
+
+## Group 12 — `apps/shopnest`
+
+- [ ] P176 Create ShopNest design system and deterministic product fixture data. (depends: P163)
+- [ ] P177 Build home route with navigation, search, product cards, and release marker. (depends: P176)
+- [ ] P178 Build search route with filters, query state, and no-results state. (depends: P177)
+- [ ] P179 Build product route with price, reviews, shipping, and Buy action. (depends: P177)
+- [ ] P180 Build cart route with quantity changes, empty state, and checkout CTA. (depends: P179)
+- [ ] P181 Build checkout route with address, payment, review, success, retry, and failure. (depends: P180)
+- [ ] P182 Build login route with demo sign-in, error, and locked states. (depends: P177)
+- [ ] P183 Implement v1 healthy release mode. (depends: P177, P178, P179, P180, P181, P182)
+- [ ] P184 Implement v2 breaking mode with moved button, low contrast, stale copy, duplicate action, and hashed classes. (depends: P183)
+- [ ] P185 Implement v3 refactor mode with wrapper changes and ambiguous target fixture. (depends: P184)
+- [ ] P186 Integrate only the SDK runtime; do not import hardcoded PATCHWORK fixes. (depends: P079, P185)
+- [ ] P187 Add ShopNest route and release-mode tests with browser fixtures. (depends: P186)
+- [ ] P188 Run ShopNest gate and measure `apps/shopnest` LOC against 2,500 lines. (depends: P187)
+
+**Runnable after Group 12:** ShopNest provides healthy, breaking, and refactor
+states for the full demo without hardcoded fixes.
+
+## Group 13 — orchestration, tests, evidence, and launch
+
+- [ ] P189 Create `npm run demo` supervisor that boots API, dashboard, web, ShopNest, and verifier with deterministic ports. (depends: P175, P188)
+- [ ] P190 Create `npm run demo:reset` that restores seed state in under five seconds. (depends: P189)
+- [ ] P191 Add full-flow Playwright test for scan, visual patch, preview, review, conflict resolution, and verification. (depends: P189)
+- [ ] P192 Add full-flow Playwright test for canary, promotion, visitor SDK behavior, and rollback. (depends: P191)
+- [ ] P193 Add full-flow Playwright test for v3 relocation, ambiguous skip, health degradation, and audit replay. (depends: P192)
+- [ ] P194 Add Playwright console-error, network-error, keyboard, and responsive assertions. (depends: P193)
+- [ ] P195 Add resolver benchmark runner and confusion matrix report. (depends: P048, P194)
+- [ ] P196 Add SDK budget runner for gzip, manifest latency, apply time, and remount time. (depends: P078, P194)
+- [ ] P197 Add verification evidence runner for seeded bad patches and runtime duration. (depends: P103, P194)
+- [ ] P198 Add Lighthouse runner for dashboard and marketing routes. (depends: P174, P194)
+- [ ] P199 Add test count, coverage, typecheck, lint, and bundle-size evidence. (depends: P022, P163, P175, P188, P195, P196, P197, P198)
+- [ ] P200 Create `npm run judge` that builds, tests, benchmarks, runs Playwright, runs tamper and rollback checks, and writes `JUDGE_REPORT.html`. (depends: P199)
+- [ ] P201 Update `README.md` with one-line pitch, hero screenshot, architecture Mermaid, quick start, matrix, limitations, and roadmap. (depends: P200)
+- [ ] P202 Update `ARCHITECTURE.md`, `THREAT_MODEL.md`, `DEMO.md`, `STATUS.md`, and `DECISIONS.md` with measured final evidence. (depends: P201)
+- [ ] P203 Verify every size gate with `npm run loc` and fail the build if a threshold is missed. (depends: P021, P065, P079, P093, P105, P116, P136, P163, P175, P188, P203)
+- [ ] P204 Run final clean-room demo from a fresh install and deterministic reset. (depends: P190, P200, P203)
+- [ ] P205 Run final Sites build, package, save version, private deploy, and deployment status check. (depends: P204)
+- [ ] P206 Re-read `AGENTS.md`, inspect the final checklist, record known limitations, and stop only with all required gates green. (depends: P205)
+
+**Runnable after Group 13:** The full SCAN/FIX/SHIP story runs from one command,
+the judge report is evidence-backed, and the deployed product is ready for a
+three-minute launch demo.
+
+## Dependency and commit rules
+
+- Never start a task while one of its listed dependencies is unticked.
+- Use conventional commits such as `feat(core): add semantic resolver` or
+  `test(verifier): catch hidden buy button`.
+- If a task reveals a missing prerequisite, add the prerequisite above the task,
+  record it in `DECISIONS.md`, and update dependencies before continuing.
+- Do not mark a task complete because a screen exists. Mark it complete only when
+  the behavior, tests, accessibility states, and group gate support it.
