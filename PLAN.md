@@ -321,18 +321,18 @@ sees the repair, and can enter the dashboard without documentation.
 
 ## Group 12 — `apps/shopnest`
 
-- [ ] P176 Create ShopNest design system and deterministic product fixture data. (depends: P163)
-- [ ] P177 Build home route with navigation, search, product cards, and release marker. (depends: P176)
-- [ ] P178 Build search route with filters, query state, and no-results state. (depends: P177)
-- [ ] P179 Build product route with price, reviews, shipping, and Buy action. (depends: P177)
-- [ ] P180 Build cart route with quantity changes, empty state, and checkout CTA. (depends: P179)
-- [ ] P181 Build checkout route with address, payment, review, success, retry, and failure. (depends: P180)
-- [ ] P182 Build login route with demo sign-in, error, and locked states. (depends: P177)
-- [ ] P183 Implement v1 healthy release mode. (depends: P177, P178, P179, P180, P181, P182)
-- [ ] P184 Implement v2 breaking mode with moved button, low contrast, stale copy, duplicate action, and hashed classes. (depends: P183)
-- [ ] P185 Implement v3 refactor mode with wrapper changes and ambiguous target fixture. (depends: P184)
-- [ ] P186 Integrate only the SDK runtime; do not import hardcoded PATCHWORK fixes. (depends: P079, P185)
-- [ ] P187 Add ShopNest route and release-mode tests with browser fixtures. (depends: P186)
+- [x] P176 Create ShopNest design system and deterministic product fixture data. (depends: P163)
+- [x] P177 Build home route with navigation, search, product cards, and release marker. (depends: P176)
+- [x] P178 Build search route with filters, query state, and no-results state. (depends: P177)
+- [x] P179 Build product route with price, reviews, shipping, and Buy action. (depends: P177)
+- [x] P180 Build cart route with quantity changes, empty state, and checkout CTA. (depends: P179)
+- [x] P181 Build checkout route with address, payment, review, success, retry, and failure. (depends: P180)
+- [x] P182 Build login route with demo sign-in, error, and locked states. (depends: P177)
+- [x] P183 Implement v1 healthy release mode. (depends: P177, P178, P179, P180, P181, P182)
+- [x] P184 Implement v2 breaking mode with moved button, low contrast, stale copy, duplicate action, and hashed classes. (depends: P183)
+- [x] P185 Implement v3 refactor mode with wrapper changes and ambiguous target fixture. (depends: P184)
+- [x] P186 Integrate only the SDK runtime; do not import hardcoded PATCHWORK fixes. (depends: P079, P185)
+- [x] P187 Add ShopNest route and release-mode tests with browser fixtures. (depends: P186)
 - [ ] P188 Run ShopNest gate and measure `apps/shopnest` LOC against 2,500 lines. (depends: P187)
 
 **Runnable after Group 12:** ShopNest provides healthy, breaking, and refactor

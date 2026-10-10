@@ -319,3 +319,14 @@ depending on the API to render public product education.
 Reason: visitors should be able to understand PATCHWORK during an API outage,
 and one shared shell keeps evidence language, navigation, and responsive
 behavior consistent across the marketing surface.
+
+## D-032 — Keep ShopNest as a local, release-switchable fixture
+
+Decision: ShopNest owns deterministic catalog and checkout state in a client
+provider, with v1, v2, and v3 selected through the visible release control. The
+cart, saved products, and mode are device-local; PATCHWORK remains the authority
+for patch evidence and release decisions.
+
+Reason: the storefront needs to be useful as a normal commerce journey while
+remaining resettable, offline-safe, and able to demonstrate healthy, breaking,
+and ambiguous releases without shipping hardcoded repairs into the product.

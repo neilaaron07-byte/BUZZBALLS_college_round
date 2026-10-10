@@ -8,6 +8,11 @@ const outputRoot = join(root, "docs", "screenshots");
 const baseUrl = process.env.PATCHWORK_BASE_URL ?? "http://localhost:3000";
 const routes = [
   { id: "storefront", path: "/" },
+  { id: "shop-search", path: "/search" },
+  { id: "shop-product", path: "/product/aurora-headphones" },
+  { id: "shop-cart", path: "/cart" },
+  { id: "shop-checkout", path: "/checkout" },
+  { id: "shop-login", path: "/login" },
   { id: "design-system", path: "/design" },
   { id: "marketing", path: "/web" },
   { id: "marketing-tour", path: "/web/tour" },

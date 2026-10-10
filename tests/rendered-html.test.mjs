@@ -25,7 +25,9 @@ test("server-renders the seeded checkout incident storefront", async () => {
 
   const html = await response.text();
   assert.match(html, /<title>PATCHWORK — Fix any website in 60 seconds<\/title>/i);
-  assert.match(html, /Checkout is currently unavailable/);
+  assert.match(html, /PATCHWORK DEMO \/ /);
+  assert.match(html, /BREAKING RELEASE/);
+  assert.match(html, /Make room for/);
   assert.match(html, /Add to cart/);
   assert.match(html, /PATCHWORK/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|react-loading-skeleton/i);
