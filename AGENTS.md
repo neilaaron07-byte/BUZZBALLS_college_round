@@ -58,6 +58,50 @@ All work must serve the PATCHWORK workflow:
 - **SHIP**: release a signed version with policy gates, canary controls, health
   signals, an audit trail, and one-click rollback.
 
+## Design-system contract
+
+The attached product-design brief is part of this contract. The visual bar is
+Vercel dashboard, Linear, Raycast, and Stripe. Anything that reads as a
+template, tutorial, or student project fails review.
+
+- Design dark-first with a polished light theme. Use near-black backgrounds,
+  three surface elevations, hairline white borders at 8-12% opacity, tiny
+  6/8/12px radii, generous whitespace, and a strict 4px spacing grid.
+- Use Geist and Geist Mono through the `geist` npm package with fallback stacks.
+  Marketing may use 72-96px display type; the app uses dense 13-14px UI text
+  and tabular numerals for metrics.
+- Use one restrained electric-violet-to-cyan gradient for primary emphasis,
+  focus rings, glows, and chart highlights. Semantic status colors must pass AA
+  contrast and be verified by a script.
+- Use the stitched seam motif everywhere: dashed seams, patch-shaped cards with
+  stitched corners, and a square-patch logo. The logo draws itself with a stroke
+  animation on first load.
+- Use a subtle grid, radial fade, GPU-friendly aurora mesh, 3% noise overlay,
+  and soft hero glows. Avoid visual noise and keep motion purposeful.
+- Use `motion` or Framer Motion with 120/200/320/600ms durations, standard
+  cubic-bezier(0.2, 0, 0, 1), emphasized spring stiffness 300/damping 30, and
+  transform/opacity-only animation where possible. Respect reduced motion.
+- Implement and document the reusable signature animations listed in the
+  design brief: stitched logo, repair morph, before/after slider, spotlight,
+  architecture beams, scroll story, tickers, health ring, release pipeline,
+  rollback time machine, ship confetti/undo, skeleton shimmer, shared-element
+  transitions, magnetic buttons, AI streaming, DOM visualizer, conflict merge,
+  audit chain, command palette, and integration marquee.
+- Generate original assets with scripts under `tools/assets` into app public
+  folders. Product art, hero art, empty/error/404 art, social preview, favicon,
+  extension icons, avatars, and AI orb must be original and offline-safe.
+  Never use stock photos, hotlinked images, or copyrighted brands.
+- Build the reusable component library under `apps/dashboard/src/ui` with
+  variants, states, keyboard support, tests, and Radix primitives where
+  appropriate. The `/design` route is a live gallery of tokens, components,
+  and animations.
+- Every surface is responsive to tablet and mobile widths, keyboard navigable,
+  screen-reader friendly, and explicit about loading, empty, error, and success
+  states. Toasts and AI streaming must be announced accessibly.
+- Add a Playwright screenshot script for every screen in dark and light at
+  desktop, tablet, and mobile widths under `/docs/screenshots`; review and fix
+  cramped, misaligned, default-looking, or boring results.
+
 ## Required planning artifacts
 
 - `BRAINSTORM.md` must contain 8 personas with 3 pains each, 30 concrete

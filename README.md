@@ -1,8 +1,13 @@
-# vinext-starter
+# PATCHWORK
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+PATCHWORK is a safety layer for fixing live website defects without rebuilding
+the original application. It connects SCAN, FIX, and SHIP in one reversible
+workflow: find the broken element, preview a semantic patch, verify it in an
+isolated browser, release it with health controls, and undo it in one click.
+
+The repository is being upgraded from a working vinext Site starter into a
+multi-surface workspace. `STATUS.md` records the current implementation state;
+`DEMO.md` describes the seeded ShopNest checkout incident.
 
 ## Prerequisites
 
@@ -20,10 +25,12 @@ This starter does not use `wrangler.jsonc`.
 
 ## Included Shape
 
-- edit site code under `app/`
+- current transitional Site code lives under `app/`
+- target workspace surfaces live under `apps/` and reusable safety behavior under
+  `packages/`
 - `.openai/hosting.json` declares optional Sites D1 and R2 bindings
 - `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
+- `db/schema.ts` remains available for the persistence migration
 - `examples/d1/` contains an optional D1 example surface
 - `drizzle.config.ts` supports local migration generation when needed
 
@@ -93,6 +100,27 @@ actions tied to the current ChatGPT user. Leave public content anonymous.
 - `npm run build`: verify the vinext build output
 - `npm test`: build the starter and verify its rendered loading skeleton
 - `npm run db:generate`: generate Drizzle migrations after schema changes
+
+The final workspace will also provide `npm run demo`, `npm run demo:reset`,
+`npm run judge`, and `npm run loc`; their evidence is tracked in `STATUS.md`.
+
+## Feature-to-proof matrix
+
+| Product promise | User-visible proof | Automated proof |
+| --- | --- | --- |
+| SCAN | Finding severity, target evidence, confidence, blast radius | Scanner fixtures and resolver mutation tests |
+| FIX | Patch operations, before/after preview, review and conflict explanation | Core safety, conflict, and preview tests |
+| VERIFY | Interaction, visual, accessibility, console, and network results | Verifier browser run and screenshot assertions |
+| SHIP | Signed manifest, policy gates, canary, health ring | Release lifecycle integration tests |
+| UNDO | Rollback time machine, kill switch, undo toast | Rollback and audit-chain tests |
+| TRUST | Immutable audit journal and plain-English explanations | Hash-chain tamper tests and judge report |
+
+## Known limitations
+
+The workspace migration and measured size gates are in progress. The current
+transitional Site still exposes the seeded incident demo, but the dashboard,
+marketing surface, package graph, visual gallery, screenshot baselines, and
+deployment evidence will only be claimed complete after their plan gates pass.
 
 ## Learn More
 

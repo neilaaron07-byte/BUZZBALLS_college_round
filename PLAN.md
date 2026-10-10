@@ -16,13 +16,13 @@ gets ticked here, committed with a conventional commit, and reflected in
 - [x] P001 Create `AGENTS.md` with the operating contract, banned list, size gates, and definition of done. (depends: none)
 - [x] P002 Create `BRAINSTORM.md` with personas, problems, competitor lessons, delights, IA, and seam motif. (depends: P001)
 - [x] P003 Create this `PLAN.md` with at least 120 dependency-aware checkbox tasks. (depends: P001, P002)
-- [ ] P004 Create `STATUS.md` with baseline, current group, next group, and known issues. (depends: P003)
-- [ ] P005 Create `DECISIONS.md` with initial architecture, offline-demo, and precision-over-recall decisions. (depends: P003)
-- [ ] P006 Add `CONTRIBUTING.md` with local setup, quality gates, commit style, and demo expectations. (depends: P003)
-- [ ] P007 Add `THREAT_MODEL.md` covering patch injection, manifest replay, collaborator compromise, SDK DoS, SSRF, and CSS exfiltration. (depends: P003)
-- [ ] P008 Add `ARCHITECTURE.md` with draft, review, verify, release, rollback, and telemetry flows. (depends: P003)
-- [ ] P009 Add `DEMO.md` with a timed three-minute script, 60-second script, and ten judge answers. (depends: P003)
-- [ ] P010 Add the final feature-to-proof matrix and known-limitations template to `README.md`. (depends: P003)
+- [x] P004 Create `STATUS.md` with baseline, current group, next group, and known issues. (depends: P003)
+- [x] P005 Create `DECISIONS.md` with initial architecture, offline-demo, and precision-over-recall decisions. (depends: P003)
+- [x] P006 Add `CONTRIBUTING.md` with local setup, quality gates, commit style, and demo expectations. (depends: P003)
+- [x] P007 Add `THREAT_MODEL.md` covering patch injection, manifest replay, collaborator compromise, SDK DoS, SSRF, and CSS exfiltration. (depends: P003)
+- [x] P008 Add `ARCHITECTURE.md` with draft, review, verify, release, rollback, and telemetry flows. (depends: P003)
+- [x] P009 Add `DEMO.md` with a timed three-minute script, 60-second script, and ten judge answers. (depends: P003)
+- [x] P010 Add the final feature-to-proof matrix and known-limitations template to `README.md`. (depends: P003)
 
 **Runnable after Group 0:** Existing dashboard still runs; documentation lint and
 file-existence checks pass.
@@ -44,6 +44,55 @@ file-existence checks pass.
 
 **Runnable after Group 1:** Workspace boots the existing surface and prints
 deterministic size metrics through `npm run loc`.
+
+## Group 1A — design language, motion, components, and assets
+
+This group is a prerequisite for the dashboard, marketing, extension, and
+ShopNest UI groups. It is intentionally placed before core feature work so the
+product does not accumulate a second visual language.
+
+- [ ] D001 Add the `geist` package and wire Geist/Geist Mono fallback stacks. (depends: P022)
+- [ ] D002 Define source token map for color, spacing, type, radius, shadow, blur, z-index, motion, and seam geometry. (depends: D001)
+- [ ] D003 Emit CSS variables for dark-first surfaces, hairlines, semantic status colors, and gradient accents. (depends: D002)
+- [ ] D004 Map the token variables into the Tailwind theme without duplicating values. (depends: D003)
+- [ ] D005 Add light and dark theme provider with system preference, explicit toggle, persistence, and reduced-motion awareness. (depends: D003)
+- [ ] D006 Add a contrast-check script for semantic colors and focus rings with AA assertions. (depends: D003)
+- [ ] D007 Create seam primitives for dashed dividers, stitched corners, connector paths, and patch cards. (depends: D003)
+- [ ] D008 Create animated stitched logo mark with a static reduced-motion fallback. (depends: D007)
+- [ ] D009 Create grid, radial fade, aurora mesh, noise overlay, and soft-glow background primitives. (depends: D003)
+- [ ] D010 Define motion constants for 120/200/320/600ms, cubic-bezier standard easing, spring stiffness 300/damping 30, and reduced-motion fallbacks. (depends: D005)
+- [ ] D011 Build reusable button and IconButton variants: primary, secondary, ghost, danger, loading, and icon. (depends: D010)
+- [ ] D012 Build Input, Textarea, Select, Combobox, Switch, Checkbox, Radio, and Slider primitives with validation states. (depends: D010)
+- [ ] D013 Build Tabs, SegmentedControl, Badge, StatusDot, Tooltip, Popover, DropdownMenu, and ContextMenu. (depends: D010)
+- [ ] D014 Build Dialog, Drawer, Sheet, Toast, live announcement region, and accessible dismissal behavior. (depends: D010)
+- [ ] D015 Build Command palette with fuzzy match, spring entrance, keyboard loop, and highlighted match. (depends: D010)
+- [ ] D016 Build Table, DataList, sticky header, row actions, sortable headers, and responsive fallback. (depends: D011, D012)
+- [ ] D017 Build Card, stitched Card, Kbd, Avatar, AvatarStack, presence, Breadcrumbs, and Stepper. (depends: D007, D011)
+- [ ] D018 Build ProgressRing, ProgressBar, Skeleton, EmptyState, ErrorState, Banner, and status explanation primitives. (depends: D011, D013)
+- [ ] D019 Build CodeBlock with copy, JSONViewer, DiffViewer, Timeline, Sparkline, and chart wrappers. (depends: D011, D016)
+- [ ] D020 Build Calendar-less date range, Resizable panels, ScrollArea, and Kanban drag/drop primitives. (depends: D012, D016)
+- [ ] D021 Build stitched logo draw-on, cursor spotlight, magnetic button, and feature-card tilt components. (depends: D008, D010)
+- [ ] D022 Build broken-storefront-to-fixed morph, glowing before/after slider, and stitched seam transition. (depends: D007, D010)
+- [ ] D023 Build architecture beams, pinned Break/Patch/Verify/Ship/Rollback story, number ticker, and sparkline draw-in. (depends: D010, D019)
+- [ ] D024 Build health ring, release pipeline with particles, rollback time machine, and preview morph. (depends: D018, D023)
+- [ ] D025 Build ship confetti plus undo toast, skeleton shimmer, shared-element transition wrapper, AI thinking orb, and typewriter stream. (depends: D014, D021)
+- [ ] D026 Build animated DOM-tree visualizer, resolver signal bars, conflict pane merge, audit-chain tamper animation, and integration marquee. (depends: D019, D023)
+- [ ] D027 Create `/design` gallery route for tokens, primitives, states, and every signature animation. (depends: D011, D012, D013, D014, D015, D016, D017, D018, D019, D020, D021, D022, D023, D024, D025, D026)
+- [ ] D028 Create `tools/assets` generator entrypoint with deterministic seeds and output manifests. (depends: D002)
+- [ ] D029 Generate 24 original ShopNest product illustrations with gradients, soft shadows, and isometric or flat-3D composition. (depends: D028)
+- [ ] D030 Generate stitched browser-window hero artwork plus SVG and 2x PNG outputs through Sharp. (depends: D028)
+- [ ] D031 Generate one empty-state illustration per dashboard page, 404 art, and error art. (depends: D028)
+- [ ] D032 Generate OG/social image, favicon set, and extension icons at 16/32/48/128px. (depends: D028)
+- [ ] D033 Generate deterministic collaborator avatars and AI orb asset. (depends: D028)
+- [ ] D034 Validate generated assets for dimensions, alpha, naming, no external URLs, and no copyrighted marks. (depends: D029, D030, D031, D032, D033)
+- [ ] D035 Add design-system component and motion tests for keyboard, reduced motion, and announced state changes. (depends: D027, D034)
+- [ ] D036 Add screenshot runner for every screen in dark/light at desktop/tablet/mobile widths. (depends: D027, D035)
+- [ ] D037 Review screenshot baselines and fix default, cramped, misaligned, low-contrast, or boring surfaces. (depends: D036)
+- [ ] D038 Run design gate: typecheck, tests, build, lint, contrast script, asset manifest, and screenshot command. (depends: D006, D035, D037)
+
+**Runnable after Group 1A:** Every app can import the same visual tokens and
+component primitives; `/design` demonstrates the system, assets are generated
+offline, and the screenshot/contrast gates are measurable.
 
 ## Group 2 — `packages/core` schemas and safety
 
@@ -209,7 +258,7 @@ rollback, and report its audit chain without external services.
 
 ## Group 10 — `apps/dashboard`
 
-- [ ] P137 Split dashboard into route-level modules under the 1,000-line file limit. (depends: P136)
+- [ ] P137 Split dashboard into route-level modules under the 1,000-line file limit. (depends: P136, D038)
 - [ ] P138 Create shared design tokens for ink, paper, seam, status colors, type, spacing, and radii. (depends: P137)
 - [ ] P139 Create reusable Button, Badge, Card, Table, Tabs, Dialog, Toast, EmptyState, Skeleton, and ErrorState primitives. (depends: P138)
 - [ ] P140 Add responsive shell with left navigation, breadcrumbs, account menu, and mobile navigation. (depends: P139)
@@ -242,7 +291,7 @@ workspace where every mandatory feature is reachable and explained.
 
 ## Group 11 — `apps/web` marketing surface
 
-- [ ] P164 Create marketing app shell with shared brand tokens and seam motif. (depends: P163)
+- [ ] P164 Create marketing app shell with shared brand tokens and seam motif. (depends: P163, D038)
 - [ ] P165 Build landing hero around “Fix any website in 60 seconds”. (depends: P164)
 - [ ] P166 Build interactive SCAN/FIX/SHIP 10-second demo with real local state. (depends: P165)
 - [ ] P167 Build before/after repair slider and time-to-fix stopwatch. (depends: P166)
