@@ -43,6 +43,7 @@ Updated: 2026-10-10
 - Group 10 is active: `/dashboard` is the operator control plane; `/` remains the deterministic ShopNest incident fixture during migration.
 - P137–P138 are complete: the dashboard is split into route-level modules with a responsive shell, shared seam/tokens styling, API/seed data contracts, and no file over the 1,000-line limit.
 - The first `/dashboard` overview is now runnable: next action, real session stopwatch, SCAN/FIX/SHIP cards, risk ring, release pipeline, recent activity, review ownership, command palette, theme toggle, and mobile navigation are wired.
+- P139–P143 are complete: reusable primitives and explicit status explanations are exercised in the operator shell; the summary keeps the next best action visible and starts a real 60-second session stopwatch.
 
 ## Next
 
