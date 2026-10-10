@@ -132,6 +132,7 @@
         "property": "color",
         "value": "#172033"
       },
+      "inverse": null,
       "targetLabel": "price",
       "confidence": {
         "score": 0.99,

@@ -402,6 +402,26 @@ states for the full demo without hardcoded fixes.
 the judge report is evidence-backed, and the deployed product is ready for a
 three-minute launch demo.
 
+## Group 14 — visual review, performance evidence, and demo handoff
+
+- [x] P207 Run the expanded 180-image screenshot matrix and record route coverage. (depends: P206)
+- [x] P208 Open every route contact sheet and write 30 or more evidence-backed visual findings. (depends: P207)
+- [x] P209 Apply the responsive dashboard, PatchPilot, guided-fix, settings, and ShopNest review repairs. (depends: P208)
+- [x] P210 Repeat the screenshot matrix after repairs and inspect every second-pass contact sheet. (depends: P209)
+- [x] P211 Add measured API p95, rollback, SDK, console, and layout evidence to the Evidence surface. (depends: P210)
+- [x] P212 Add the performance evidence runner and generated local benchmark artifact. (depends: P211)
+- [x] P213 Add the 90-second and three-minute demo choreography. (depends: P212)
+- [x] P214 Record the Playwright demo video and derive the README hero GIF. (depends: P213)
+- [x] P215 Refresh README, API, architecture, threat model, and contribution handoff docs. (depends: P214)
+- [x] P216 Install or provision a Lighthouse runner and capture both landing and dashboard scores. (depends: P215)
+- [ ] P217 Run final clean-room judge and close all remaining measured package size gates. (depends: P216)
+- [x] P218 Add a dedicated full Playwright interaction gate with zero-console-error assertions. (depends: P214)
+- [x] P219 Run contrast, SDK-size, extension-smoke, and verifier-evidence gates and record their outputs. (depends: P218)
+
+**Runnable after Group 14:** The local demo has visual review evidence, a real
+recorded launch flow, performance measurements in the product, and explicit
+remaining Lighthouse and size-gate work.
+
 ## Dependency and commit rules
 
 - Never start a task while one of its listed dependencies is unticked.

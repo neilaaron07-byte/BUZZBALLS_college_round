@@ -1,66 +1,36 @@
-# PATCHWORK Demo Script
+# PATCHWORK demo choreography
 
-## Three-minute launch demo
+The demo follows the product’s own guided tour: **SCAN → AI explains → FIX → VERIFY → SHIP → resolve conflict → auto-rollback → audit proof**.
 
-### 0:00 — Context
+## 90-second launch cut
 
-Open the dashboard and say: “A ShopNest checkout button disappeared after a
-release. PATCHWORK will scan the live surface, propose a precise patch, verify
-it in isolation, and ship it with a one-click undo path.”
+| Time | Action | Proof to call out |
+| --- | --- | --- |
+| 00:00–00:10 | Open `/fix` | One screen, public URL policy, no source rebuild |
+| 00:10–00:22 | Click **Scan page** | Detector progress, semantic target evidence, plain-English finding |
+| 00:22–00:32 | Click **Fix safe issues** | Private preview and inverse operation; public site is unchanged |
+| 00:32–00:42 | Click **Stage 10% canary** | Human-gated ship boundary and bounded traffic |
+| 00:42–00:52 | Open Conflicts and keep verified patch | A second developer’s stale color is not merged automatically |
+| 00:52–01:04 | Ask PatchPilot to explain the conflict | AI uses supplied evidence, recommends the verified target, and stays review-only |
+| 01:04–01:16 | Simulate critical health and click **Rollback now** | Health threshold, previous signed manifest, and recovery action |
+| 01:16–01:30 | Open Audit | Hash chain, actors, release, rollback entry, and tamper-test handoff |
 
-### 0:20 — SCAN
+The recorded Playwright artifact is [docs/demo.webm](docs/demo.webm). The capture script is `tools/demo-video.mjs` and is run with `npm run demo:video`. The resulting WebM is 98.68 seconds because it includes browser settle time between actions; the narrated launch cut remains the 90-second target.
 
-Open the seeded incident. Show the red finding for the hidden Buy button, the
-390px evidence, the semantic target, confidence, and blast radius. Explain that
-PATCHWORK names the reason in plain English instead of presenting a selector.
+## Three-minute judge cut
 
-### 0:50 — FIX
+1. **00:00–00:25 — Context and SCAN.** Open the seeded ShopNest checkout incident. Show the URL policy, scan progress, detector summary, semantic target, confidence, and blast radius. Explain that the scanner names the target instead of asking a non-technical owner to edit a selector.
+2. **00:25–01:05 — FIX.** Apply the safe contrast fix in private preview. Show the before/after operation, allowlisted property, inverse rollback value, and the stale conflict. The public storefront remains unchanged.
+3. **01:05–01:35 — VERIFY.** Open the verification report. Show interaction, visual, accessibility, console, and network checks plus the viewport matrix. The hidden Buy-button regression is blocked before release.
+4. **01:35–02:05 — SHIP.** Open release controls. Show signed manifest, policy gates, reviewer ownership, 10% canary, health ring, pause, kill switch, and promotion boundary.
+5. **02:05–02:35 — failure and undo.** Simulate the bad patch’s health event, trigger the automatic rollback path, and show the previous healthy version returning without rebuilding the application.
+6. **02:35–03:00 — TRUST.** Open the audit chain, run the tamper test, and copy the evidence brief. End with: “The change is small, reversible, and proven.”
 
-Open the patch detail. Show the before/after view, the target signals, the
-allowlisted operation, and the conflict guard. Preview the patch while the
-public storefront remains unchanged. Run the verification gate and show the
-interaction, visual, accessibility, and console checks turning green.
+## Local reset
 
-### 1:40 — SHIP
+```bash
+npm run demo:reset
+npm run demo
+```
 
-Open the release rail. Show signed manifest, reviewer, canary percentage, and
-the health ring. Ship the patch, show the restrained seam confetti and undo
-toast, then use rollback to demonstrate the time-machine state returning to the
-last healthy release.
-
-### 2:20 — Explainability
-
-Open the audit journal and show the hash chain, actor, release, verification
-run, and rollback entry. End with: “The fix is small, reversible, and proven.”
-
-## Sixty-second version
-
-1. Scan: select the red hidden Buy button finding.
-2. Fix: preview the patch and run the verification gate.
-3. Ship: approve the canary, then use the undo toast to roll back.
-4. Show the audit entry proving what changed.
-
-## Judge answers
-
-1. **Why not redeploy?** PATCHWORK isolates a small reversible change when the
-   source build or vendor ownership makes a full deployment risky.
-2. **How is the target found?** A weighted semantic fingerprint uses structure,
-   labels, landmarks, siblings, and visual role; low-confidence matches stop.
-3. **What happens when the DOM moves?** The resolver proposes an auto-heal with
-   evidence or refuses to guess if the runner-up margin is unsafe.
-4. **Can a patch inject JavaScript?** No. The core allowlists operations and
-   rejects scripts, event handlers, unsafe URLs, external fetches, and CSS
-   exfiltration patterns.
-5. **How do you test it?** Isolated browser verification records interactions,
-   visual diff, accessibility delta, console, and network evidence.
-6. **How do you ship safely?** Signed manifests, policy gates, canary rollout,
-   health events, kill switch, and rollback.
-7. **What makes the audit trustworthy?** Entries are hash-chained and tamper
-   checks report the first broken link.
-8. **Can non-engineers use it?** Every finding, conflict, and gate has a plain
-   English explanation and an obvious next action.
-9. **Does it work offline?** The demo uses deterministic local fixtures and an
-   offline PatchPilot provider; network-backed integrations remain explicit.
-10. **What is the product boundary?** PATCHWORK handles safe frontend patches;
-    it does not replace source control, full deploy infrastructure, or business
-    policy review.
+The demo is deterministic. Remote live-site scans require a reachable public origin and never execute third-party scripts in the scanner stage.

@@ -37,6 +37,8 @@ const routes = [
   { id: "dashboard-install", path: "/dashboard?view=install" },
   { id: "dashboard-audit", path: "/dashboard?view=audit" },
   { id: "dashboard-settings", path: "/dashboard?view=settings" },
+  { id: "dashboard-patchpilot", path: "/dashboard?view=overview&pilot=1" },
+  { id: "guided-fix", path: "/fix" },
 ];
 const viewports = [
   { id: "desktop", width: 1440, height: 1000 },

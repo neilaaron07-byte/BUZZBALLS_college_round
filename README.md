@@ -1,128 +1,85 @@
 # PATCHWORK
 
-PATCHWORK is a safety layer for fixing live website defects without rebuilding
-the original application. It connects SCAN, FIX, and SHIP in one reversible
-workflow: find the broken element, preview a semantic patch, verify it in an
-isolated browser, release it with health controls, and undo it in one click.
+![PATCHWORK demo](docs/hero.gif)
 
-The repository is being upgraded from a working vinext Site starter into a
-multi-surface workspace. `STATUS.md` records the current implementation state;
-`DEMO.md` describes the seeded ShopNest checkout incident.
+PATCHWORK fixes a live website in 60 seconds: **SCAN** the real surface, **FIX** one reversible thing, and **SHIP** behind evidence, canary controls, and one-click undo.
 
-## Prerequisites
+## What the demo proves
 
-- Node.js `>=22.13.0`
+| Mandatory capability | User-visible proof | Automated evidence |
+| --- | --- | --- |
+| Visual patching | Guided fix, patch editor, before/after operation | Dashboard route contracts and patch workflow tests |
+| Smart element tracking | Confidence signals, moved/ambiguous target outcomes | 200 resolver scenarios and mutation fixtures |
+| Collaboration | Review inbox, named owners, conflict decision | API collaboration and conflict tests |
+| Isolated preview | Private preview state before public traffic | Verifier report and preview API |
+| Automated verification | Interaction, visual, accessibility, console, network checks | Stored verifier evidence and replay tests |
+| Versioned ship and rollback | Signed release, canary, health boundary, rollback time machine | Release lifecycle and rollback benchmark |
+| Audit trail | Hash chain, tamper test, CSV handoff | Audit verification and export tests |
 
-## Quick Start
+## Quick start
+
+Requirements: Node.js 22.13 or newer.
 
 ```bash
 npm install
-npm run dev
-npm run build
+npm run demo
 ```
 
-This starter does not use `wrangler.jsonc`.
+Open [http://localhost:3000/web](http://localhost:3000/web), [http://localhost:3000/fix](http://localhost:3000/fix), or [http://localhost:3000/dashboard?view=overview](http://localhost:3000/dashboard?view=overview). The supervisor runs the unified UI on port 3000 and the seeded API on port 8787.
 
-## Included Shape
+Useful gates:
 
-- current transitional Site code lives under `app/`
-- target workspace surfaces live under `apps/` and reusable safety behavior under
-  `packages/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` remains available for the persistence migration
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
-
-## Workspace Auth Headers
-
-Signed-in visitors receive both `oai-authenticated-user-id` and `oai-authenticated-user-email`. Private Sites require every visitor to sign in; public Sites may also have anonymous visitors, for whom neither header is present.
-
-The user ID is stable for the same user on the same Site and different across Sites. Email and name are intended for display or contact purposes.
-
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const userId = requestHeaders.get("oai-authenticated-user-id");
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+```bash
+npm run demo:reset
+npm run typecheck
+npm run lint
+npm run test
+npm run performance
+npm run screenshots
+npm run playwright
+npm run ai:eval
+npm run judge
+npm run loc
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+## Architecture
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+```mermaid
+flowchart LR
+  Site["Live website"] --> SDK["SDK runtime"]
+  Extension["Inspector extension"] --> API["API boundary"]
+  SDK --> API
+  API --> Core["Core safety engine"]
+  API --> Verifier["Isolated verifier"]
+  API --> AI["PatchPilot offline/provider boundary"]
+  Dashboard["Dashboard: SCAN / FIX / SHIP"] --> API
+  Marketing["Marketing and guided fix"] --> Dashboard
+  Core --> Manifest["Signed allowlisted manifest"]
+  Manifest --> SDK
+  Verifier --> Audit["Hash-chained audit"]
+  API --> Audit
+```
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+Read [ARCHITECTURE.md](ARCHITECTURE.md), [API.md](API.md), and [THREAT_MODEL.md](THREAT_MODEL.md) for the boundaries and failure modes.
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+## Performance evidence
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
+The seeded local benchmark currently records 4.08 ms API read p95 across 32 reads, 18.78 ms rollback request-to-restore time, 7.2 KB SDK gzip, zero screenshot console errors, and a 0.02 reserved-layout CLS baseline. `npm run performance` writes the raw capture to `docs/evidence/performance.json` and the dashboard Evidence page exposes the same values. The measured mobile Lighthouse scores are 57/100/100 on landing and 49/96/100 on dashboard for performance/accessibility/best practices; performance remains below the 90 target and is not presented as green.
 
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
+The repository’s current handwritten LOC is intentionally below the eventual size gates. `npm run loc` is the source of truth; generated screenshots, bundles, assets, and dependencies are excluded.
 
-## Useful Commands
+## PatchPilot
 
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
+PatchPilot is evidence-constrained. It can explain a finding, summarize release risk, draft an allowlisted operation, and propose an inverse-aware review card. It cannot publish, rollback, delete, inject scripts, or bypass human approval. The local demo uses the deterministic offline provider; a server-side provider adapter can be enabled without changing the safety boundary.
 
-The final workspace will also provide `npm run demo`, `npm run demo:reset`,
-`npm run judge`, and `npm run loc`; their evidence is tracked in `STATUS.md`.
+## Security model
 
-## Feature-to-proof matrix
+Patchwork operations are typed, allowlisted, same-origin checked, content hashed, signed, expiry-bound, and reversible. The API keeps secrets server-side, rate-limits requests, uses request IDs and idempotency keys, rejects SSRF/private targets, and appends state-changing events to a tamper-evident audit chain.
 
-| Product promise | User-visible proof | Automated proof |
-| --- | --- | --- |
-| SCAN | Finding severity, target evidence, confidence, blast radius | Scanner fixtures and resolver mutation tests |
-| FIX | Patch operations, before/after preview, review and conflict explanation | Core safety, conflict, and preview tests |
-| VERIFY | Interaction, visual, accessibility, console, and network results | Verifier browser run and screenshot assertions |
-| SHIP | Signed manifest, policy gates, canary, health ring | Release lifecycle integration tests |
-| UNDO | Rollback time machine, kill switch, undo toast | Rollback and audit-chain tests |
-| TRUST | Immutable audit journal and plain-English explanations | Hash-chain tamper tests and judge report |
+## Limitations and roadmap
 
-## Known limitations
+Current limitations are explicit: Lighthouse performance is below target, the local target storefront is an inert deterministic fixture, remote model credentials are not included, live mutation requires the installed SDK handshake and human approval, and the final 25,000+ LOC gates are not yet met. The next roadmap tranche is package depth, production persistence, production-server performance tuning, richer browser coverage, and authenticated provider integrations.
 
-The workspace migration and measured size gates are in progress. The current
-transitional Site still exposes the seeded incident demo, but the dashboard,
-marketing surface, package graph, visual gallery, screenshot baselines, and
-deployment evidence will only be claimed complete after their plan gates pass.
+## Contributing
 
-## Learn More
-
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+See [CONTRIBUTING.md](CONTRIBUTING.md). Every change should preserve a runnable demo, add a real test or evidence artifact, and keep the next safe action legible.

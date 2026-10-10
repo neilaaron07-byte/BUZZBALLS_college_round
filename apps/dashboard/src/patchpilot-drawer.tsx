@@ -75,7 +75,7 @@ export function PatchPilotDrawer({ data, view, onNavigate }: Readonly<{ data: Da
   }
 
   return <>
-    <button type="button" className="pw-pilot-floating-trigger" onClick={() => setOpen(true)} aria-label="Ask PatchPilot"><Sparkles size={14} aria-hidden="true" /><span>Ask PatchPilot</span><kbd>⌘ J</kbd></button>
+    <button type="button" className="pw-pilot-floating-trigger" onClick={() => setOpen(true)} aria-label="Ask PatchPilot ⌘ J"><Sparkles size={14} aria-hidden="true" /><span>Ask PatchPilot</span><kbd>⌘ J</kbd></button>
     {open ? <div className="pw-pilot-layer"><button type="button" className="pw-pilot-backdrop" aria-label="Close PatchPilot" onClick={() => setOpen(false)} /><aside className="pw-pilot-drawer" aria-label="PatchPilot assistant" role="dialog" aria-modal="true">
       <header className="pw-pilot-header"><div className="pw-pilot-title"><span className="pw-pilot-orb"><Bot size={17} aria-hidden="true" /></span><span><strong>PatchPilot</strong><small>Offline evidence assistant · {view}</small></span></div><IconButton label="Close PatchPilot" size="sm" onClick={() => setOpen(false)}><X size={16} aria-hidden="true" /></IconButton></header>
       <div className="pw-pilot-safety"><ShieldCheck size={14} aria-hidden="true" /><span>Reads evidence and proposes reviewable drafts. Publishing, rollback, and deletion stay human-only.</span></div>

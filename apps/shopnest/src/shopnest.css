@@ -1,4 +1,4 @@
-.sn-app { --sn-ink: #10181c; --sn-muted: #65736f; --sn-faint: #8d9995; --sn-paper: #f6f7f4; --sn-surface: #ffffff; --sn-line: #dce3de; --sn-lime: #bbfa45; --sn-lime-dark: #83b62c; --sn-coral: #f17367; --sn-coral-soft: #fff0ed; --sn-cyan: #4cabb6; --sn-mono: var(--font-geist-mono), "SFMono-Regular", monospace; --sn-sans: var(--font-geist-sans), Inter, sans-serif; min-height: 100vh; overflow: hidden; background: var(--sn-paper); color: var(--sn-ink); font-family: var(--sn-sans); }
+.sn-app { --sn-ink: #10181c; --sn-muted: #52615c; --sn-faint: #71817a; --sn-paper: #f6f7f4; --sn-surface: #ffffff; --sn-line: #dce3de; --sn-lime: #bbfa45; --sn-lime-dark: #83b62c; --sn-coral: #f17367; --sn-coral-soft: #fff0ed; --sn-cyan: #4cabb6; --sn-mono: var(--font-geist-mono), "SFMono-Regular", monospace; --sn-sans: var(--font-geist-sans), Inter, sans-serif; min-height: 100vh; overflow: hidden; background: var(--sn-paper); color: var(--sn-ink); font-family: var(--sn-sans); }
 .sn-app *, .sn-app *::before, .sn-app *::after { box-sizing: border-box; }
 .sn-app a { color: inherit; text-decoration: none; }
 .sn-app button, .sn-app input, .sn-app select { font: inherit; }
@@ -75,3 +75,14 @@
 .sn-release-gates { margin-top: 52px; border-top: 1px solid var(--sn-line); padding-top: 27px; }.sn-preview-badge { border-radius: 15px; padding: 7px 9px; font: 8px/1 var(--sn-mono); }.sn-preview-green { background: #edf7db; color: var(--sn-lime-dark); }.sn-preview-red { background: var(--sn-coral-soft); color: var(--sn-coral); }.sn-gate-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px; margin-top: 19px; }.sn-gate-card { display: grid; grid-template-columns: 18px 1fr; gap: 4px 7px; border: 1px solid #d8e6d7; border-radius: 5px; padding: 12px; background: #f5fbf1; }.sn-gate-card > span { grid-row: span 2; display: grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: #ddf0d7; color: var(--sn-lime-dark); }.sn-gate-card strong { font-size: 9px; }.sn-gate-card small { color: var(--sn-muted); font: 8px/1.4 var(--sn-mono); }.sn-gate-amber { border-color: #ead7a5; background: #fff9e8; }.sn-gate-amber > span { background: #f8e6b9; color: #ba8a2c; }.sn-gate-red { border-color: #efc2bc; background: var(--sn-coral-soft); }.sn-gate-red > span { background: #fbd9d4; color: var(--sn-coral); }.sn-preview-explanation { margin-top: 14px; color: var(--sn-muted); font: 9px/1.5 var(--sn-mono); }
 @media (max-width: 1120px) { .sn-wishlist-grid { grid-template-columns: repeat(2, 1fr); }.sn-support-layout, .sn-release-layout { gap: 35px; }.sn-account-grid, .sn-support-layout, .sn-release-layout { padding-left: 2%; padding-right: 2%; } }
 @media (max-width: 780px) { .sn-wishlist-grid { grid-template-columns: 1fr 1fr; }.sn-support-hero, .sn-release-heading { align-items: start; flex-direction: column; padding: 58px 0 43px; }.sn-support-hero h1, .sn-release-heading h1 { font-size: 56px; }.sn-support-mark { width: 50px; height: 50px; }.sn-support-layout, .sn-release-layout { grid-template-columns: 1fr; gap: 39px; padding: 0 0 65px; }.sn-support-card { order: -1; }.sn-support-count { flex-wrap: wrap; margin: 0; line-height: 1.5; }.sn-health-score { align-self: start; }.sn-release-switcher { margin: 0 0 36px; }.sn-release-switcher button { padding: 12px; }.sn-release-switcher button small { line-height: 1.35; }.sn-release-panel-heading h2 { font-size: 23px; }.sn-release-back { margin-left: 0; }.sn-shipping-options label { grid-template-columns: 16px 1fr; }.sn-shipping-options label > strong { grid-column: 2; }.sn-shipping-options label > span { min-width: 0; } }
+
+@media (max-width: 780px) {
+  .sn-icon-button, .sn-cart-link { min-width: 32px; min-height: 32px; justify-content: center; }
+  .sn-empty-state, .sn-cart-empty, .sn-wishlist-empty { min-height: 270px; }
+  .sn-cart-empty, .sn-wishlist-empty { margin-bottom: 40px; }
+  .sn-empty-state { padding: 25px 18px; }
+  .sn-empty-state h2 { margin-top: 13px; font-size: 21px; }
+  .sn-empty-state .sn-button { margin-top: 16px; }
+  .sn-product-hero > .sn-product-art { min-height: 330px; }
+  .sn-detail-description { font-size: 14px; }
+}

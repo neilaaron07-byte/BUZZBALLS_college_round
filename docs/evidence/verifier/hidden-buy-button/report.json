@@ -19,7 +19,7 @@
       "status": "passed",
       "blocking": true,
       "explanation": "Loaded without an HTTP response.",
-      "durationMs": 503,
+      "durationMs": 522,
       "evidence": [
         "data:text/html;charset=utf-8,%3C!doctype%20html%3E%3Chtml%20lang%3D%22en%22%3E%3Chead%3E%3Cmeta%20charset%3D%22utf-8%22%3E%3Ctitle%3EAurora%20travel%20mug%3C%2Ftitle%3E%3Cmeta%20name%3D%22description%22%20content%3D%22Insulated%20drinkware%20for%20the%20morning%20commute.%22%3E%3C%2Fhead%3E%3Cbody%3E%3Cmain%3E%3Ch1%3EAurora%20travel%20mug%3C%2Fh1%3E%3Cp%3EInsulated%20for%20the%20morning%20commute.%3C%2Fp%3E%3Cbutton%20data-testid%3D%22add-to-cart%22%3EAdd%20to%20cart%3C%2Fbutton%3E%3C%2Fmain%3E%3C%2Fbody%3E%3C%2Fhtml%3E"
       ]
@@ -31,7 +31,7 @@
       "status": "passed",
       "blocking": true,
       "explanation": "Moved target recovered: Add to cart scored 0.93 with a clear margin over the next candidate.",
-      "durationMs": 9,
+      "durationMs": 34,
       "evidence": [
         "moved",
         "confidence 0.93",
@@ -48,7 +48,7 @@
       "evidence": [
         "[data-testid='add-to-cart']"
       ],
-      "durationMs": 20
+      "durationMs": 40
     },
     {
       "id": "published-desktop-interaction-search",
@@ -58,7 +58,7 @@
       "blocking": false,
       "explanation": "No search control is present on this page.",
       "evidence": [],
-      "durationMs": 2
+      "durationMs": 3
     },
     {
       "id": "published-desktop-interaction-login",
@@ -68,7 +68,7 @@
       "blocking": false,
       "explanation": "No login action is present on this page.",
       "evidence": [],
-      "durationMs": 2
+      "durationMs": 9
     },
     {
       "id": "published-desktop-interaction-checkout",
@@ -78,7 +78,7 @@
       "blocking": false,
       "explanation": "No checkout action is present on this page.",
       "evidence": [],
-      "durationMs": 2
+      "durationMs": 7
     },
     {
       "id": "published-desktop-accessibility-desktop",
@@ -87,7 +87,7 @@
       "status": "passed",
       "blocking": true,
       "explanation": "Axe found no accessibility violations.",
-      "durationMs": 208,
+      "durationMs": 444,
       "evidence": []
     },
     {
@@ -117,7 +117,7 @@
       "status": "passed",
       "blocking": true,
       "explanation": "Loaded without an HTTP response.",
-      "durationMs": 504,
+      "durationMs": 509,
       "evidence": [
         "data:text/html;charset=utf-8,%3C!doctype%20html%3E%3Chtml%20lang%3D%22en%22%3E%3Chead%3E%3Cmeta%20charset%3D%22utf-8%22%3E%3Ctitle%3EAurora%20travel%20mug%3C%2Ftitle%3E%3Cmeta%20name%3D%22description%22%20content%3D%22Insulated%20drinkware%20for%20the%20morning%20commute.%22%3E%3C%2Fhead%3E%3Cbody%3E%3Cmain%3E%3Ch1%3EAurora%20travel%20mug%3C%2Fh1%3E%3Cp%3EInsulated%20for%20the%20morning%20commute.%3C%2Fp%3E%3Cbutton%20data-testid%3D%22add-to-cart%22%20style%3D%22display%3Anone%22%3EAdd%20to%20cart%3C%2Fbutton%3E%3C%2Fmain%3E%3C%2Fbody%3E%3C%2Fhtml%3E"
       ]
@@ -129,7 +129,7 @@
       "status": "passed",
       "blocking": true,
       "explanation": "Moved target recovered: Add to cart scored 0.93 with a clear margin over the next candidate.",
-      "durationMs": 6,
+      "durationMs": 8,
       "evidence": [
         "moved",
         "confidence 0.93",
@@ -146,7 +146,7 @@
       "evidence": [
         "[data-testid='add-to-cart']"
       ],
-      "durationMs": 14
+      "durationMs": 20
     },
     {
       "id": "patched-desktop-interaction-search",
@@ -156,7 +156,7 @@
       "blocking": false,
       "explanation": "No search control is present on this page.",
       "evidence": [],
-      "durationMs": 0
+      "durationMs": 1
     },
     {
       "id": "patched-desktop-interaction-login",
@@ -166,7 +166,7 @@
       "blocking": false,
       "explanation": "No login action is present on this page.",
       "evidence": [],
-      "durationMs": 3
+      "durationMs": 6
     },
     {
       "id": "patched-desktop-interaction-checkout",
@@ -176,7 +176,7 @@
       "blocking": false,
       "explanation": "No checkout action is present on this page.",
       "evidence": [],
-      "durationMs": 1
+      "durationMs": 4
     },
     {
       "id": "patched-desktop-accessibility-desktop",
@@ -185,7 +185,7 @@
       "status": "passed",
       "blocking": true,
       "explanation": "Axe found no accessibility violations.",
-      "durationMs": 201,
+      "durationMs": 406,
       "evidence": []
     },
     {

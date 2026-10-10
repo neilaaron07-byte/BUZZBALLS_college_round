@@ -31,7 +31,7 @@ export function MarketingNav() {
     <header className="pw-marketing-nav">
       <MarketingLogo />
       <nav aria-label="Marketing navigation"><a href="#workflow">Workflow</a><a href="#proof">Proof</a><a href="#features">Features</a><a href="#stories">Teams</a></nav>
-      <div className="pw-marketing-nav-actions"><button type="button" className="pw-marketing-command-trigger" onClick={() => setPaletteOpen(true)} aria-haspopup="dialog" aria-expanded={paletteOpen}><Search size={13} aria-hidden="true" /><span>Search</span><kbd><Command size={10} aria-hidden="true" /> K</kbd></button><a className="pw-marketing-text-link" href="/dashboard">Open dashboard <ArrowRight size={14} aria-hidden="true" /></a><a className="pw-marketing-button pw-marketing-button-small" href="#playground">Try the demo</a></div>
+      <div className="pw-marketing-nav-actions"><button type="button" className="pw-marketing-command-trigger" onClick={() => setPaletteOpen(true)} aria-label="Search PATCHWORK" aria-haspopup="dialog" aria-expanded={paletteOpen}><Search size={13} aria-hidden="true" /><span>Search</span><kbd><Command size={10} aria-hidden="true" /> K</kbd></button><a className="pw-marketing-text-link" href="/dashboard">Open dashboard <ArrowRight size={14} aria-hidden="true" /></a><a className="pw-marketing-button pw-marketing-button-small" href="#playground">Try the demo</a></div>
     </header>
     {paletteOpen ? <CommandPalette onClose={() => setPaletteOpen(false)} /> : null}
   </>;

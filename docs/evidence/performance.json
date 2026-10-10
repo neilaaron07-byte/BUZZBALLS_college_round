@@ -1,0 +1,11 @@
+{
+  "capturedAt": "2026-10-10T18:47:29.793Z",
+  "apiBase": "http://127.0.0.1:8787",
+  "seededSite": "site_shopnest",
+  "readSamples": 32,
+  "apiReadP95Ms": 4.08,
+  "rollbackMs": 18.78,
+  "rollbackBudgetMs": 10000,
+  "cumulativeLayoutShift": 0.02,
+  "layoutShiftSource": "reserved capture geometry baseline; confirm with Lighthouse"
+}

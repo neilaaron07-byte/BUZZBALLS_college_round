@@ -25,6 +25,7 @@ import { createSeedState } from "./seed";
 import type { ApiContext } from "./types";
 import { liveSiteRoutes } from "./routes/live-sites";
 import { aiRoutes } from "./routes/ai";
+import { localCors } from "./cors";
 
 export interface ApiContextOptions {
   filePath?: string;
@@ -41,6 +42,7 @@ export async function createApiContext(options: ApiContextOptions = {}): Promise
 export function createApiApp(context: ApiContext, options: Pick<ApiContextOptions, "rateLimitPerMinute"> = {}): Express {
   const app = express();
   app.disable("x-powered-by");
+  app.use(localCors());
   app.use(requestContext(context));
   app.use(rateLimit(context, 60_000, options.rateLimitPerMinute ?? 120));
   app.use(express.json({ limit: "128kb", strict: true }));

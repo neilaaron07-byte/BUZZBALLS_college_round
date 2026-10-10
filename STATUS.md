@@ -1,13 +1,42 @@
 # PATCHWORK Status
 
-Updated: 2026-10-10
+Updated: 2026-10-11
 
 ## Current state
 
-- Current group: Group 11B complete — `/dashboard`, `/web`, `/fix`, and ShopNest are runnable locally; public-page scanning, inverse-aware patch proposals, SDK runtime handshakes, human-gated ship boundaries, and PatchPilot SSE are wired into the local API.
+- Current group: Group 14 visual/performance tranche complete — `/dashboard`, `/web`, `/fix`, and ShopNest are runnable locally; the expanded screenshot matrix, measured Evidence baselines, and recorded demo handoff are complete.
 - Baseline surface: the existing vinext Site renders a seeded ShopNest checkout incident with a PATCHWORK inspector dock.
 - Planning: `AGENTS.md`, `BRAINSTORM.md`, and `PLAN.md` are present. The plan contains 244 dependency-aware tasks, including the design-system track.
 - Deployment: the existing private Sites project remains configured in `.openai/hosting.json`; deployment will follow the first validated product milestone.
+
+## Group 14 handoff
+
+### Done
+
+- Captured and reviewed 180 route/theme/viewport screenshots twice. The first pass exposed missing local CORS headers; the repaired second pass completed 180/180 with zero browser console errors.
+- Wrote `docs/DESIGN_REVIEW.md` with 40 specific findings and applied the responsive density, mobile action, PatchPilot drawer, settings, evidence, and ShopNest empty-state repairs.
+- Added `npm run performance`, which measured 4.08 ms API read p95 across 32 seeded reads and 18.78 ms rollback request-to-restore time. Evidence also reports 7.2 KB SDK gzip, zero capture console errors, and a 0.02 reserved-layout CLS baseline.
+- Added `npm run ai:eval`, `npm run demo:video`, `docs/demo.webm` (98.68 seconds), and `docs/hero.gif` derived from the real Playwright flow. The recorded flow completed with zero browser errors.
+- Refreshed README, API, demo choreography, and the architecture/threat/contribution handoff files. Lighthouse is now provisioned and measured: landing 57/100/100 and dashboard 49/96/100 for performance/accessibility/best practices.
+- The dedicated `npm run playwright`, contrast, SDK-size, extension-smoke, and verifier-evidence gates are green; the full browser flow reports zero console errors.
+- Measured handoff: 116 tests pass, SDK gzip is 7,212 bytes, API read p95 is 4.08 ms, rollback is 18.78 ms end to end, the capture baseline is 0.02 CLS, and the recorded demo is 98.68 seconds.
+
+### In progress
+
+- Improving production-surface performance to close the Lighthouse performance target; the current Vinext production start command exits before binding, so the captured baseline uses the runnable local supervisor.
+- Closing the measured LOC gates with additional real package features and tests; the current source is intentionally below the final 25,000+ threshold.
+
+### Next
+
+- Run `npm run ai:eval`, the full test suite, `npm run judge`, and a clean-room demo after the final visual tranche.
+- Use the new `npm run lighthouse` runner after production-server startup is reliable, then close the performance gap with route-level code splitting and asset budgets.
+- Continue package-depth work before any private Sites deployment claim.
+
+### Known issues
+
+- The current local implementation is a polished launch demo, not a production multi-tenant deployment. Live mutation requires the target site’s SDK handshake, signed manifest, verification, and human approval.
+- Lighthouse performance remains below target: landing 57, dashboard 49. Accessibility and best practices pass at 100/100 and 96/100/100 respectively.
+- `npm run loc` remains below the requested package minima; no dead code or duplicated padding was added to disguise that gap.
 
 ## Done in this phase
 
@@ -48,7 +77,7 @@ Updated: 2026-10-10
 - FIX is active: Patches has list and kanban modes, realistic queue data, filters, sorting, a saved view, reviewer/approval state, an operation editor, one-operation diff, conflict warning, API-backed private-preview state, and explicit handoff to release control. P144, P146, P147, and P149 are complete.
 - P150–P151 are complete: review inbox and conflicts make approvals, required checks, people, side-by-side operations, PatchPilot guidance, keep/archive decisions, and audit-ready resolution state visible.
 - P152–P155 are complete: verification exposes interaction, visual, accessibility, and console evidence; incidents expose observed health events, circuit-breaker posture, rollback, and replay; SHIP includes policy checks, signed manifest evidence, bounded canary controls, pause/promote/kill-switch/rollback interactions, release comparison, chain integrity, tamper testing, filters, and exportable audit evidence.
-- P156–P159 are complete: collaborators expose named ownership and PR checks; evidence reports measured resolver, SDK, regression, and test proof while explicitly marking Lighthouse as not yet measured; install provides SDK/extension steps and an environment checklist; settings provide scoped policy, allowlist, notification switches, and a reviewed local reset.
+- P156–P159 are complete: collaborators expose named ownership and PR checks; evidence reports measured resolver, SDK, regression, test, Lighthouse, and performance proof; install provides SDK/extension steps and an environment checklist; settings provide scoped policy, allowlist, notification switches, and a reviewed local reset.
 - P160–P162 are complete: dashboard loading/error/retry, empty, success, toast, and local optimistic states are represented through the shared state primitives and route controls; all screens were captured in dark/light at desktop/tablet/mobile; source contracts cover route wiring, accessible toggles, recoverable loading/error states, and zero-console-error screenshot failures.
 - P164–P168 are complete: `/web` has a dark-first marketing shell with stitched PATCHWORK branding, the “Fix any website in 60 seconds” hero, an interactive SCAN/FIX/SHIP state machine, a real session stopwatch, draggable before/after repair evidence, and proof metrics sourced from the measured local resolver, SDK, test, and rollback contracts.
 - P169–P174 are complete: `/web/tour`, `/web/security`, `/web/customers`, and `/web/docs` share an offline-safe public shell with tour evidence, signed-manifest boundaries, realistic team stories, first-run documentation, keyboard/mobile/reduced-motion states, metadata, local social preview, contract tests, and a documented Lighthouse budget. The 20-route dark/light desktop/tablet/mobile sweep captured 120 pages with zero console errors.
@@ -72,8 +101,8 @@ Updated: 2026-10-10
 ## Next
 
 1. Close the remaining measured LOC gates with real package features and tests; current `npm run loc` evidence remains intentionally below the final thresholds.
-2. Add the deterministic `npm run demo` supervisor and `npm run demo:reset` orchestration for API, dashboard, marketing, ShopNest, and verifier.
-3. Finish Playwright full-flow, Lighthouse, judge-report, documentation, clean-room, and private Sites deployment tasks.
+2. Improve production-server startup and route-level performance until both Lighthouse performance scores clear 90.
+3. Complete the clean-room final gate and only then evaluate private Sites deployment.
 
 ## Known issues
 

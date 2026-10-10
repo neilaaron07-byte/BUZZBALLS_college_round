@@ -5,23 +5,23 @@ import { budgetNarrative, budgetProgress, evidenceBrief, evidenceBudgets, eviden
 
 test("evidence records stay measured, named, and explicit about the Lighthouse gap", () => {
   const records = evidenceForSite(cloneFixture(), 63);
-  assert.equal(records.length, 7);
-  assert.equal(evidenceScore(records).score, 94);
-  assert.deepEqual(evidenceScore(records), { score: 94, passed: 6, review: 1, blocked: 0, posture: "review" });
-  assert.equal(evidenceRecordByKey(records, "lighthouse")?.status, "Not measured");
+  assert.equal(records.length, 10);
+  assert.equal(evidenceScore(records).score, 96);
+  assert.deepEqual(evidenceScore(records), { score: 96, passed: 9, review: 1, blocked: 0, posture: "review" });
+  assert.equal(evidenceRecordByKey(records, "lighthouse")?.status, "Below target");
   assert.match(evidenceBrief(records), /Resolver benchmark: 200 scenarios/);
-  assert.equal(qualityGateCount(records, "green"), 6);
+  assert.equal(qualityGateCount(records, "green"), 9);
   assert.equal(evidenceToneLabel("amber"), "Review");
 });
 
 test("quality budgets distinguish observed values from a budget that still needs capture", () => {
   const budgets = evidenceBudgets();
   const sdk = budgets.find((budget) => budget.key === "sdk-gzip");
-  const lighthouse = budgets.find((budget) => budget.key === "lighthouse-performance");
+  const lighthouse = budgets.find((budget) => budget.key === "lighthouse-dashboard-performance");
   assert.equal(sdk?.observed, 7.2);
   assert.equal(budgetProgress(sdk!), 100);
-  assert.equal(budgetProgress(lighthouse!), 0);
-  assert.match(budgetNarrative(lighthouse!), /not measured yet/);
+  assert.equal(budgetProgress(lighthouse!), 54);
+  assert.match(budgetNarrative(lighthouse!), /49score observed against 90score target/);
 });
 
 test("verification checks have stable browser evidence and export-safe CSV", () => {
