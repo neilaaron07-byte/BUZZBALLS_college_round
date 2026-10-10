@@ -356,3 +356,15 @@ Reason: SCAN, FIX, and SHIP need one explainable decision model. Keeping the
 logic outside dense JSX prevents screens from drifting into contradictory copy,
 makes edge states testable, and avoids inventing launch evidence just to make a
 score appear green.
+
+## D-035 — Constrain dashboard patch drafts before preview
+
+Decision: the dashboard FIX path treats a patch as a typed draft with one or
+more allowlisted operations, a semantic target fingerprint, an explicit inverse
+operation, a preview state, a human review decision, and a conflict decision.
+The UI rejects unsafe color values before saving and shows the validation
+contract beside the operation editor.
+
+Reason: an editor that accepts arbitrary CSS can look useful while undermining
+the safety promise. Making the inverse and the conflict decision first-class
+keeps isolated preview, review, and rollback aligned with the core SDK policy.

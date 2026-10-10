@@ -297,7 +297,7 @@ rollback, and report its audit chain without external services.
 - [x] P161 Add full keyboard, focus, reduced-motion, touch, and screen-reader coverage. (depends: P160)
 - [x] P162 Add dashboard component tests, route tests, interaction tests, and console-error guards. (depends: P161)
 - [x] P163a Add scan-session state, detector comparison, and finding triage engines for repeatable SCAN decisions. (depends: P162)
-- [ ] P163b Add patch-draft, inverse-operation, review-decision, and conflict-resolution engines for safe FIX handoffs. (depends: P163a)
+- [x] P163b Add patch-draft, inverse-operation, review-decision, and conflict-resolution engines for safe FIX handoffs. (depends: P163a)
 - [ ] P163c Add verification-run, browser-check, and evidence-matrix engines for replayable proof. (depends: P163b)
 - [ ] P163d Add release-health, rollback, and audit-summary engines for explainable SHIP decisions. (depends: P163c)
 - [ ] P163e Add dashboard recovery, activity, and workflow panels that consume the depth engines on visible routes. (depends: P163d)
