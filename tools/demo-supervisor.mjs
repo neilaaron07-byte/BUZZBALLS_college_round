@@ -38,9 +38,11 @@ async function clearStaleWebLock() {
 }
 
 let shuttingDown = false;
+let keepAliveTimer;
 async function shutdown() {
   if (shuttingDown) return;
   shuttingDown = true;
+  if (keepAliveTimer) clearInterval(keepAliveTimer);
   for (const { child } of services) if (!child.killed) child.kill("SIGTERM");
   await new Promise((resolve) => setTimeout(resolve, 250));
 }
@@ -55,4 +57,5 @@ if (!(await responds(webUrl))) start("web", "npm", ["run", "dev"], { NEXT_PUBLIC
 console.log(`[demo] PATCHWORK is ready at ${webUrl}/dashboard`);
 console.log(`[demo] Guided repair: ${webUrl}/fix`);
 console.log(`[demo] API health: ${apiUrl}/healthz`);
+keepAliveTimer = setInterval(() => undefined, 60_000);
 await new Promise(() => {});

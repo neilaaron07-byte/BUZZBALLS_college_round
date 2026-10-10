@@ -542,3 +542,8 @@ budget. The local runnable supervisor reports 57/100/100 for landing and
 49/96/100 for dashboard on the default mobile profile; accessibility and best
 practices are repaired, while performance remains amber/red. A new
 `npm run lighthouse` runner preserves those reports instead of hiding the gap.
+
+D-051 — Keep the demo supervisor alive with a real interval handle. Node 22
+exits unresolved top-level-await supervisors with code 13 when spawned service
+processes have not yet registered an active handle; the interval is cleared by
+the existing shutdown path and keeps the local handoff URLs reachable.
