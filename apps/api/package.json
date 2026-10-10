@@ -3,7 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "scripts": {
+    "smoke": "node ../../tools/api-smoke.mjs",
+    "start": "tsx src/server.ts"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
   "dependencies": {
-    "@patchwork/shared": "0.1.0"
+    "@patchwork/shared": "0.1.0",
+    "@patchwork/core": "0.1.0",
+    "@patchwork/verifier": "0.1.0",
+    "express": "^5.1.0"
   }
 }

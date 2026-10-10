@@ -123,6 +123,17 @@ Reason: the demo must be useful without credentials and must not turn a model
 guess into a production mutation. Keeping the proposal review-only also makes
 auto-heal explainable and preserves the one-click rollback promise.
 
+## D-018 — Use an atomic JSON repository for the local API milestone
+
+Decision: the local API stores its deterministic demo state in a JSON
+repository that writes a temporary file, keeps a backup, serializes updates,
+and restores a valid backup when the primary file is corrupted. The repository
+boundary is replaceable by a durable database adapter later.
+
+Reason: the API needs real persistence, replayable demos, and corruption
+recovery now, while the current Site runtime must remain Worker-compatible and
+the dashboard should not depend on an external database during local review.
+
 ## D-006 — Deterministic offline demo data
 
 Decision: seed named actors, releases, findings, timestamps, and ShopNest

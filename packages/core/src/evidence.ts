@@ -10,6 +10,7 @@ export const reviewSchema = z.object({
   note: z.string().min(1).max(1_000),
   createdAt: isoDateSchema,
 }).strict();
+export type Review = z.infer<typeof reviewSchema>;
 
 export const conflictKindSchema = z.enum([
   "property",
@@ -55,6 +56,7 @@ export const verificationRunSchema = z.object({
   startedAt: isoDateSchema,
   finishedAt: isoDateSchema.nullable(),
 }).strict();
+export type VerificationRun = z.infer<typeof verificationRunSchema>;
 
 export const healthEventSchema = z.object({
   id: identifierSchema,
@@ -66,6 +68,7 @@ export const healthEventSchema = z.object({
   threshold: z.number().finite().nullable(),
   explanation: z.string().min(1).max(1_000),
 }).strict();
+export type HealthEvent = z.infer<typeof healthEventSchema>;
 
 export const auditEntrySchema = z.object({
   sequence: z.number().int().nonnegative(),
