@@ -4,7 +4,7 @@ Updated: 2026-10-10
 
 ## Current state
 
-- Current group: Group 6 complete — MV3 inspector, visual draft controls, and extension handoff.
+- Current group: Group 7 complete — isolated browser verification, evidence capture, and hidden-button blocking.
 - Baseline surface: the existing vinext Site renders a seeded ShopNest checkout incident with a PATCHWORK inspector dock.
 - Planning: `AGENTS.md`, `BRAINSTORM.md`, and `PLAN.md` are present. The plan contains 244 dependency-aware tasks, including the design-system track.
 - Deployment: the existing private Sites project remains configured in `.openai/hosting.json`; deployment will follow the first validated product milestone.
@@ -33,23 +33,24 @@ Updated: 2026-10-10
 - P050–P065 are complete: three-way conflict keys and semantic conflict detection, stale-manifest and dependency-cycle blocking, Ed25519 signing and replay guards, hash-chained audit verification, and six pure scanner detectors now pass their conflict, tamper, signature, and finding tests.
 - P066–P079 are complete: the dependency-free `@patchwork/sdk` verifies and caches signed manifests, resolves target evidence against the live DOM, applies transactional safe mutations with inverse rollback, re-applies after remounts, batches health events with backoff, and pauses after repeated failures. Four jsdom tests pass, and `npm run sdk:size` measures 7,212 gzipped bytes against the 15,360-byte budget.
 - P080–P093 are complete: the MV3 extension now packages a content inspector, service-worker handshake, side panel, DOM breadcrumbs, fingerprint warnings, resolver signal bars, visual controls, safe attributes, constrained reorder, local undo/redo, and explicit state cards. Four jsdom interaction tests and the `extension:smoke` package check pass.
+- P094–P105 are complete: `@patchwork/verifier` loads published and patched URLs in isolated Chromium contexts, checks semantic target recovery, runs purchase/search/login/checkout probes, captures Axe and console/network evidence, records visual diffs with changed-region bounds, calculates a release score, and replays stored reports offline. The seeded hidden Add to cart regression is blocked in `docs/evidence/verifier/hidden-buy-button/report.json` with committed screenshot evidence.
 
 ## Next
 
-1. Start Group 7 with the isolated verifier, viewport matrix, interaction scripts, and evidence reports.
+1. Start Group 8 with the offline PatchPilot provider, tool schemas, prompts, and resolver-backed explanations.
 2. Add the dashboard SCAN workflow on top of the validated UI primitives.
-3. Add verifier and AI contracts before connecting release controls.
+3. Connect verifier and AI contracts to API persistence and release controls.
 4. Keep `npm run loc` visible as feature packages grow toward the measured gates.
 
 ## Known issues
 
 - The repository is still a single vinext app; the target workspace packages do not exist yet.
 - The current ShopNest incident surface still contains the first-pass visual language and will be migrated incrementally.
-- The LOC gates are intentionally not met yet: current measured handwritten LOC is 3,583 while the final product requires 25,000+ lines of real feature code and tests.
+- The LOC gates are intentionally not met yet: current measured handwritten LOC is 3,968 while the final product requires 25,000+ lines of real feature code and tests.
 - The currently deployed Site reflects the prior validated incident demo, not this rebuild in progress.
 - `npm install` reports 28 transitive audit findings in the existing toolchain; no production feature dependency was added yet.
 - The core safety gate is intentionally narrower than the final release gate: signing, resolver, conflict, scanner, API, and dashboard behavior remain in later groups.
-- The scanner currently consumes a normalized page snapshot; browser collection and isolated verification belong to `packages/verifier` and the SDK/extension groups.
+- The scanner currently consumes a normalized page snapshot; the verifier now collects browser evidence, while a richer production scanner feed remains an API/dashboard task.
 - SDK runtime guards intentionally stay lightweight for the browser bundle; the authoritative Zod schema boundary remains in `packages/core` for authoring and server surfaces.
 - The extension side panel currently hands off draft intent through the protocol boundary; dashboard persistence and private preview URLs land in the API/verifier groups.
 - The visual primitives are wired into the root layout and global CSS, but the existing ShopNest screen is still being migrated to use them.

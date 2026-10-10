@@ -197,18 +197,18 @@ draft a patch, undo it locally, and hand it to the dashboard.
 
 ## Group 7 — `packages/verifier`
 
-- [ ] P094 Create verifier package and browser-runner contract. (depends: P093)
-- [ ] P095 Implement published-versus-patched URL loading. (depends: P094)
-- [ ] P096 Implement desktop, tablet, and mobile viewport matrix. (depends: P095)
-- [ ] P097 Implement patch resolution check with exact/moved/ambiguous/missing outcomes. (depends: P071, P095)
-- [ ] P098 Implement add-to-cart, search, login, and checkout interaction scripts. (depends: P095)
-- [ ] P099 Implement screenshot capture and visual diff changed-region bounding boxes. (depends: P096)
-- [ ] P100 Implement accessibility baseline delta checks with axe-core integration. (depends: P096)
-- [ ] P101 Implement console and network regression checks. (depends: P095)
-- [ ] P102 Implement structured verification report and score calculation. (depends: P097, P098, P099, P100, P101)
-- [ ] P103 Seed a deliberately bad hidden-Buy-button patch and assert the verifier blocks it. (depends: P102)
-- [ ] P104 Add verifier fixtures and report snapshots. (depends: P103)
-- [ ] P105 Run verifier gate with offline stored-report replay. (depends: P104)
+- [x] P094 Create verifier package and browser-runner contract. (depends: P093)
+- [x] P095 Implement published-versus-patched URL loading. (depends: P094)
+- [x] P096 Implement desktop, tablet, and mobile viewport matrix. (depends: P095)
+- [x] P097 Implement patch resolution check with exact/moved/ambiguous/missing outcomes. (depends: P071, P095)
+- [x] P098 Implement add-to-cart, search, login, and checkout interaction scripts. (depends: P095)
+- [x] P099 Implement screenshot capture and visual diff changed-region bounding boxes. (depends: P096)
+- [x] P100 Implement accessibility baseline delta checks with axe-core integration. (depends: P096)
+- [x] P101 Implement console and network regression checks. (depends: P095)
+- [x] P102 Implement structured verification report and score calculation. (depends: P097, P098, P099, P100, P101)
+- [x] P103 Seed a deliberately bad hidden-Buy-button patch and assert the verifier blocks it. (depends: P102)
+- [x] P104 Add verifier fixtures and report snapshots. (depends: P103)
+- [x] P105 Run verifier gate with offline stored-report replay. (depends: P104)
 
 **Runnable after Group 7:** A patch can be verified across viewports and the bad
 patch is demonstrably caught.

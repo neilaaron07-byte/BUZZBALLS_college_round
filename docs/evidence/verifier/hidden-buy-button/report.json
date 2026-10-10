@@ -1,0 +1,242 @@
+{
+  "schemaVersion": 1,
+  "id": "rel_20261010_hidden_buy_button",
+  "createdAt": "2026-10-10T08:00:00.000Z",
+  "publishedUrl": "data:text/html;charset=utf-8,%3C!doctype%20html%3E%3Chtml%20lang%3D%22en%22%3E%3Chead%3E%3Cmeta%20charset%3D%22utf-8%22%3E%3Ctitle%3EAurora%20travel%20mug%3C%2Ftitle%3E%3Cmeta%20name%3D%22description%22%20content%3D%22Insulated%20drinkware%20for%20the%20morning%20commute.%22%3E%3C%2Fhead%3E%3Cbody%3E%3Cmain%3E%3Ch1%3EAurora%20travel%20mug%3C%2Fh1%3E%3Cp%3EInsulated%20for%20the%20morning%20commute.%3C%2Fp%3E%3Cbutton%20data-testid%3D%22add-to-cart%22%3EAdd%20to%20cart%3C%2Fbutton%3E%3C%2Fmain%3E%3C%2Fbody%3E%3C%2Fhtml%3E",
+  "patchedUrl": "data:text/html;charset=utf-8,%3C!doctype%20html%3E%3Chtml%20lang%3D%22en%22%3E%3Chead%3E%3Cmeta%20charset%3D%22utf-8%22%3E%3Ctitle%3EAurora%20travel%20mug%3C%2Ftitle%3E%3Cmeta%20name%3D%22description%22%20content%3D%22Insulated%20drinkware%20for%20the%20morning%20commute.%22%3E%3C%2Fhead%3E%3Cbody%3E%3Cmain%3E%3Ch1%3EAurora%20travel%20mug%3C%2Fh1%3E%3Cp%3EInsulated%20for%20the%20morning%20commute.%3C%2Fp%3E%3Cbutton%20data-testid%3D%22add-to-cart%22%20style%3D%22display%3Anone%22%3EAdd%20to%20cart%3C%2Fbutton%3E%3C%2Fmain%3E%3C%2Fbody%3E%3C%2Fhtml%3E",
+  "viewports": [
+    {
+      "id": "desktop",
+      "width": 1024,
+      "height": 720
+    }
+  ],
+  "checks": [
+    {
+      "id": "published-desktop-load-data:text/html;charset=utf-8,%3C!doctype%20html%3E%3Chtml%20lang%3D%22en%22%3E%3Chead%3E%3Cmeta%20charset%3D%22utf-8%22%3E%3Ctitle%3EAurora%20travel%20mug%3C%2Ftitle%3E%3Cmeta%20name%3D%22description%22%20content%3D%22Insulated%20drinkware%20for%20the%20morning%20commute.%22%3E%3C%2Fhead%3E%3Cbody%3E%3Cmain%3E%3Ch1%3EAurora%20travel%20mug%3C%2Fh1%3E%3Cp%3EInsulated%20for%20the%20morning%20commute.%3C%2Fp%3E%3Cbutton%20data-testid%3D%22add-to-cart%22%3EAdd%20to%20cart%3C%2Fbutton%3E%3C%2Fmain%3E%3C%2Fbody%3E%3C%2Fhtml%3E",
+      "kind": "load",
+      "label": "Page load",
+      "status": "passed",
+      "blocking": true,
+      "explanation": "Loaded without an HTTP response.",
+      "durationMs": 503,
+      "evidence": [
+        "data:text/html;charset=utf-8,%3C!doctype%20html%3E%3Chtml%20lang%3D%22en%22%3E%3Chead%3E%3Cmeta%20charset%3D%22utf-8%22%3E%3Ctitle%3EAurora%20travel%20mug%3C%2Ftitle%3E%3Cmeta%20name%3D%22description%22%20content%3D%22Insulated%20drinkware%20for%20the%20morning%20commute.%22%3E%3C%2Fhead%3E%3Cbody%3E%3Cmain%3E%3Ch1%3EAurora%20travel%20mug%3C%2Fh1%3E%3Cp%3EInsulated%20for%20the%20morning%20commute.%3C%2Fp%3E%3Cbutton%20data-testid%3D%22add-to-cart%22%3EAdd%20to%20cart%3C%2Fbutton%3E%3C%2Fmain%3E%3C%2Fbody%3E%3C%2Fhtml%3E"
+      ]
+    },
+    {
+      "id": "published-desktop-resolution-target",
+      "kind": "resolution",
+      "label": "Semantic target resolution",
+      "status": "passed",
+      "blocking": true,
+      "explanation": "Moved target recovered: Add to cart scored 0.93 with a clear margin over the next candidate.",
+      "durationMs": 9,
+      "evidence": [
+        "moved",
+        "confidence 0.93",
+        "winner Add to cart"
+      ]
+    },
+    {
+      "id": "published-desktop-interaction-add-to-cart",
+      "kind": "interaction",
+      "label": "Add to cart",
+      "status": "passed",
+      "blocking": true,
+      "explanation": "The purchase action is visible and available for interaction.",
+      "evidence": [
+        "[data-testid='add-to-cart']"
+      ],
+      "durationMs": 20
+    },
+    {
+      "id": "published-desktop-interaction-search",
+      "kind": "interaction",
+      "label": "Search",
+      "status": "skipped",
+      "blocking": false,
+      "explanation": "No search control is present on this page.",
+      "evidence": [],
+      "durationMs": 2
+    },
+    {
+      "id": "published-desktop-interaction-login",
+      "kind": "interaction",
+      "label": "Login",
+      "status": "skipped",
+      "blocking": false,
+      "explanation": "No login action is present on this page.",
+      "evidence": [],
+      "durationMs": 2
+    },
+    {
+      "id": "published-desktop-interaction-checkout",
+      "kind": "interaction",
+      "label": "Checkout",
+      "status": "skipped",
+      "blocking": false,
+      "explanation": "No checkout action is present on this page.",
+      "evidence": [],
+      "durationMs": 2
+    },
+    {
+      "id": "published-desktop-accessibility-desktop",
+      "kind": "accessibility",
+      "label": "Accessibility baseline",
+      "status": "passed",
+      "blocking": true,
+      "explanation": "Axe found no accessibility violations.",
+      "durationMs": 208,
+      "evidence": []
+    },
+    {
+      "id": "published-desktop-console-desktop",
+      "kind": "console",
+      "label": "Console errors",
+      "status": "passed",
+      "blocking": true,
+      "explanation": "No console errors were emitted.",
+      "durationMs": 0,
+      "evidence": []
+    },
+    {
+      "id": "published-desktop-network-desktop",
+      "kind": "network",
+      "label": "Network failures",
+      "status": "passed",
+      "blocking": false,
+      "explanation": "No network requests failed.",
+      "durationMs": 0,
+      "evidence": []
+    },
+    {
+      "id": "patched-desktop-load-data:text/html;charset=utf-8,%3C!doctype%20html%3E%3Chtml%20lang%3D%22en%22%3E%3Chead%3E%3Cmeta%20charset%3D%22utf-8%22%3E%3Ctitle%3EAurora%20travel%20mug%3C%2Ftitle%3E%3Cmeta%20name%3D%22description%22%20content%3D%22Insulated%20drinkware%20for%20the%20morning%20commute.%22%3E%3C%2Fhead%3E%3Cbody%3E%3Cmain%3E%3Ch1%3EAurora%20travel%20mug%3C%2Fh1%3E%3Cp%3EInsulated%20for%20the%20morning%20commute.%3C%2Fp%3E%3Cbutton%20data-testid%3D%22add-to-cart%22%20style%3D%22display%3Anone%22%3EAdd%20to%20cart%3C%2Fbutton%3E%3C%2Fmain%3E%3C%2Fbody%3E%3C%2Fhtml%3E",
+      "kind": "load",
+      "label": "Page load",
+      "status": "passed",
+      "blocking": true,
+      "explanation": "Loaded without an HTTP response.",
+      "durationMs": 504,
+      "evidence": [
+        "data:text/html;charset=utf-8,%3C!doctype%20html%3E%3Chtml%20lang%3D%22en%22%3E%3Chead%3E%3Cmeta%20charset%3D%22utf-8%22%3E%3Ctitle%3EAurora%20travel%20mug%3C%2Ftitle%3E%3Cmeta%20name%3D%22description%22%20content%3D%22Insulated%20drinkware%20for%20the%20morning%20commute.%22%3E%3C%2Fhead%3E%3Cbody%3E%3Cmain%3E%3Ch1%3EAurora%20travel%20mug%3C%2Fh1%3E%3Cp%3EInsulated%20for%20the%20morning%20commute.%3C%2Fp%3E%3Cbutton%20data-testid%3D%22add-to-cart%22%20style%3D%22display%3Anone%22%3EAdd%20to%20cart%3C%2Fbutton%3E%3C%2Fmain%3E%3C%2Fbody%3E%3C%2Fhtml%3E"
+      ]
+    },
+    {
+      "id": "patched-desktop-resolution-target",
+      "kind": "resolution",
+      "label": "Semantic target resolution",
+      "status": "passed",
+      "blocking": true,
+      "explanation": "Moved target recovered: Add to cart scored 0.93 with a clear margin over the next candidate.",
+      "durationMs": 6,
+      "evidence": [
+        "moved",
+        "confidence 0.93",
+        "winner Add to cart"
+      ]
+    },
+    {
+      "id": "patched-desktop-interaction-add-to-cart",
+      "kind": "interaction",
+      "label": "Add to cart",
+      "status": "failed",
+      "blocking": true,
+      "explanation": "The purchase action exists but is hidden or unavailable.",
+      "evidence": [
+        "[data-testid='add-to-cart']"
+      ],
+      "durationMs": 14
+    },
+    {
+      "id": "patched-desktop-interaction-search",
+      "kind": "interaction",
+      "label": "Search",
+      "status": "skipped",
+      "blocking": false,
+      "explanation": "No search control is present on this page.",
+      "evidence": [],
+      "durationMs": 0
+    },
+    {
+      "id": "patched-desktop-interaction-login",
+      "kind": "interaction",
+      "label": "Login",
+      "status": "skipped",
+      "blocking": false,
+      "explanation": "No login action is present on this page.",
+      "evidence": [],
+      "durationMs": 3
+    },
+    {
+      "id": "patched-desktop-interaction-checkout",
+      "kind": "interaction",
+      "label": "Checkout",
+      "status": "skipped",
+      "blocking": false,
+      "explanation": "No checkout action is present on this page.",
+      "evidence": [],
+      "durationMs": 1
+    },
+    {
+      "id": "patched-desktop-accessibility-desktop",
+      "kind": "accessibility",
+      "label": "Accessibility baseline",
+      "status": "passed",
+      "blocking": true,
+      "explanation": "Axe found no accessibility violations.",
+      "durationMs": 201,
+      "evidence": []
+    },
+    {
+      "id": "patched-desktop-console-desktop",
+      "kind": "console",
+      "label": "Console errors",
+      "status": "passed",
+      "blocking": true,
+      "explanation": "No console errors were emitted.",
+      "durationMs": 0,
+      "evidence": []
+    },
+    {
+      "id": "patched-desktop-network-desktop",
+      "kind": "network",
+      "label": "Network failures",
+      "status": "passed",
+      "blocking": false,
+      "explanation": "No network requests failed.",
+      "durationMs": 0,
+      "evidence": []
+    },
+    {
+      "id": "visual-desktop",
+      "kind": "visual",
+      "label": "Visual evidence",
+      "status": "passed",
+      "blocking": false,
+      "explanation": "Captured 1,676 changed pixels for review.",
+      "durationMs": 0,
+      "evidence": [
+        "/Users/paras/Documents/ChatGPT/buzzballs 2/docs/evidence/verifier/hidden-buy-button/published-desktop.png",
+        "/Users/paras/Documents/ChatGPT/buzzballs 2/docs/evidence/verifier/hidden-buy-button/patched-desktop.png"
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "viewport": "desktop",
+      "publishedPath": "docs/evidence/verifier/hidden-buy-button/published-desktop.png",
+      "patchedPath": "docs/evidence/verifier/hidden-buy-button/patched-desktop.png",
+      "changedPixels": 1676,
+      "changedRegion": {
+        "left": 8,
+        "top": 114,
+        "right": 87,
+        "bottom": 134
+      }
+    }
+  ],
+  "score": 90,
+  "status": "blocked",
+  "summary": "1 blocking verification check failed; release is blocked."
+}

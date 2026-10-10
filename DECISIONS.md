@@ -100,6 +100,18 @@ Reason: the extension runs inside arbitrary customer pages and must remain
 recoverable even when the workspace is offline; release policy belongs in the
 dashboard and API surfaces.
 
+## D-016 — Verify published and patched pages in separate browser contexts
+
+Decision: the verifier opens the published and patched URLs in isolated
+Playwright contexts for every configured viewport, attaches console and network
+listeners before navigation, and stores portable report metadata plus local
+screenshots.
+
+Reason: separate contexts prevent cookies, storage, and service-worker state
+from leaking between baselines. Attaching listeners before navigation catches
+load-time regressions, while portable evidence keeps the committed fixture
+reviewable outside the originating machine.
+
 ## D-006 — Deterministic offline demo data
 
 Decision: seed named actors, releases, findings, timestamps, and ShopNest
