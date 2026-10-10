@@ -18,16 +18,16 @@ async function render() {
   );
 }
 
-test("server-renders the PATCHWORK workspace", async () => {
+test("server-renders the seeded checkout incident storefront", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>PATCHWORK — Repair\. Verify\. Release\.<\/title>/i);
-  assert.match(html, /Good morning, Alex/);
-  assert.match(html, /Automated verification/);
-  assert.match(html, /Open audit trail/);
+  assert.match(html, /<title>LUMEN — Checkout incident demo<\/title>/i);
+  assert.match(html, /Checkout is currently unavailable/);
+  assert.match(html, /Add to cart/);
+  assert.match(html, /PATCHWORK/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|react-loading-skeleton/i);
 });
 
