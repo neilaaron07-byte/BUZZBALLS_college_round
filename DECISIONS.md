@@ -381,3 +381,16 @@ Reason: a single green badge is not enough for a launch demo or a real operator.
 Keeping the evidence granular makes regressions visible, gives the release
 screen a trustworthy input, and makes offline handoff possible without claiming
 that an unmeasured check passed.
+
+## D-037 — Derive release, incident, and audit posture from one SHIP model
+
+Decision: the dashboard SHIP surfaces share a typed release-health engine for
+health boundaries, policy gates, canary readiness, conservative transitions,
+rollback/restore events, and hash-linked audit summaries. The release and audit
+screens render that model directly; UI actions may change local demo state but
+cannot bypass a red gate or a missing previous manifest.
+
+Reason: independent release, incident, and audit copy can make the operator see
+contradictory truth. One domain boundary keeps promotion, kill-switch, rollback,
+and tamper states explainable and testable while preserving the deterministic
+offline demo.
