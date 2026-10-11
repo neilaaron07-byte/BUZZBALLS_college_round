@@ -552,3 +552,8 @@ D-052 — Keep one PatchPilot entry point per responsive dashboard surface. The
 desktop top bar already owns the persistent action, so the fixed floating pill
 is hidden there to prevent it covering overview metrics; mobile keeps the
 floating action and receives explicit bottom content clearance.
+
+D-053 — Make the guided Fix preview visible and sandboxed. The seeded ShopNest
+ flow now renders a script-free before/after snapshot in two isolated iframes
+ and requires an explicit confirmation before verification. External targets
+ remain read-only until their SDK handshake and a real preview renderer exist.

@@ -51,6 +51,7 @@ test("PatchPilot is globally reachable and keeps release authority human-only", 
 test("guided fix route exposes SCAN, FIX, SHIP, live API recovery, and undo", async () => {
   const route = await readFile(new URL("../app/fix/page.tsx", import.meta.url), "utf8");
   const page = await readFile(new URL("../apps/dashboard/src/fix-page.tsx", import.meta.url), "utf8");
+  const preview = await readFile(new URL("../apps/dashboard/src/fix-preview.tsx", import.meta.url), "utf8");
   assert.match(route, /FixPage/);
   assert.match(page, /SCAN/);
   assert.match(page, /FIX/);
@@ -58,5 +59,7 @@ test("guided fix route exposes SCAN, FIX, SHIP, live API recovery, and undo", as
   assert.match(page, /api\/v1\/live-sites\/scan/);
   assert.match(page, /Stage 10% canary/);
   assert.match(page, /Undo canary/);
+  assert.match(page, /IsolatedPreview/);
+  assert.match(preview, /Confirm preview/);
   assert.match(page, /Nothing changed/);
 });

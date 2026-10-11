@@ -20,6 +20,7 @@ Updated: 2026-10-11
 - Refreshed README, API, demo choreography, and the architecture/threat/contribution handoff files. Lighthouse is now provisioned and measured: landing 57/100/100 and dashboard 49/96/100 for performance/accessibility/best practices.
 - The dedicated `npm run playwright`, contrast, SDK-size, extension-smoke, and verifier-evidence gates are green; the full browser flow reports zero console errors.
 - Removed the redundant desktop floating PatchPilot action so the topbar action remains clear of the overview metric grid; mobile retains the floating action with 104px of content clearance.
+- Added a visible sandboxed before/after preview to `/fix`; the flow now requires an explicit **Confirm preview** action before staging the canary, and the Playwright demo covers that gate.
 - Measured handoff: 116 tests pass, SDK gzip is 7,212 bytes, API read p95 is 4.08 ms, rollback is 18.78 ms end to end, the capture baseline is 0.02 CLS, and the recorded demo is 98.68 seconds.
 
 ### In progress

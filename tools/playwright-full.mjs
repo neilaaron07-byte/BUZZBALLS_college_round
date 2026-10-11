@@ -18,6 +18,8 @@ await open("/fix", "One-screen guided fix");
 await page.getByRole("button", { name: "Scan page" }).click();
 await page.getByText("Scan complete.", { exact: false }).waitFor({ state: "visible", timeout: 10_000 });
 await page.getByRole("button", { name: "Fix safe issues" }).click();
+await page.getByRole("heading", { name: "See the change before it ships." }).waitFor();
+await page.getByRole("button", { name: "Confirm preview" }).click();
 await page.getByRole("button", { name: "Stage 10% canary" }).click();
 
 await open("/dashboard?view=conflicts", "Conflicts");
