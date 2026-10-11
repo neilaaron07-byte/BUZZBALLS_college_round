@@ -4,7 +4,7 @@ Updated: 2026-10-11
 
 ## Current state
 
-- Current group: Group 14 visual/performance tranche complete — `/dashboard`, `/web`, `/fix`, and ShopNest are runnable locally; the expanded screenshot matrix, measured Evidence baselines, and recorded demo handoff are complete.
+- Current group: Group 14 visual/performance tranche complete, with a responsive overlap repair applied — `/dashboard`, `/web`, `/fix`, and ShopNest are runnable locally; the expanded screenshot matrix, measured Evidence baselines, and recorded demo handoff are complete.
 - Baseline surface: the existing vinext Site renders a seeded ShopNest checkout incident with a PATCHWORK inspector dock.
 - Planning: `AGENTS.md`, `BRAINSTORM.md`, and `PLAN.md` are present. The plan contains 244 dependency-aware tasks, including the design-system track.
 - Deployment: the existing private Sites project remains configured in `.openai/hosting.json`; deployment will follow the first validated product milestone.
@@ -19,6 +19,7 @@ Updated: 2026-10-11
 - Added `npm run ai:eval`, `npm run demo:video`, `docs/demo.webm` (98.68 seconds), and `docs/hero.gif` derived from the real Playwright flow. The recorded flow completed with zero browser errors.
 - Refreshed README, API, demo choreography, and the architecture/threat/contribution handoff files. Lighthouse is now provisioned and measured: landing 57/100/100 and dashboard 49/96/100 for performance/accessibility/best practices.
 - The dedicated `npm run playwright`, contrast, SDK-size, extension-smoke, and verifier-evidence gates are green; the full browser flow reports zero console errors.
+- Removed the redundant desktop floating PatchPilot action so the topbar action remains clear of the overview metric grid; mobile retains the floating action with 104px of content clearance.
 - Measured handoff: 116 tests pass, SDK gzip is 7,212 bytes, API read p95 is 4.08 ms, rollback is 18.78 ms end to end, the capture baseline is 0.02 CLS, and the recorded demo is 98.68 seconds.
 
 ### In progress

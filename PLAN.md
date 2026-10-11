@@ -417,6 +417,7 @@ three-minute launch demo.
 - [ ] P217 Run final clean-room judge and close all remaining measured package size gates. (depends: P216)
 - [x] P218 Add a dedicated full Playwright interaction gate with zero-console-error assertions. (depends: P214)
 - [x] P219 Run contrast, SDK-size, extension-smoke, and verifier-evidence gates and record their outputs. (depends: P218)
+- [x] P220 Remove the desktop PatchPilot floating-action overlap and reserve the mobile bottom safe area. (depends: P219)
 
 **Runnable after Group 14:** The local demo has visual review evidence, a real
 recorded launch flow, performance measurements in the product, and explicit

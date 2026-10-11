@@ -547,3 +547,8 @@ D-051 — Keep the demo supervisor alive with a real interval handle. Node 22
 exits unresolved top-level-await supervisors with code 13 when spawned service
 processes have not yet registered an active handle; the interval is cleared by
 the existing shutdown path and keeps the local handoff URLs reachable.
+
+D-052 — Keep one PatchPilot entry point per responsive dashboard surface. The
+desktop top bar already owns the persistent action, so the fixed floating pill
+is hidden there to prevent it covering overview metrics; mobile keeps the
+floating action and receives explicit bottom content clearance.
