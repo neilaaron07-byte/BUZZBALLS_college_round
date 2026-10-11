@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 import { createApiApp, createApiContext } from "../apps/api/src/app";
-import { fetchLivePage, extractLiveSnapshot, getLiveScanJob, startLiveScan, validateLiveSiteUrl } from "../apps/api/src/live-site";
+import { fetchLivePage, extractLiveSnapshot, getLiveScanJob, sanitizeLivePreviewHtml, startLiveScan, validateLiveSiteUrl } from "../apps/api/src/live-site";
 
 const publicLookup = async (): Promise<readonly { address: string; family: number }[]> => [{ address: "93.184.216.34", family: 4 }];
 
@@ -43,6 +43,13 @@ test("HTML extraction produces stable evidence for detector-backed live scans", 
   assert.equal(snapshot.elements.find((element) => element.tag === "input")?.accessibleName, undefined);
 });
 
+test("live preview sanitization removes execution and navigation capabilities", () => {
+  const preview = sanitizeLivePreviewHtml(`<!doctype html><html><head><script>window.bad = true</script><link rel="stylesheet" href="https://evil.example/app.css"></head><body><form action="https://evil.example/submit" onsubmit="window.bad = true"><a href="javascript:alert(1)" onclick="window.bad = true">Buy</a><img src="https://evil.example/image.png"><style>@import url(https://evil.example/theme.css); .card { background: url(https://evil.example/bg.png); }</style></form></body></html>`, "https://example.com/store");
+  assert.doesNotMatch(preview, /<script|<link|javascript:|onsubmit|onclick|https:\/\/evil\.example/);
+  assert.match(preview, /data-patchwork-preview-form/);
+  assert.match(preview, /href="#"/);
+});
+
 test("live scan job stores progress, scan evidence, and findings without executing page scripts", async () => {
   const directory = await mkdtemp(join(tmpdir(), "patchwork-live-site-"));
   const context = await createApiContext({ filePath: join(directory, "state.json"), rateLimitPerMinute: 200 });
@@ -59,6 +66,8 @@ test("live scan job stores progress, scan evidence, and findings without executi
     assert.equal(completed.status, "completed", completed.error ?? "");
     assert.equal(completed.result?.scan.status, "completed");
     assert.ok((completed.result?.findings.length ?? 0) >= 3);
+    assert.match(completed.result?.snapshot.previewHtml ?? "", /<!doctype html>/i);
+    assert.doesNotMatch(completed.result?.snapshot.previewHtml ?? "", /<script/i);
     assert.deepEqual(completed.events.map((event) => event.phase), ["queued", "validating", "fetching", "parsing", "analyzing", "completed"]);
     assert.equal(completed.result?.snapshot.elements.some((element) => element.text.includes("globalThis")), false);
   } finally {

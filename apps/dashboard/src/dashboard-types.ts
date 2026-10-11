@@ -47,6 +47,9 @@ export interface DashboardFinding {
   severity: "low" | "medium" | "high" | "critical";
   confidence: number;
   blastRadius: { elementCount: number; pageCount: number; explanation: string };
+  detector?: "contrast" | "duplicate_action" | "stale_copy" | "missing_label" | "broken_link" | "layout_overflow";
+  targetIds?: readonly string[];
+  evidence?: readonly string[];
 }
 
 export interface DashboardPatch {

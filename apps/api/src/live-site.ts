@@ -28,6 +28,7 @@ export interface LiveSiteSnapshot extends ScanSnapshot {
   contentType: string;
   bytes: number;
   title: string;
+  previewHtml: string;
 }
 
 export interface LiveScanResult {
@@ -205,6 +206,41 @@ function safeElementId(element: Element, tag: string, index: number, seen: Set<s
   return candidate;
 }
 
+/**
+ * Produce a passive document for the operator preview. A live page is never
+ * replayed in the browser: scripts, navigation, embeds, external resources,
+ * event handlers, and form submissions are removed before the HTML crosses
+ * the API boundary.
+ */
+export function sanitizeLivePreviewHtml(html: string, pageUrl: string): string {
+  const dom = new JSDOM(html, { url: pageUrl });
+  const { document } = dom.window;
+  document.querySelectorAll("script, iframe, object, embed, base, link, meta[http-equiv]").forEach((element) => element.remove());
+  document.querySelectorAll("*").forEach((element) => {
+    for (const attribute of [...element.attributes]) {
+      const name = attribute.name.toLowerCase();
+      if (name.startsWith("on") || ["src", "srcset", "poster"].includes(name)) element.removeAttribute(attribute.name);
+      if (name === "href") {
+        if (element.tagName.toLowerCase() === "a") element.setAttribute("href", "#");
+        else element.removeAttribute(attribute.name);
+      }
+      if (name === "action" || name === "formaction") element.setAttribute(attribute.name, "#");
+      if (name === "style") element.setAttribute("style", attribute.value.replace(/url\s*\([^)]*\)/gi, "none"));
+    }
+    if (element.tagName.toLowerCase() === "form") {
+      element.setAttribute("data-patchwork-preview-form", "true");
+      element.setAttribute("onsubmit", "return false");
+      element.removeAttribute("onsubmit");
+    }
+  });
+  document.querySelectorAll("style").forEach((element) => {
+    element.textContent = (element.textContent ?? "").replace(/@import[^;]+;?/gi, "").replace(/url\s*\([^)]*\)/gi, "none");
+  });
+  const output = `<!doctype html>${document.documentElement.outerHTML}`;
+  dom.window.close();
+  return output;
+}
+
 export function extractLiveSnapshot(html: string, pageUrl: string, viewport = { width: 1_440, height: 900 }, fetched: Pick<LiveFetchResponse, "status" | "contentType" | "bytes"> = { status: 200, contentType: "text/html", bytes: Buffer.byteLength(html, "utf8") }, now: () => Date = () => new Date()): LiveSiteSnapshot {
   const dom = new JSDOM(html, { url: pageUrl });
   const { document } = dom.window;
@@ -229,7 +265,7 @@ export function extractLiveSnapshot(html: string, pageUrl: string, viewport = { 
   });
   const title = compactText(document.title, 240);
   dom.window.close();
-  return { pageUrl, viewport, elements, source: "server_html", fetchedAt: nowIso(now), httpStatus: fetched.status, contentType: fetched.contentType, bytes: fetched.bytes, title };
+  return { pageUrl, viewport, elements, source: "server_html", fetchedAt: nowIso(now), httpStatus: fetched.status, contentType: fetched.contentType, bytes: fetched.bytes, title, previewHtml: sanitizeLivePreviewHtml(html, pageUrl) };
 }
 
 function emit(job: LiveScanJob, phase: LiveScanPhase, progress: number, message: string, now: () => Date = () => new Date()): void {

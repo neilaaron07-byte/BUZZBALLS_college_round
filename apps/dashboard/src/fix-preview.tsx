@@ -1,16 +1,19 @@
 import { Check, Eye, LockKeyhole } from "lucide-react";
 import { Button } from "./ui/button";
+import type { DashboardFinding } from "./dashboard-types";
 
-export function IsolatedPreview({ target, canConfirm, onConfirm }: Readonly<{ target: string; canConfirm: boolean; onConfirm: () => void }>) {
-  const targetLabel = target.includes("shopnest.example") ? "ShopNest · Aurora product" : "Safe snapshot · external target";
+export function IsolatedPreview({ target, pageTitle, previewHtml, finding, canConfirm, onConfirm }: Readonly<{ target: string; pageTitle?: string | null; previewHtml?: string; finding?: DashboardFinding; canConfirm: boolean; onConfirm: () => void }>) {
+  const targetLabel = pageTitle ? `${pageTitle} · ${safeHostname(target)}` : target.includes("shopnest.example") ? "ShopNest · Aurora product" : "Safe snapshot · external target";
+  const publishedHtml = previewHtml ?? previewDocument(false);
+  const patchedHtml = previewHtml && finding ? applyPreviewPatch(previewHtml, finding) : previewDocument(true);
   return <section className="pw-fix-preview pw-fix-panel" aria-labelledby="isolated-preview-title">
     <div className="pw-fix-preview-heading">
-      <div><span className="pw-fix-panel-label"><Eye size={12} aria-hidden="true" /> ISOLATED PREVIEW</span><h2 id="isolated-preview-title">See the change before it ships.</h2><p>{targetLabel} · sandboxed snapshot · production is unchanged</p></div>
+      <div><span className="pw-fix-panel-label"><Eye size={12} aria-hidden="true" /> ISOLATED PREVIEW</span><h2 id="isolated-preview-title">See the change before it ships.</h2><p>{targetLabel} · {previewHtml ? "sanitized live snapshot" : "demo snapshot"} · production is unchanged</p></div>
       <span className="pw-fix-preview-lock"><LockKeyhole size={13} aria-hidden="true" /> Private</span>
     </div>
     <div className="pw-fix-preview-grid">
-      <PreviewFrame label="Published state" detail="Current production" patched={false} />
-      <PreviewFrame label="Patch preview" detail="Allowlisted color operation" patched />
+      <PreviewFrame label="Published state" detail="Current public HTML" html={publishedHtml} />
+      <PreviewFrame label="Patch preview" detail={finding ? previewOperationLabel(finding) : "Allowlisted operation"} html={patchedHtml} />
     </div>
     <div className="pw-fix-preview-footer">
       <span><Check size={13} aria-hidden="true" /> No scripts or network requests run inside the preview.</span>
@@ -19,8 +22,69 @@ export function IsolatedPreview({ target, canConfirm, onConfirm }: Readonly<{ ta
   </section>;
 }
 
-function PreviewFrame({ label, detail, patched }: Readonly<{ label: string; detail: string; patched: boolean }>) {
-  return <div className="pw-fix-preview-frame"><div className="pw-fix-preview-frame-head"><span>{label}</span><small>{detail}</small></div><iframe title={`${label} preview`} sandbox="" srcDoc={previewDocument(patched)} /></div>;
+function PreviewFrame({ label, detail, html }: Readonly<{ label: string; detail: string; html: string }>) {
+  return <div className="pw-fix-preview-frame"><div className="pw-fix-preview-frame-head"><span>{label}</span><small>{detail}</small></div><iframe title={`${label} preview`} sandbox="" srcDoc={html} /></div>;
+}
+
+function safeHostname(value: string): string {
+  try { return new URL(value).hostname; } catch { return "external target"; }
+}
+
+function previewOperationLabel(finding: DashboardFinding): string {
+  const labels: Record<NonNullable<DashboardFinding["detector"]>, string> = {
+    contrast: "Readable color operation",
+    duplicate_action: "Distinct action labels",
+    stale_copy: "Copy review operation",
+    missing_label: "Accessible label operation",
+    broken_link: "Safe link operation",
+    layout_overflow: "Viewport-safe layout operation",
+  };
+  return labels[finding.detector ?? "contrast"];
+}
+
+function applyPreviewPatch(html: string, finding: DashboardFinding): string {
+  if (typeof DOMParser === "undefined") return html;
+  const document = new DOMParser().parseFromString(html, "text/html");
+  const targets = findPreviewTargets(document, finding.targetIds ?? []);
+  for (const [index, target] of targets.entries()) {
+    const style = target instanceof HTMLElement ? target.style : null;
+    switch (finding.detector) {
+      case "contrast":
+        style?.setProperty("color", "#172033");
+        break;
+      case "missing_label":
+        target.setAttribute("aria-label", target.textContent?.trim() || `${target.tagName.toLowerCase()} control`);
+        break;
+      case "stale_copy":
+        target.textContent = "Updated published copy";
+        break;
+      case "broken_link":
+        target.setAttribute("href", "#patchwork-reviewed-link");
+        break;
+      case "layout_overflow":
+        style?.setProperty("max-width", "100%");
+        style?.setProperty("overflow-wrap", "anywhere");
+        break;
+      case "duplicate_action":
+        target.setAttribute("aria-label", `${target.textContent?.trim() || "Action"} ${index === 0 ? "primary" : "secondary"}`);
+        break;
+      default:
+        break;
+    }
+  }
+  return `<!doctype html>${document.documentElement.outerHTML}`;
+}
+
+function findPreviewTargets(document: Document, targetIds: readonly string[]): Element[] {
+  const all = [...document.querySelectorAll("button,a,input,textarea,select,[role],h1,h2,h3,p")];
+  const selected = targetIds.flatMap((targetId) => {
+    const direct = [...document.querySelectorAll("[id], [data-testid], [data-patchwork-id]")].find((element) => [element.id, element.getAttribute("data-testid"), element.getAttribute("data-patchwork-id")].includes(targetId));
+    if (direct) return [direct];
+    const index = /^live-[a-z0-9-]+-(\d+)$/i.exec(targetId)?.[1];
+    const indexed = index ? all[Number(index) - 1] : undefined;
+    return indexed ? [indexed] : [];
+  });
+  return selected.length > 0 ? selected : all.slice(0, 1);
 }
 
 function previewDocument(patched: boolean): string {

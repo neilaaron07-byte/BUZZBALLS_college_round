@@ -557,3 +557,14 @@ D-053 — Make the guided Fix preview visible and sandboxed. The seeded ShopNest
  flow now renders a script-free before/after snapshot in two isolated iframes
  and requires an explicit confirmation before verification. External targets
  remain read-only until their SDK handshake and a real preview renderer exist.
+
+D-054 — Make live scan results the source of truth for `/fix`. The API now returns
+  a sanitized HTML snapshot with its detector findings; the client maps those
+  findings into the guided flow and applies a detector-specific preview change.
+  The seeded ShopNest fixture remains available only for the explicit demo path.
+
+Reason: rendering the seeded finding after scanning another URL made the product
+look functional while silently discarding the user’s target. A passive HTML
+snapshot provides useful cross-site preview evidence without executing unknown
+third-party code or pretending that a public fetch is permission to mutate the
+site.

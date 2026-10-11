@@ -2,6 +2,27 @@
 
 Updated: 2026-10-11
 
+## Live-target repair update
+
+### Done
+
+- Fixed the hardcoded live URL path: completed live scans now populate the Fix screen with the returned detector findings, page title, live health score, and target-specific preview HTML instead of reusing ShopNest evidence.
+- Added server-side preview sanitization that removes scripts, external resources, navigation, event handlers, and form submission before a live page can be rendered in the isolated preview.
+- Added detector-aware before/after preview transformations for contrast, labels, stale copy, links, duplicate actions, and viewport overflow.
+- Added regression coverage for sanitized live previews and verified 117 tests, the production build, lint, typecheck, judge, and the full browser flow with zero console errors.
+
+### In progress
+
+- The public-site path supports safe scan and isolated review for any reachable public HTML page. It does not claim arbitrary third-party mutation without the target site’s installed SDK and signed runtime handshake.
+
+### Next
+
+- Connect the live finding to the typed proposal builder and target SDK install flow so a verified owner can move from the live preview into a real signed canary.
+
+### Known issues
+
+- Pages that require authentication, execute their content only in client-side JavaScript, or reject server-side HTML fetching can only return a clear safety error; they need the PATCHWORK SDK/extension boundary for runtime inspection.
+
 ## Current state
 
 - Current group: Group 14 visual/performance tranche complete, with a responsive overlap repair applied — `/dashboard`, `/web`, `/fix`, and ShopNest are runnable locally; the expanded screenshot matrix, measured Evidence baselines, and recorded demo handoff are complete.
